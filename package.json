@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "client:build": "nodemon server/boot.js",
+    "client:build": "webpack --hide-modules --config client/webpack.config.js",
     "client:watch": "webpack --hide-modules --watch --config client/webpack.config.js",
     "server:start": "nodemon server/boot.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -43,6 +43,8 @@
     "mongoose": "^4.10.6",
     "morgan": "^1.8.2",
     "pretty-error": "^2.1.0",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
     "underscore": "^1.8.3"
   }
 }
