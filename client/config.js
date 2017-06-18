@@ -2,8 +2,6 @@ const _ = require('underscore');
 
 const configs = require('./config/index');
 
-console.log(configs);
-
 module.exports = (key, defaultValue) => {
 
     if(typeof defaultValue === 'undefined') {
