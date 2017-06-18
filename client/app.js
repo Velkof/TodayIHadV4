@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import bootstrap from 'bootstrap';
+import bootstrap from './bootstrap';
 
 import Test from './components/test/test.component';
 
-class App extends React.Component {
+class App extends Component {
     render() {
         return <Test />
     }

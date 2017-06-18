@@ -1,10 +1,12 @@
 const path = require('path');
 const webpack = require('webpack');
+const dotenv = require('dotenv');
+
+dotenv.config({path: path.resolve(__dirname, '.env')});
 
 module.exports = {
-
     entry: {
-        app: './assets/js/site/app/index.js',
+        app: path.resolve(__dirname, 'app.js'),
         vendor: ['jquery', 'underscore', 'react', 'react-dom']
     },
     output: {
@@ -27,5 +29,8 @@ module.exports = {
                 }
             }
         ]
+    },
+    node: {
+        fs: 'empty'
     }
 };

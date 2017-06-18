@@ -1,10 +1,8 @@
-const dotenv = require('dotenv');
-const path = require('path');
 const _ = require('underscore');
 
-dotenv.config({path: path.join(__dirname, '.env')});
-
 const configs = require('./config/index');
+
+console.log(configs);
 
 module.exports = (key, defaultValue) => {
 
