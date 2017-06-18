@@ -32,6 +32,7 @@
   },
   "dependencies": {
     "body-parser": "^1.17.2",
+    "bootstrap": "^3.3.7",
     "dotenv": "^4.0.0",
     "errorhandler": "^1.5.0",
     "express": "^4.15.3",
@@ -45,6 +46,8 @@
     "pretty-error": "^2.1.0",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
+    "react-redux": "^5.0.5",
+    "redux": "^3.7.0",
     "underscore": "^1.8.3"
   }
 }
