@@ -21,30 +21,23 @@ export default class Layout extends React.Component {
         this.props.dispatch(fetchUser())
     }
 
-    // fetchTweets() {
-    //     this.props.dispatch(fetchTweets());
-    // }
+    fetchTweets() {
+        this.props.dispatch(fetchTweets());
+    }
 
     render() {
-        // const { user, tweets } = this.props;
+        const { user, tweets } = this.props;
+
+        if (!tweets.length) {
+            return <button onClick={this.fetchTweets.bind(this)}>load tweets</button>
+        }
 
 
-        console.log("fdsfsd", this.props);
-
-        // const tweets = this.fetchTweets;
-
-        // console.log("dasdasd", tweets, user);
-        // console.log(this.props);
-        // if (!tweets.length) {
-        //     return <button onClick={this.fetchTweets.bind(this)}>load tweets</button>
-        // }
-
-
-        // const mappedTweets = tweets.map(tweet => <li key={tweet.id}>{tweet.text}</li>)
-        // console.log(mappedTweets, "mappedTweets");
+        const mappedTweets = tweets.map(tweet => <li key={tweet.id}>{tweet.text}</li>)
+        console.log(mappedTweets, "mappedTweets");
         return <div>
-            <h1>{this.props.user}</h1>
-            {/*<ul>{mappedTweets}</ul>*/}
+            {/*<h1>{user}</h1>*/}
+            <ul>{mappedTweets}</ul>
         </div>
     }
 }
