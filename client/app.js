@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from "react-redux"
+import { Provider } from "react-redux";
 import {Route, BrowserRouter } from "react-router-dom";
 
-import store from "./store"
+import store from "./store";
+
+import styles from './assets/stylesheets/main.css';
+
 
 import Test from './components/test/test';
 import Header from './components/header/header';
@@ -21,7 +24,6 @@ ReactDOM.render(
         <BrowserRouter>
             <div>
                 <Header/>
-
                 <Route exact path="/" component={DashboardContainer}/>
                 <Route exact path="/dashboard" component={DashboardContainer}/>
                 <Route exact path="/food" component={FoodContainer}/>

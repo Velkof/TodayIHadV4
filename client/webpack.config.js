@@ -28,8 +28,15 @@ module.exports = {
                     presets: ['es2015', 'react', 'stage-2'],
                     plugins: ['transform-decorators-legacy']
                 }
+            },
+            {
+                test: /\.css$/,
+                use: [
+                    { loader: "style-loader" },
+                    { loader: "css-loader" }
+                ]
             }
-        ]
+        ],
     },
     node: {
         fs: 'empty'
