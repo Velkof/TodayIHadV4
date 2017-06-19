@@ -7,7 +7,7 @@ dotenv.config({path: path.resolve(__dirname, '.env')});
 module.exports = {
     entry: {
         app: path.resolve(__dirname, 'app.js'),
-        vendor: ['jquery', 'underscore', 'react', 'react-dom']
+        vendor: ['jquery', 'underscore', 'react', 'react-dom', 'axios']
     },
     output: {
         path: path.resolve(__dirname, '../dist'),
