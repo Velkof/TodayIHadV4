@@ -14,15 +14,14 @@ class UserService {
         const result = this.httpClient.get('/profile');
 
         result.then(response => {
-            return response.json();
+            return response;
         });
 
         result.catch(error => {
             return error;
         });
 
-        return request;
-
+        return result;
     }
 }
 
