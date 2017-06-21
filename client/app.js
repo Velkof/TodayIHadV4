@@ -1,22 +1,36 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from "react-redux"
+import { Provider } from "react-redux";
+import {Route, BrowserRouter } from "react-router-dom";
 
-import Layout from "./components/Layout"
-import store from "./store"
+import store from "./store";
 
-import Test from './components/test/test.component';
+import styles from './assets/stylesheets/main.css';
 
-// class App extends Component {
-//     render() {
-//         return <Test />
-//     }
-// }
 
-// ReactDOM.render(<App />, document.getElementById('app'));
+import Test from './components/test/test';
+import Header from './components/header/header';
+import Footer from './components/footer/footer';
 
-const app = document.getElementById('app')
+import DashboardContainer from "./containers/dashboard/dashboard";
+import FoodContainer from "./containers/food/food";
+import FoodsContainer from "./containers/foods/foods";
 
-ReactDOM.render(<Provider store={store}>
-    <Layout />
-</Provider>, app);
+
+const app = document.getElementById('app');
+
+
+ReactDOM.render(
+    <Provider store={store}>
+        <BrowserRouter>
+            <div>
+                <Header/>
+                <Route exact path="/" component={DashboardContainer}/>
+                <Route exact path="/dashboard" component={DashboardContainer}/>
+                <Route exact path="/food" component={FoodContainer}/>
+                <Route exact path="api/foods" component={FoodsContainer}/>
+                <Footer/>
+            </div>
+        </BrowserRouter>
+    </Provider>
+, app);
