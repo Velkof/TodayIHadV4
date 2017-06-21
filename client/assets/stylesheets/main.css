@@ -1,0 +1,22 @@
+body{
+    background-color: #d8d8d8;
+}
+
+/* CONTAINERS */
+
+/* main container that will make our app fit as mobile size and centered on big screens */
+
+.container-mob {
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+    /*width: 100%;*/
+}
+@media (min-width: 576px) {
+    .container-mob {
+        width: 540px;
+        max-width: 100%;
+    }
+}

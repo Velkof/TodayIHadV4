@@ -6,15 +6,14 @@ import {Route, BrowserRouter } from "react-router-dom";
 import store from "./store";
 
 import styles from './assets/stylesheets/main.css';
+import colors from './assets/stylesheets/colors.css';
 
 
 import Test from './components/test/test';
 import Header from './components/header/header';
 import Footer from './components/footer/footer';
+import MainLayout from './components/mainLayout/mainLayout';
 
-import DashboardContainer from "./containers/dashboard/dashboard";
-import FoodContainer from "./containers/food/food";
-import FoodsContainer from "./containers/foods/foods";
 
 
 const app = document.getElementById('app');
@@ -25,10 +24,7 @@ ReactDOM.render(
         <BrowserRouter>
             <div>
                 <Header/>
-                <Route exact path="/" component={DashboardContainer}/>
-                <Route exact path="/dashboard" component={DashboardContainer}/>
-                <Route exact path="/food" component={FoodContainer}/>
-                <Route exact path="api/foods" component={FoodsContainer}/>
+                <MainLayout/>
                 <Footer/>
             </div>
         </BrowserRouter>

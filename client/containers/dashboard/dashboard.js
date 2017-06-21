@@ -5,13 +5,12 @@ import React from "react"
 import { connect } from "react-redux"
 
 import { fetchUser } from "../../actions/userActions"
-import { fetchTweets } from "../../actions/tweetsActions"
 import { fetchFoods } from "../../actions/foodActions"
 
 
 @connect((store) => {
     return {
-        tweets: store.tweets.tweets,
+        foods: store.foods.foods,
     };
 })
 
@@ -20,30 +19,23 @@ export default class DashboardContainer extends React.Component {
         this.props.dispatch(fetchUser())
     }
 
-    fetchTweets() {
-        this.props.dispatch(fetchTweets());
-    }
     fetchFoods() {
         this.props.dispatch(fetchFoods());
     }
 
     render() {
-        const { tweets, foods } = this.props;
-
-        if (!tweets.length) {
-            return <button onClick={this.fetchTweets.bind(this)}>load tweets</button>
-        }
-
-        if (!foods.length) {
-            return <button onClick={this.fetchFoods.bind(this)}>load foods</button>
-        }
-
-        const mappedTweets = tweets.map(tweet => <li key={tweet.id}>{tweet.text}</li>);
-        const mappedFoods = foods.map(food => <li key={food.id}>{food.name}</li>);
+        // const {  foods } = this.props;
+        //
+        //
+        // if (!foods.length) {
+        //     return <button onClick={this.fetchFoods.bind(this)}>load foods</button>
+        // }
+        //
+        // const mappedFoods = foods.map(food => <li key={food._id}>{food.name}</li>);
 
         return <div>
-            <ul>{mappedTweets}</ul>
-            <ul>{mappedFoods}</ul>
+            {/*<ul>{mappedFoods}</ul>*/}
+            <h1>DASHBOARD</h1>
         </div>
     }
 }

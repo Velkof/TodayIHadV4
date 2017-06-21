@@ -4,8 +4,8 @@
 import React from "react"
 import { connect } from "react-redux"
 
-import { fetchFoods } from "../../actions/foodActions"
 import { fetchUser } from "../../actions/userActions"
+import { fetchFoods } from "../../actions/foodActions"
 
 
 @connect((store) => {
@@ -16,7 +16,7 @@ import { fetchUser } from "../../actions/userActions"
 
 export default class FoodsContainer extends React.Component {
     componentWillMount() {
-        this.props.dispatch(fetchUser())
+        this.props.dispatch(fetchUser());
     }
 
     fetchFoods() {
@@ -24,16 +24,17 @@ export default class FoodsContainer extends React.Component {
     }
 
     render() {
-        const { foods } = this.props;
+        const {  foods } = this.props;
 
-        console.log("foooooooooooooooooooods", foods);
 
         if (!foods.length) {
             return <button onClick={this.fetchFoods.bind(this)}>load foods</button>
         }
 
-        const mappedFoods = foods.map(food => <li key={food.id}>{food.name}</li>);
+        const mappedFoods = foods.map(food => <li key={food._id}>{food.name}</li>);
+
         return <div>
+            <button onClick={this.fetchFoods.bind(this)}>load foods</button>
             <ul>{mappedFoods}</ul>
         </div>
     }

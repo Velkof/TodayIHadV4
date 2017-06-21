@@ -1,11 +1,12 @@
-.header {
+.footer{
     position: fixed;
-    top: 0;
+    bottom: 0;
     left: 0;
     right: 0;
     height: 4rem;
     z-index: 9;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
-    background-color: black;
+    border-top:1px solid #b3b3b3;
+    background-color: white;
 }

@@ -1,12 +1,12 @@
 /**
  * Created by Marjan on 18-Jun-17.
  */
-import { combineReducers } from "redux"
+import { combineReducers } from "redux";
 
-import tweets from "./tweets"
-import user from "./user"
+import user from "./user";
+import foods from "./foods";
 
 export default combineReducers({
-    tweets,
     user,
-})
+    foods,
+});
