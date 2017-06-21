@@ -7,11 +7,14 @@ const bodyParser = require('body-parser');
 const errorhandler = require('errorhandler');
 const exphbs = require('express-handlebars');
 const path = require('path');
+const router = require('./controllers');
+const fs = require('fs');
+const app = express();
+
 
 const pe = new PrettyError();
 pe.start();
 
-const app = express();
 
 app.use(require('morgan')('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -22,8 +25,16 @@ app.use(require('method-override')());
 app.use(express.static(path.join(__dirname, '../dist')));
 app.use(express.static(path.join(__dirname, '../public')));
 
+app.use('/api', router);
+
 const hbs = exphbs.create({
     layoutsDir: __dirname + '/views/layouts'
+});
+
+const models_path = __dirname + '/models';
+
+fs.readdirSync(models_path).forEach(function (file) {
+    require(models_path+'/'+file);
 });
 
 app.engine('handlebars', hbs.engine);
