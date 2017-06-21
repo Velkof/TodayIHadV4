@@ -22,8 +22,10 @@ class Header extends Component {
         return (
             <div className="header">
                 <h1>Header</h1>
-                    <Link to={'/dashboard'} >DashboardContainer</Link> <br/>
-                     <Link to={'/food'} >FoodContainer</Link>
+                    <Link to={'/dashboard'} >DashboardContainer</Link> <br/><br/>
+                     <Link to={'/food'} >FoodContainer</Link><br/><br/>
+                     <Link to={'/foods'} >FoodsContainer</Link><br/><br/>
+
             </div>
         );
     }

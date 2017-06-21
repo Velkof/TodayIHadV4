@@ -14,6 +14,7 @@ import Footer from './components/footer/footer';
 
 import DashboardContainer from "./containers/dashboard/dashboard";
 import FoodContainer from "./containers/food/food";
+import FoodsContainer from "./containers/foods/foods";
 
 
 const app = document.getElementById('app');
@@ -27,7 +28,7 @@ ReactDOM.render(
                 <Route exact path="/" component={DashboardContainer}/>
                 <Route exact path="/dashboard" component={DashboardContainer}/>
                 <Route exact path="/food" component={FoodContainer}/>
-
+                <Route exact path="api/foods" component={FoodsContainer}/>
                 <Footer/>
             </div>
         </BrowserRouter>

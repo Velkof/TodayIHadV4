@@ -2,6 +2,8 @@ const router = require('express').Router();
 
 router.use('/example', require('./example'));
 router.use('/profile', require('./profile'));
+router.use('/foods', require('./foods'));
+
 
 router.get('/', function (req, res) {
     res.render('home');
