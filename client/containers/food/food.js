@@ -1,42 +1,13 @@
 /**
  * Created by Marjan on 19-Jun-17.
  */
-// import React from "react"
-// import { connect } from "react-redux"
-//
-// import { fetchUser } from "../../actions/userActions"
-// import Test from '../../components/test/test';
-//
-//
-// @connect((store) => {
-//     return {
-//         user: store.user.user,
-//         userFetched: store.user.fetched,
-//     };
-// })
-//
-// export default class FoodContainer extends React.Component {
-//     componentWillMount() {
-//         this.props.dispatch(fetchUser())
-//     }
-//
-//
-//     render() {
-//         const { user } = this.props;
-//         return(
-//             <div>
-//                 <h1>{user.name}</h1>
-//                 <Test/>
-//             </div>
-//         );
-//     }
-// }
 
 import React from "react"
 import { connect } from "react-redux"
 
-import { fetchUser } from "../../actions/userActions"
 import { fetchFoods } from "../../actions/foodActions"
+import {Link, Route} from "react-router-dom";
+import EditFood from "../../components/food/editFood/editFood";
 
 
 @connect((store) => {
@@ -47,31 +18,24 @@ import { fetchFoods } from "../../actions/foodActions"
 
 export default class FoodContainer extends React.Component {
     componentWillMount() {
-        this.props.dispatch(fetchUser());
-    }
-
-    fetchFoods() {
         this.props.dispatch(fetchFoods());
     }
-
     render() {
-        const {  foods } = this.props;
+        const { foods } = this.props;
+
+        const mappedFoods = foods.map(food =>
+            <div key={food._id}>
+                {food.name}
+                <Link to={'api/foods/edit/'+ food._id}>    Edit food     </Link>
+                <Link to={'api/foods/view/'+ food._id}>    View food     </Link>
+                <Link to={'api/foods/delete/'+ food._id}>    Delete food</Link>
+            </div>);
 
 
-        if (!foods.length) {
-            return (
-                <div>
-                    <h1>FOODS</h1>
-                    <button onClick={this.fetchFoods.bind(this)}>load foods</button>
-                </div>
-            );
-        }
-
-        const mappedFoods = foods.map(food => <li key={food._id}>{food.name}</li>);
 
         return <div>
             <h1>FOODS</h1>
-
+            <Link to={'/api/foods/add'} >Add Food</Link> <br/><br/>
             <ul>{mappedFoods}</ul>
         </div>
     }

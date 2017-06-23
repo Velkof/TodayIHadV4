@@ -2,6 +2,21 @@ body{
     background-color: #d8d8d8;
 }
 
+
+/* small screen mobiles */
+@media (max-width: 400px) {
+    html {
+        font-size: 70%;
+    }
+}
+
+/* large screen mobiles */
+@media (min-width: 401px) and (max-width: 767px){
+    html {
+        font-size: 80%;
+    }
+}
+
 /* CONTAINERS */
 
 /* main container that will make our app fit as mobile size and centered on big screens */
@@ -12,8 +27,8 @@ body{
     margin-right: auto;
     padding-left: 15px;
     padding-right: 15px;
-    /*width: 100%;*/
 }
+
 @media (min-width: 576px) {
     .container-mob {
         width: 540px;

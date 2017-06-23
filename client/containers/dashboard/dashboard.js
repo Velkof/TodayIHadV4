@@ -24,17 +24,7 @@ export default class DashboardContainer extends React.Component {
     }
 
     render() {
-        // const {  foods } = this.props;
-        //
-        //
-        // if (!foods.length) {
-        //     return <button onClick={this.fetchFoods.bind(this)}>load foods</button>
-        // }
-        //
-        // const mappedFoods = foods.map(food => <li key={food._id}>{food.name}</li>);
-
         return <div>
-            {/*<ul>{mappedFoods}</ul>*/}
             <h1>DASHBOARD</h1>
         </div>
     }

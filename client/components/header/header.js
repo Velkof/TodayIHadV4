@@ -22,7 +22,7 @@ class Header extends Component {
         return (
             <div className="header">
                 <div className="container-mob c-white">
-                    <h1>Header</h1>
+                    <p>Header</p>
                 </div>
             </div>
         );

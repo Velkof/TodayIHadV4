@@ -17,26 +17,56 @@ export function fetchFoods() {
     }
 }
 
-export function addFood(id, name) {
-    return {
-        type: 'ADD_FOOD',
-        payload: {
-            id,
-            name,
-        },
+export function addFood( data) {
+    return function (dispatch) {
+
+        dispatch({type: 'ADD_FOOD', payload: data});
+
+        axios.post('http://localhost:9000/api/foods', {
+            name: data.name,
+        })
+        .then(function (response) {
+            dispatch({type: "ADD_FOOD_FULFILLED", payload: response.data})
+        })
+        .catch(function (err) {
+            dispatch({type: "ADD_FOOD_REJECTED", payload: err})
+        });
     }
 }
 
-export function updateFood(id, name) {
-    return {
-        type: 'UPDATE_FOOD',
-        payload: {
-            id,
-            name,
-        },
+
+export function updateFood( data) {
+    return function (dispatch) {
+
+        dispatch({type: 'UPDATE_FOOD', payload: data});
+
+        axios.put('http://localhost:9000/api/foods/' + data.id, {
+            id: data.id,
+            name: data.name,
+        })
+        .then(function (response) {
+            dispatch({type: "UPDATE_FOOD_FULFILLED", payload: response.data})
+        })
+        .catch(function (err) {
+            dispatch({type: "UPDATE_FOOD_REJECTED", payload: err})
+        });
     }
 }
 
-export function deleteFood(id) {
-    return { type: 'DELETE_FOOD', payload: id}
+
+export function deleteFood(data) {
+    return function (dispatch) {
+
+        dispatch({type: 'DELETE_FOOD', payload: data});
+
+        axios.delete('http://localhost:9000/api/foods/' + data.id, {
+            id: data.id,
+        })
+        .then(function (response) {
+            dispatch({type: "DELETE_FOOD_FULFILLED", payload: response.data})
+        })
+        .catch(function (err) {
+            dispatch({type: "DELETE_FOOD_REJECTED", payload: err})
+        });
+    }
 }
