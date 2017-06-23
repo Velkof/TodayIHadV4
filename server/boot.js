@@ -11,21 +11,17 @@ const router = require('./controllers');
 const fs = require('fs');
 const app = express();
 
-
 const pe = new PrettyError();
 pe.start();
-
 
 app.use(require('morgan')('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
 app.use(require('method-override')());
-
 app.use(express.static(path.join(__dirname, '../dist')));
 app.use(express.static(path.join(__dirname, '../public')));
-
 app.use('/api', router);
+
 
 const hbs = exphbs.create({
     layoutsDir: __dirname + '/views/layouts'
@@ -63,3 +59,4 @@ if(config('app.port')) {
 } else {
     console.error('==> ERROR: No PORT environment variable has been specified');
 }
+

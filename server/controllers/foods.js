@@ -4,8 +4,19 @@
 const router = require('express').Router();
 const Food = require('../models/Food');
 
+const jwt = require('express-jwt');
+const cors = require('cors');
+
+
+router.use(cors());
+
+const authCheck = jwt({
+    secret:  process.env.AUTH0_SECRET,
+    audience:  process.env.AUTH0_CLIENT_ID
+});
+
 router.route('/')
-    .post(function(req, res) {
+    .post(authCheck, function(req, res) {
 
         const food = new Food();
         food.name = req.body.name;
@@ -15,7 +26,7 @@ router.route('/')
                 res.send(err);
             res.json({ message: 'Food created!' });
         });
-    }).get(function(req, res) {
+    }).get(authCheck, function(req, res) {
 
         Food.find(function(err, bears) {
             if (err){
@@ -27,7 +38,7 @@ router.route('/')
     });
 
 router.route('/:id')
-    .get(function(req, res) {
+    .get(authCheck, function(req, res) {
 
         Food.findOne({_id: req.params.id}, function (err, food) {
 
@@ -37,7 +48,7 @@ router.route('/:id')
 
             res.json(food);
         });
-    }).put(function(req, res) {
+    }).put(authCheck, function(req, res) {
 
         Food.findOne({_id: req.params.id}, function (err, food) {
 
@@ -55,7 +66,7 @@ router.route('/:id')
             });
         });
     })
-    .delete(function(req, res) {
+    .delete(authCheck, function(req, res) {
 
         Food.remove({
             _id: req.params.id
