@@ -1,11 +1,13 @@
 /**
- * Created by Marjan on 21-Jun-17.
+ * Created by Marjan on 19-Jun-17.
  */
+
 import React from "react"
 import { connect } from "react-redux"
 
-import { fetchUser } from "../../actions/userActions"
 import { fetchFoods } from "../../actions/foodActions"
+import {Link, Route} from "react-router-dom";
+import EditFood from "../../components/food/editFood/editFood";
 
 
 @connect((store) => {
@@ -16,25 +18,24 @@ import { fetchFoods } from "../../actions/foodActions"
 
 export default class FoodsContainer extends React.Component {
     componentWillMount() {
-        this.props.dispatch(fetchUser());
-    }
-
-    fetchFoods() {
         this.props.dispatch(fetchFoods());
     }
-
     render() {
-        const {  foods } = this.props;
+        const { foods } = this.props;
+
+        const mappedFoods = foods.map(food =>
+            <div key={food._id}>
+                {food.name}
+                <Link to={'api/foods/edit/'+ food._id}>    Edit food     </Link>
+                <Link to={'api/foods/view/'+ food._id}>    View food     </Link>
+                <Link to={'api/foods/delete/'+ food._id}>    Delete food</Link>
+            </div>);
 
 
-        if (!foods.length) {
-            return <button onClick={this.fetchFoods.bind(this)}>load foods</button>
-        }
-
-        const mappedFoods = foods.map(food => <li key={food._id}>{food.name}</li>);
 
         return <div>
-            <button onClick={this.fetchFoods.bind(this)}>load foods</button>
+            <h1>FOODS</h1>
+            <Link to={'/api/foods/add'} >Add Food</Link> <br/><br/>
             <ul>{mappedFoods}</ul>
         </div>
     }

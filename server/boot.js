@@ -20,12 +20,13 @@ app.use(bodyParser.json());
 app.use(require('method-override')());
 app.use(express.static(path.join(__dirname, '../dist')));
 app.use(express.static(path.join(__dirname, '../public')));
+app.use(require('./controllers'));
 app.use('/api', router);
-
 
 const hbs = exphbs.create({
     layoutsDir: __dirname + '/views/layouts'
 });
+
 
 const models_path = __dirname + '/models';
 
@@ -36,8 +37,6 @@ fs.readdirSync(models_path).forEach(function (file) {
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 app.set('views', __dirname + '/views');
-
-app.use(require('./controllers'));
 
 mongoose.connect(util.format('mongodb://%s/%s', config('database.host'), config('database.name')));
 

@@ -11,7 +11,6 @@ class Footer extends Component {
         <div className="footer">
             <div className="container-mob">
                 <Link to={'/dashboard'} >DashboardContainer</Link> <br/><br/>
-                <Link to={'/food'} >FoodContainer</Link><br/><br/>
                 <Link to={'/foods'} >FoodsContainer</Link><br/><br/>
             </div>
         </div>

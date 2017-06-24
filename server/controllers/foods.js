@@ -6,13 +6,13 @@ const Food = require('../models/Food');
 
 const jwt = require('express-jwt');
 const cors = require('cors');
-
+const config = require('../config');
 
 router.use(cors());
 
 const authCheck = jwt({
-    secret:  process.env.AUTH0_SECRET,
-    audience:  process.env.AUTH0_CLIENT_ID
+    secret:  config("auth.clientSecret"),
+    audience:  config("auth.clientId")
 });
 
 router.route('/')
