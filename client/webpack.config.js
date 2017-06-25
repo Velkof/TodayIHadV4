@@ -4,6 +4,10 @@ const dotenv = require('dotenv');
 
 dotenv.config({path: path.resolve(__dirname, '.env')});
 
+const ExtendedDefinePlugin = require('extended-define-webpack-plugin');
+const appConfig = require('./config/index');
+
+
 module.exports = {
     entry: {
         app: path.resolve(__dirname, 'app.js'),
@@ -16,6 +20,9 @@ module.exports = {
     plugins: [
         new webpack.optimize.CommonsChunkPlugin({
             name: ['vendor']
+        }),
+        new ExtendedDefinePlugin({
+            APP_CONFIG: appConfig,
         })
     ],
     module: {
@@ -35,7 +42,11 @@ module.exports = {
                     { loader: "style-loader" },
                     { loader: "css-loader" }
                 ]
-            }
+            },
+            {
+                test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+                loader: 'url-loader?limit=10000',
+            },
         ],
     },
     node: {

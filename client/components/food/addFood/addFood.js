@@ -27,11 +27,12 @@ class AddFood extends Component {
         return (
             <div className="">
                 <h1>Add Food</h1>
+                <div className="form-group label-floating">
+                    <label className="control-label">Name</label>
+                    <input type="text" value={this.state.name} onChange={this.handleNameChange.bind(this)} className="form-control"/>
+                </div>
                 <br/>
-                <label>FoodName</label><br/>
-                <input placeholder="Name" value={this.state.name}  onChange={this.handleNameChange.bind(this)}/>
-
-                <button onClick={this.addFood.bind(this)}>Add Food</button>
+                <button className="btn btn-raised btn-primary" onClick={this.addFood.bind(this)}>Add Food</button>
             </div>
         );
     };

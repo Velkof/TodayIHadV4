@@ -1,3 +1,4 @@
-import app from './app';
+const app = require('./app');
+const auth = require('./auth');
 
-export default Object.assign({}, app);
+module.exports = Object.assign({}, app, auth);

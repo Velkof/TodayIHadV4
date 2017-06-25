@@ -5,13 +5,18 @@ import React, {Component} from 'react';
 import {Link} from "react-router-dom";
 import styles from './footer.css';
 
+
 class Footer extends Component {
     render() {
       return (
         <div className="footer">
             <div className="container-mob">
-                <Link to={'/dashboard'} >DashboardContainer</Link> <br/><br/>
-                <Link to={'/foods'} >FoodsContainer</Link><br/><br/>
+                <div className="col-xs-3">
+                    <Link to={'/dashboard'} ><span className="glyphicon glyphicon-home" style={{fontSize:'2rem'}}></span></Link> <br/><br/>
+                </div>
+                <div className="col-xs-3">
+                    <Link to={'/foods'} ><span className="glyphicon glyphicon-cutlery" style={{fontSize:'2rem'}}></span></Link><br/><br/>
+                </div>
             </div>
         </div>
       );
