@@ -21,8 +21,8 @@ export default class Auth extends Component {
                     </ul>
                 ) : (
                     <ul className="list-inline">
-                        {/*<li><img src={profile.picture} height="40px" /></li>*/}
-                        {/*<li><span>Welcome, {profile.nickname}</span></li>*/}
+                        <li><img src={profile.picture} height="40px" /></li>
+                        <li><span>Welcome, {profile.name}</span></li>
                         <li><button className="btn btn-secondary btn-raised" style={{ margin: '0px' }} onClick={onLogoutClick}>Logout</button></li>
                     </ul>
                 )}

@@ -28,12 +28,12 @@ router.route('/')
         });
     }).get(authCheck, function(req, res) {
 
-        Food.find(function(err, bears) {
+        Food.find(function(err, foods) {
             if (err){
                 res.send(err);
             }
 
-            res.json(bears);
+            res.json(foods);
         });
     });
 

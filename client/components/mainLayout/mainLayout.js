@@ -3,8 +3,8 @@
  */
 import React, {Component} from 'react';
 import {Route} from "react-router-dom";
-// import { connect } from 'react-redux'
-// import {login, logout} from "../../actions/loginActions";
+import { connect } from 'react-redux'
+import {login, logout} from "../../actions/loginActions";
 
 
 import DashboardContainer from "../../containers/dashboard/dashboard";
@@ -19,35 +19,35 @@ import styles from './mainLayout.css';
 
 
 class MainLayout extends Component {
-    // constructor(props) {
-    //     super(props);
-    //     this.handleLoginClick = this.handleLoginClick.bind(this);
-    //     this.handleLogoutClick = this.handleLogoutClick.bind(this);
-    // }
-    // handleLoginClick() {
-    //     this.props.login()
-    // }
-    //
-    // handleLogoutClick() {
-    //     this.props.logout()
-    // }
+    constructor(props) {
+        super(props);
+        this.handleLoginClick = this.handleLoginClick.bind(this);
+        this.handleLogoutClick = this.handleLogoutClick.bind(this);
+    }
+    handleLoginClick() {
+        this.props.login()
+    }
+
+    handleLogoutClick() {
+        this.props.logout()
+    }
     render() {
-        // const {  isAuthenticated, profile } = this.props
+        const {  isAuthenticated, profile } = this.props;
 
         return (
 
         <div className="mainLayout container-mob bg-c-white">
-            {/*<div className="navbar navbar-default">*/}
-                {/*<div className="container-fluid">*/}
-                    {/*<a className="navbar-brand">Redux Jedi</a>*/}
-                    {/*<Auth*/}
-                        {/*isAuthenticated={isAuthenticated}*/}
-                        {/*profile={profile}*/}
-                        {/*onLoginClick={this.handleLoginClick}*/}
-                        {/*onLogoutClick={this.handleLogoutClick}*/}
-                    {/*/>*/}
-                {/*</div>*/}
-            {/*</div>*/}
+            <div className="navbar navbar-default">
+                <div className="container-fluid">
+                    <a className="navbar-brand">Redux Jedi</a>
+                    <Auth
+                        isAuthenticated={isAuthenticated}
+                        profile={profile}
+                        onLoginClick={this.handleLoginClick}
+                        onLogoutClick={this.handleLogoutClick}
+                    />
+                </div>
+            </div>
                 <Route exact path="/" component={DashboardContainer}/>
                 <Route exact path="/dashboard" component={DashboardContainer}/>
                 <Route exact path="/foods" component={FoodsContainer}/>
@@ -61,19 +61,19 @@ class MainLayout extends Component {
 }
 
 
-// function mapStateToProps(state) {
-//     const { auth } = state;
-//     const { isAuthenticated, profile } = auth;
-//     return {
-//         isAuthenticated,
-//         profile
-//     }
-// }
-//
-// export default connect(mapStateToProps, {
-//     login,
-//     logout
-// })(MainLayout)
+function mapStateToProps(state) {
+    const { auth } = state;
+    const { isAuthenticated, profile } = auth;
+    return {
+        isAuthenticated,
+        profile
+    }
+}
+
+export default connect(mapStateToProps, {
+    login,
+    logout
+})(MainLayout)
 
 
-export default MainLayout;
+// export default MainLayout;
