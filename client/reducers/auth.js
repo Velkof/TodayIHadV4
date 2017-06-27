@@ -27,7 +27,7 @@ export default function reducer(state={
     error: ''
 }, action) {
     switch (action.type) {
-        case "LOGIN_SUCCESS": {
+        case "LOGIN_FULFILLED": {
             return {
                 ...state,
                 isAuthenticated: true,
@@ -35,7 +35,7 @@ export default function reducer(state={
                 error: ''
             };
         }
-        case "LOGIN_ERROR": {
+        case "LOGIN_REJECTED": {
             return {
                 ...state,
                 isAuthenticated: false,
@@ -43,7 +43,7 @@ export default function reducer(state={
                 error: action.error
             };
         }
-        case "LOGOUT_SUCCESS":{
+        case "LOGOUT_FULFILLED":{
             return {
                 ...state,
                 isAuthenticated: false,

@@ -36,7 +36,7 @@ class EditFood extends Component {
 
     render() {
         return (
-            <div className="">
+            <div className="container-mob bg-c-white main-layout">
 
                 <h1>Edit Food</h1>
                     <label>Food Name</label>

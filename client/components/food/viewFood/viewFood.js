@@ -26,7 +26,7 @@ class ViewFood extends Component {
     }
     render() {
         return (
-            <div className="">
+            <div className="container-mob bg-c-white main-layout">
                 <h1>View Food</h1>
                 <label>Food Name</label>
                 <p> {this.currentFood.name}</p>

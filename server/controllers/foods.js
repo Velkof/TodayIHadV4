@@ -15,6 +15,7 @@ const authCheck = jwt({
     audience:  config("auth.clientId")
 });
 
+
 router.route('/')
     .post(authCheck, function(req, res) {
 
@@ -26,9 +27,10 @@ router.route('/')
                 res.send(err);
             res.json({ message: 'Food created!' });
         });
+
     }).get(authCheck, function(req, res) {
 
-        Food.find(function(err, foods) {
+        Food.find({}, function(err, foods) {
             if (err){
                 res.send(err);
             }
@@ -65,8 +67,7 @@ router.route('/:id')
                 res.json({ message: 'Food updated!' });
             });
         });
-    })
-    .delete(authCheck, function(req, res) {
+    }).delete(authCheck, function(req, res) {
 
         Food.remove({
             _id: req.params.id

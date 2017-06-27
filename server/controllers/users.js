@@ -18,28 +18,24 @@ const authCheck = jwt({
 router.route('/')
     .post( function(req, res) {
 
-        let userExists = User.findOne({email:req.body.email}, {});
+        User.findOne({email:req.body.email}, function (err, user) {
 
-        if(!userExists) {
-            const user = new User();
-            user.name = req.body.name;
-            user.email = req.body.email;
-            user.save(function(err) {
-                if (err)
-                    res.send(err);
-                res.json({ message: 'User created!' });
+                if (err) {
+                   console.log("error", err);
+                }
+                console.log("user", user);
+                if(user === null) {
+                    const user = new User();
+                    user.name = req.body.name;
+                    user.email = req.body.email;
+                    user.role = "user";
+                    user.save(function(err) {
+                        if (err)
+                            res.send(err);
+                        res.json({ message: 'User created!' });
+                    });
+                }
             });
-        }
-
-        // User.findAndModify({
-        //     query: { email: req.body.email },
-        //     update: {
-        //         $setOnInsert: { name: req.body.name, email: req.body.email }
-        //     },
-        //     new: true,   // return new doc if one is upserted
-        //     upsert: true // insert the document if it does not exist
-        // });
-
 
     }).get(authCheck, function(req, res) {
 

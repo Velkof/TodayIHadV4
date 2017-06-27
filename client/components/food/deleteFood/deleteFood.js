@@ -31,7 +31,7 @@ class DeleteFood extends Component {
     }
     render() {
         return (
-            <div className="">
+            <div className="container-mob bg-c-white main-layout">
                 <h1>Delete Food</h1>
                 <p> Are you sure you want to delete {this.currentFood.name}?</p>
                 <button onClick={this.deleteFood.bind(this)}>Delete</button>

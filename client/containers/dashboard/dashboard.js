@@ -24,7 +24,7 @@ export default class DashboardContainer extends React.Component {
     }
 
     render() {
-        return <div>
+        return <div className="container-mob bg-c-white main-layout">
             <h1>DASHBOARD</h1>
         </div>
     }

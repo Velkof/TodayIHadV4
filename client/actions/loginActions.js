@@ -4,24 +4,13 @@
 import axios from "axios";
 import Auth0Lock from 'auth0-lock';
 
-export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
-export const LOGIN_ERROR = 'LOGIN_ERROR';
+export const LOGIN_FULFILLED = 'LOGIN_FULFILLED';
+export const LOGIN_REJECTED = 'LOGIN_REJECTED';
+export const LOGOUT_FULFILLED = 'LOGOUT_FULFILLED';
 
-function loginSuccess(profile) {
-    return {
-        type: LOGIN_SUCCESS,
-        profile
-    }
-}
-
-function loginError(err) {
-    return {
-        type: LOGIN_ERROR,
-        err
-    }
-}
 
 export function login() {
+
     const options = {
         auth: {
             redirect: false,
@@ -37,14 +26,13 @@ export function login() {
 
     lock.show();
 
-
     return function(dispatch) {
 
         lock.on("authenticated", function(authResult) {
             console.log("authResult", authResult);
             lock.getUserInfo(authResult.accessToken, function(error, profile) {
                 if (error) {
-                    return dispatch(loginError(error))
+                    return dispatch(loginRejected(error))
                 }
 
                 axios.post('http://localhost:9000/api/users', {
@@ -58,40 +46,34 @@ export function login() {
                     dispatch({type: "ADD_USER_REJECTED", payload: err})
                 });
 
-
-                // localStorage.setItem("accessToken", authResult.accessToken);
                 localStorage.setItem('id_token', authResult.idToken);
                 localStorage.setItem("profile", JSON.stringify(profile));
-                return dispatch(loginSuccess(authResult.profile));
+                return dispatch(loginFulfilled(authResult.profile));
 
             });
         });
 
     };
-
-    // return function(dispatch) {
-    //
-    //
-    //     lock.show((err, profile, token) => {
-    //
-    //         if(err) {
-    //
-    //             return dispatch(loginError(err))
-    //         }
-    //         localStorage.setItem('profile', JSON.stringify(profile));
-    //         localStorage.setItem('id_token', token);
-    //         dispatch({type: 'LOGIN_SUCCESS', payload: profile});
-    //
-    //          return dispatch(loginSuccess(profile));
-    //     })
-    // }
 }
 
-export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 
-function logoutSuccess(profile) {
+function logoutFulfilled(profile) {
     return {
-        type: LOGOUT_SUCCESS
+        type: LOGOUT_FULFILLED
+    }
+}
+
+function loginFulfilled(profile) {
+    return {
+        type: LOGIN_FULFILLED,
+        profile
+    }
+}
+
+function loginRejected(err) {
+    return {
+        type: LOGIN_REJECTED,
+        err
     }
 }
 
@@ -99,7 +81,7 @@ export function logout() {
     return dispatch => {
         localStorage.removeItem('id_token');
         localStorage.removeItem('profile');
-        return dispatch(logoutSuccess());
+        return dispatch(logoutFulfilled());
     }
 }
 
