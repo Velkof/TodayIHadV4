@@ -5,6 +5,7 @@ import React, {Component} from 'react';
 import { connect } from "react-redux"
 
 import {deleteFood, fetchFoods } from "../../../actions/foodActions";
+import Footer from "../../footer/footer";
 
 @connect((store) => {
     return {
@@ -31,10 +32,13 @@ class DeleteFood extends Component {
     }
     render() {
         return (
-            <div className="container-mob bg-c-white main-layout">
-                <h1>Delete Food</h1>
-                <p> Are you sure you want to delete {this.currentFood.name}?</p>
-                <button onClick={this.deleteFood.bind(this)}>Delete</button>
+            <div>
+                <div className="container-mob bg-c-white main-layout">
+                    <h1>Delete Food</h1>
+                    <p> Are you sure you want to delete {this.currentFood.name}?</p>
+                    <button onClick={this.deleteFood.bind(this)}>Delete</button>
+                </div>
+                <Footer/>
             </div>
         );
     };

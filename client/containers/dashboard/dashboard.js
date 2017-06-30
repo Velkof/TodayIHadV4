@@ -6,6 +6,7 @@ import { connect } from "react-redux"
 
 import { fetchUser } from "../../actions/userActions"
 import { fetchFoods } from "../../actions/foodActions"
+import Footer from "../../components/footer/footer";
 
 
 @connect((store) => {
@@ -24,8 +25,14 @@ export default class DashboardContainer extends React.Component {
     }
 
     render() {
-        return <div className="container-mob bg-c-white main-layout">
-            <h1>DASHBOARD</h1>
-        </div>
+
+        return (
+            <div>
+                <div className="container-mob bg-c-white main-layout">
+                    <h1>DASHBOARD</h1>
+                </div>
+                <Footer/>
+            </div>
+        )
     }
 }

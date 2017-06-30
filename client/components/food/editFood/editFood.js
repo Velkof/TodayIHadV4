@@ -5,6 +5,7 @@ import React, {Component} from 'react';
 import { connect } from "react-redux"
 
 import { fetchFoods, updateFood } from "../../../actions/foodActions";
+import Footer from "../../footer/footer";
 
 @connect((store) => {
     return {
@@ -36,12 +37,14 @@ class EditFood extends Component {
 
     render() {
         return (
-            <div className="container-mob bg-c-white main-layout">
-
-                <h1>Edit Food</h1>
+            <div>
+                <div className="container-mob bg-c-white main-layout">
+                    <h1>Edit Food</h1>
                     <label>Food Name</label>
                     <input placeholder="Name" defaultValue={this.currentFood.name} onChange={this.handleNameChange.bind(this)}/>
                     <button onClick={this.updateFood.bind(this)}>Update Food</button>
+                </div>
+                <Footer/>
             </div>
         );
     };

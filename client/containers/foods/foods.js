@@ -7,6 +7,7 @@ import { connect } from "react-redux"
 
 import { fetchFoods } from "../../actions/foodActions"
 import {Link, Route} from "react-router-dom";
+import Footer from "../../components/footer/footer";
 
 
 @connect((store) => {
@@ -32,10 +33,15 @@ export default class FoodsContainer extends React.Component {
 
 
 
-        return <div className="container-mob bg-c-white main-layout">
-            <h1>FOODS</h1>
-            <Link to={'/foods/add'} >Add Food</Link> <br/><br/>
-            <ul>{mappedFoods}</ul>
-        </div>
+        return (
+            <div>
+                <div className="container-mob bg-c-white main-layout">
+                    <h1>FOODS</h1>
+                    <Link to={'/foods/add'} >Add Food</Link> <br/><br/>
+                    <ul>{mappedFoods}</ul>
+                </div>
+                <Footer/>
+            </div>
+        )
     }
 }

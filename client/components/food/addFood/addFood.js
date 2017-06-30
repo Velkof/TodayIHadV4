@@ -5,6 +5,7 @@ import React, {Component} from 'react';
 import { addFood } from "../../../actions/foodActions"
 import { connect } from "react-redux"
 import {Link} from "react-router-dom";
+import Footer from "../../footer/footer";
 
 
 @connect((store) => {
@@ -26,14 +27,17 @@ class AddFood extends Component {
     }
     render() {
         return (
-            <div className="container-mob bg-c-white main-layout">
-                <h1>Add Food</h1>
-                <div className="form-group label-floating">
-                    <label className="control-label">Name</label>
-                    <input type="text" value={this.state.name} onChange={this.handleNameChange.bind(this)} className="form-control"/>
+            <div>
+                <div className="container-mob bg-c-white main-layout">
+                    <h1>Add Food</h1>
+                    <div className="form-group label-floating">
+                        <label className="control-label">Name</label>
+                        <input type="text" value={this.state.name} onChange={this.handleNameChange.bind(this)} className="form-control"/>
+                    </div>
+                    <br/>
+                    <button className="btn btn-raised btn-primary" onClick={this.addFood.bind(this)}><Link className="c-white" to={'/foods'}>Add Food</Link> </button>
                 </div>
-                <br/>
-                <button className="btn btn-raised btn-primary" onClick={this.addFood.bind(this)}><Link className="c-white" to={'/foods'}>Add Food</Link> </button>
+                <Footer/>
             </div>
         );
     };
