@@ -3,10 +3,17 @@
     bottom: 0;
     left: 0;
     right: 0;
-    height: 4em;
+    height: 5em;
     z-index: 9;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
     border-top:1px solid #b3b3b3;
     background-color: white;
+    text-align: center;
+}
+
+.footerTab {
+    line-height: 2em;
+    font-size: 2.5em;
+    color:grey;
 }
