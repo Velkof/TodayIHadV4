@@ -15,7 +15,10 @@ class Footer extends Component {
                     <Link to={'/dashboard'} ><span className="glyphicon glyphicon-home" style={{fontSize:'2rem'}}></span></Link> <br/><br/>
                 </div>
                 <div className="col-xs-3">
-                    <Link to={'/foods'} ><span className="glyphicon glyphicon-cutlery" style={{fontSize:'2rem'}}></span></Link><br/><br/>
+                    <Link to={'/foods'} ><span className="glyphicon glyphicon-apple" style={{fontSize:'2rem'}}></span></Link><br/><br/>
+                </div>
+                <div className="col-xs-3">
+                    <Link to={'/foods/add'} ><span className="glyphicon glyphicon-plus" style={{fontSize:'2rem'}}></span></Link><br/><br/>
                 </div>
             </div>
         </div>

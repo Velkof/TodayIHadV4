@@ -1,24 +1,227 @@
-body{
+body, html{
     background-color: #d8d8d8;
+    font-size: 97%!important
+}
+
+@media(min-width: 261px) and (max-width: 270px) {
+    body, html {
+        font-size: 64%!important;
+    }
+}
+
+@media(min-width: 271px) and (max-width: 280px) {
+    body, html {
+        font-size: 65%!important;
+    }
+}
+
+@media(min-width: 281px) and (max-width: 290px) {
+    body, html {
+        font-size: 66%!important;
+    }
+}
+
+@media(min-width: 291px) and (max-width: 300px) {
+    body, html {
+        font-size: 67%!important;
+    }
+}
+
+@media(min-width: 301px) and (max-width: 310px) {
+    body, html {
+        font-size: 68%!important;
+    }
+}
+
+@media(min-width: 311px) and (max-width: 320px) {
+    body, html {
+        font-size: 69%!important;
+    }
+}
+
+@media(min-width: 321px) and (max-width: 330px) {
+    body, html {
+        font-size: 70%!important;
+    }
+}
+
+@media(min-width: 331px) and (max-width: 340px) {
+    body, html {
+        font-size: 71%!important;
+    }
+}
+
+@media(min-width: 341px) and (max-width: 350px) {
+    body, html {
+        font-size: 72%!important;
+    }
+}
+
+@media(min-width: 351px) and (max-width: 360px) {
+    body, html {
+        font-size: 73%!important;
+    }
+}
+
+@media(min-width: 361px) and (max-width: 370px) {
+    body, html {
+        font-size: 74%!important;
+    }
+}
+
+@media(min-width: 371px) and (max-width: 380px) {
+    body, html {
+        font-size: 75%!important;
+    }
+}
+
+@media(min-width: 381px) and (max-width: 390px) {
+    body, html {
+        font-size: 76%!important;
+    }
+}
+
+@media(min-width: 391px) and (max-width: 400px) {
+    body, html {
+        font-size: 77%!important;
+    }
 }
 
 
-/* small screen mobiles */
-@media (max-width: 400px) {
-    html {
-        font-size: 70%;
+@media(min-width: 401px) and (max-width: 410px) {
+    body, html {
+        font-size: 78%!important;
+    }
+}
+
+@media(min-width: 411px) and (max-width: 420px) {
+    body, html {
+        font-size: 79%!important;
+    }
+}
+
+@media(min-width: 421px) and (max-width: 430px) {
+    body, html {
+        font-size: 80%!important;
+    }
+}
+
+@media(min-width: 431px) and (max-width: 440px) {
+    body, html {
+        font-size: 81%!important;
+    }
+}
+
+@media(min-width: 441px) and (max-width: 450px) {
+    body, html {
+        font-size: 82%!important;
+    }
+}
+
+@media(min-width: 451px) and (max-width: 460px) {
+    body, html {
+        font-size: 83%!important;
+    }
+}
+
+@media(min-width: 461px) and (max-width: 470px) {
+    body, html {
+        font-size: 84%!important;
+    }
+}
+
+@media(min-width: 471px) and (max-width: 480px) {
+    body, html {
+        font-size: 85%!important;
+    }
+}
+
+@media(min-width: 481px) and (max-width: 490px) {
+    body, html {
+        font-size: 86%!important;
+    }
+}
+
+@media(min-width: 491px) and (max-width: 500px) {
+    body, html {
+        font-size: 87%!important;
+    }
+}
+
+@media(min-width: 501px) and (max-width: 510px) {
+    body, html {
+        font-size: 88%!important;
+    }
+}
+
+@media(min-width: 511px) and (max-width: 520px) {
+    body, html {
+        font-size: 89%!important;
+    }
+}
+
+@media(min-width: 521px) and (max-width: 530px) {
+    body, html {
+        font-size: 90%!important;
+    }
+}
+
+@media(min-width: 531px) and (max-width: 540px) {
+    body, html {
+        font-size: 91%!important;
+    }
+}
+
+@media (min-width: 541px) and (max-width: 550px){
+    body, html{
+        font-size: 92%!important;
+    }
+}
+
+
+@media(min-width: 551px) and (max-width: 560px) {
+    body, html {
+        font-size: 93%!important;
+    }
+}
+
+@media(min-width: 561px) and (max-width: 570px) {
+    body, html {
+        font-size: 94%!important;
+    }
+}
+
+@media(min-width: 571px) and (max-width: 580px) {
+    body, html {
+        font-size: 95%!important;
     }
 }
 
 /* large screen mobiles */
-@media (min-width: 401px) and (max-width: 767px){
-    html {
-        font-size: 80%;
+@media (min-width: 581px) and (max-width: 767px){
+    body, html {
+        font-size: 96%!important;
     }
 }
 
-/* CONTAINERS */
+.divlevel1{
+    width:20em!important;
+    height:20em!important;
+    background-color: red!important;
+}
 
+.divlevel2{
+    width:10em!important;
+    height:10em!important;
+    background-color: blue!important;
+}
+
+.divlevel3{
+    width:5em!important;
+    height:5em!important;
+    background-color: green!important;
+}
+/* CONTAINERS */
 /* main container that will make our app fit as mobile size and centered on big screens */
 
 .container-mob {
@@ -33,14 +236,27 @@ body{
     display: block;
     position: absolute;
     left: 0;
-    top: 4rem;
-    bottom: 4rem;
+    top: 4em;
+    bottom: 4em;
     right: 0;
 }
 
 @media (min-width: 576px) {
     .container-mob {
-        width: 540px;
+        width: 540px!important;
         max-width: 100%;
     }
+}
+
+.line-in-middle {
+    color: red;
+    width:inherit;
+    height:20em;
+    background: linear-gradient(to right,
+    transparent 0%,
+    transparent calc(50% - 0.81px),
+    black calc(50% - 0.8px),
+    black calc(50% + 0.8px),
+    transparent calc(50% + 0.81px),
+    transparent 100%);
 }

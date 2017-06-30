@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
 import styles from './assets/stylesheets/main.css';
+import sizesAndPositioning from './assets/stylesheets/sizesAndPositioning.css';
 import colors from './assets/stylesheets/colors.css';
 import overrides from './assets/stylesheets/overrides.css';
 

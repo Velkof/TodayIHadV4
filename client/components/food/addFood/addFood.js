@@ -32,7 +32,7 @@ class AddFood extends Component {
                     <h1>Add Food</h1>
                     <div className="form-group label-floating">
                         <label className="control-label">Name</label>
-                        <input type="text" value={this.state.name} onChange={this.handleNameChange.bind(this)} className="form-control"/>
+                        <input type="text" value={this.state.name} onChange={this.handleNameChange.bind(this)} className="form-control w-8"/>
                     </div>
                     <br/>
                     <button className="btn btn-raised btn-primary" onClick={this.addFood.bind(this)}><Link className="c-white" to={'/foods'}>Add Food</Link> </button>
