@@ -7,7 +7,6 @@ import { connect } from "react-redux"
 import {Link} from "react-router-dom";
 import Footer from "../../footer/footer";
 
-
 @connect((store) => {
     return {};
 })
@@ -18,6 +17,9 @@ class AddFood extends Component {
         this.state = {
             name:"",
         };
+    }
+    componentDidMount(){
+        $.material.init();
     }
     addFood() {
         this.props.dispatch(addFood(this.state));
@@ -32,7 +34,7 @@ class AddFood extends Component {
                     <h1>Add Food</h1>
                     <div className="form-group label-floating">
                         <label className="control-label">Name</label>
-                        <input type="text" value={this.state.name} onChange={this.handleNameChange.bind(this)} className="form-control w-8"/>
+                        <input type="text" value={this.state.name} onChange={this.handleNameChange.bind(this)} className="form-control"/>
                     </div>
                     <br/>
                     <button className="btn btn-raised btn-primary" onClick={this.addFood.bind(this)}><Link className="c-white" to={'/foods'}>Add Food</Link> </button>

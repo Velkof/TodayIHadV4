@@ -16,8 +16,9 @@ export default class Auth extends Component {
             <div >
                 { !isAuthenticated ? (
                     <ul className="list-inline">
-                        <li ><button className="btn btn-secondary btn-raised" style={{ margin: '0px' }}
-                                     onClick={onLoginClick}>Login</button></li>
+                        <li className="f-size-2_5">TodayIHad</li>
+                        <li ><span className="btn btn-raised btn-default" style={{ margin: '0px' }}
+                                     onClick={onLoginClick}>Login / Sign up</span></li>
                     </ul>
                 ) : (
                     <ul className="list-inline">

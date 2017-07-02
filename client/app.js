@@ -10,9 +10,12 @@ import Bootstrap from 'bootstrap/dist/css/bootstrap.css';
 import BootstrapMaterialDesign from "bootstrap-material-design/dist/css/bootstrap-material-design.css";
 import Ripples from "bootstrap-material-design/dist/css/ripples.css";
 
-import { makeMainRoutes } from './routes';
+import '../node_modules/bootstrap-material-design/dist/js/material.js';
+import '../node_modules/bootstrap-material-design/dist/js/ripples.js';
 
-const routes = makeMainRoutes();
+import { Routes } from './routes';
+
+const routes = Routes();
 const app = document.getElementById('app');
 
 ReactDOM.render(

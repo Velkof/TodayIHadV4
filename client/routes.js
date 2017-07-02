@@ -6,7 +6,7 @@ import store from "./store";
 
 import Header from './components/header/header';
 import {Provider} from "react-redux";
-import DashboardContainer from "./containers/dashboard/dashboard";
+import Dashboard from "./containers/dashboard/dashboard";
 import FoodsContainer from "./containers/foods/foods";
 import EditFood from "./components/food/editFood/editFood";
 import ViewFood from "./components/food/viewFood/viewFood";
@@ -25,15 +25,15 @@ function requireAuth() {
 }
 
 
-export const makeMainRoutes = () => {
+export const Routes = () => {
     return (
     <Provider history={history} store={store}>
         <BrowserRouter>
             <div>
                 <Header/>
                 <Route exact path="/homepage"  render={() => ( requireAuth() ? ( <Redirect to="/"/>) : ( <Homepage />) )}/>
-                <Route exact path="/"  render={() => ( requireAuth() ? ( <DashboardContainer />) : ( <Redirect to="/homepage"/>) )}/>
-                <Route exact path="/dashboard"  render={() => ( requireAuth() ? ( <DashboardContainer />) : ( <Redirect to="/homepage"/>) )}/>
+                <Route exact path="/"  render={() => ( requireAuth() ? ( <Dashboard />) : ( <Redirect to="/homepage"/>) )}/>
+                <Route exact path="/dashboard"  render={() => ( requireAuth() ? ( <Dashboard />) : ( <Redirect to="/homepage"/>) )}/>
                 <Route exact path="/foods"  render={() => ( requireAuth() ? ( <FoodsContainer />) : ( <Redirect to="/homepage"/>) )}/>
                 <Route exact path="/foods/edit/:id" component={EditFood}/>
                 <Route exact path="/foods/delete/:id" component={DeleteFood}/>

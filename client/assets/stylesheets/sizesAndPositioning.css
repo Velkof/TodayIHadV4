@@ -32,6 +32,10 @@
     height: 2em!important;
 }
 
+.h-3 {
+    height: 3em!important;
+}
+
 /*width*/
 
 .w-2 {
@@ -42,6 +46,19 @@
     width: 100%;
 }
 
+/*line-height*/
+
+.lh-1 {
+    line-height: 1em!important;
+}
+
+.lh-2 {
+    line-height: 2em!important;
+}
+
+.lh-3 {
+    line-height: 3em!important;
+}
 
 /* padding */
 

@@ -15,7 +15,7 @@ import Footer from "../../components/footer/footer";
     };
 })
 
-export default class DashboardContainer extends React.Component {
+export default class Dashboard extends React.Component {
     componentWillMount() {
         this.props.dispatch(fetchUser())
     }

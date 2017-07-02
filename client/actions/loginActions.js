@@ -3,6 +3,7 @@
  */
 import axios from "axios";
 import Auth0Lock from 'auth0-lock';
+import history from "../history";
 
 export const LOGIN_FULFILLED = 'LOGIN_FULFILLED';
 export const LOGIN_REJECTED = 'LOGIN_REJECTED';
@@ -10,7 +11,6 @@ export const LOGOUT_FULFILLED = 'LOGOUT_FULFILLED';
 
 
 export function login() {
-
     const options = {
         auth: {
             redirect: false,
@@ -48,6 +48,9 @@ export function login() {
 
                 localStorage.setItem('id_token', authResult.idToken);
                 localStorage.setItem("profile", JSON.stringify(profile));
+
+                history.push('/');
+
                 return dispatch(loginFulfilled(authResult.profile));
 
             });
@@ -79,6 +82,7 @@ function loginRejected(err) {
 
 export function logout() {
     return dispatch => {
+        history.push('/homepage');
         localStorage.removeItem('id_token');
         localStorage.removeItem('profile');
         return dispatch(logoutFulfilled());

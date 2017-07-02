@@ -19,9 +19,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(require('method-override')());
 app.use(express.static(path.join(__dirname, '../dist')));
-app.use(express.static(path.join(__dirname, '../public')));
 app.use(require('./controllers'));
 app.use('/api', router);
+
+
+
 
 const hbs = exphbs.create({
     layoutsDir: __dirname + '/views/layouts'

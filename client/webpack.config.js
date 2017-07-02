@@ -23,7 +23,12 @@ module.exports = {
         }),
         new ExtendedDefinePlugin({
             APP_CONFIG: appConfig,
-        })
+        }),
+        new webpack.ProvidePlugin({
+            $: "jquery",
+            jQuery: "jquery",
+            "window.jQuery": "jquery"
+        }),
     ],
     module: {
         loaders: [
