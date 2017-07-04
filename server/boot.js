@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 const errorhandler = require('errorhandler');
 const exphbs = require('express-handlebars');
 const path = require('path');
-const router = require('./controllers');
+const controllers = require('./controllers');
 const fs = require('fs');
 const app = express();
 
@@ -19,11 +19,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(require('method-override')());
 app.use(express.static(path.join(__dirname, '../dist')));
-app.use(require('./controllers'));
-app.use('/api', router);
 
+app.use('/api', controllers);
 
-
+app.get('*', function (req, res) {
+    res.render('home');
+});
 
 const hbs = exphbs.create({
     layoutsDir: __dirname + '/views/layouts'
