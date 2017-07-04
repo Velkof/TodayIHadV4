@@ -7,6 +7,8 @@ dotenv.config({path: path.resolve(__dirname, '.env')});
 const ExtendedDefinePlugin = require('extended-define-webpack-plugin');
 const appConfig = require('./config/index');
 
+console.log(appConfig);
+
 
 module.exports = {
     entry: {
