@@ -2,6 +2,14 @@
     color:white;
 }
 
+.c-black {
+    color: black;
+}
+
+.c-grey {
+    color: grey;
+}
+
 .bg-c-white {
     background-color:white;
 }

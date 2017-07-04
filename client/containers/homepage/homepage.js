@@ -12,12 +12,11 @@ import {connect} from "react-redux";
     };
 })
 export default class Homepage extends React.Component {
-
     render() {
         const { auth } = this.props;
         return (
             <div>
-                <div className="main-layout container-mob bg-c-white">
+                <div className="main-layout bg-c-white">
                     <h1>HOMEPAGE</h1>
                 </div>
                 <FooterNonAuthorized/>

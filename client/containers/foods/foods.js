@@ -16,7 +16,7 @@ import Footer from "../../components/footer/footer";
     };
 })
 
-export default class FoodsContainer extends React.Component {
+export default class Foods extends React.Component {
     componentWillMount() {
         this.props.dispatch(fetchFoods());
     }
