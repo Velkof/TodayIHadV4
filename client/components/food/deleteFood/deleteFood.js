@@ -6,6 +6,7 @@ import { connect } from "react-redux"
 
 import {deleteFood, fetchFoods } from "../../../actions/foodActions";
 import Footer from "../../footer/footer";
+import {Link} from "react-router-dom";
 
 @connect((store) => {
     return {
@@ -17,7 +18,7 @@ class DeleteFood extends Component {
     componentWillMount(){
         this.props.dispatch(fetchFoods());
 
-        let id = this.props.match.params.id;
+        let id = window.location.href.substr(window.location.href.length - 24);
 
         this.setState({id: id});
 
@@ -35,8 +36,9 @@ class DeleteFood extends Component {
             <div>
                 <div className="container-mob bg-c-white main-layout">
                     <h1>Delete Food</h1>
-                    <p> Are you sure you want to delete {this.currentFood.name}?</p>
-                    <button onClick={this.deleteFood.bind(this)}>Delete</button>
+                    <p> Are you sure you want to delete "{this.currentFood.name}"?</p>
+                    <button className="col-xs-12 btn btn-raised btn-primary" onClick={this.deleteFood.bind(this)}><Link className="c-white" to={'/foods'}>Delete Food</Link> </button>
+
                 </div>
                 <Footer/>
             </div>

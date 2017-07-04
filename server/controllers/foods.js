@@ -21,6 +21,19 @@ router.route('/')
 
         const food = new Food();
         food.name = req.body.name;
+        food.amount = req.body.amount;
+        food.unit = req.body.unit;
+        food.calories = req.body.calories;
+        food.protein = req.body.protein;
+        food.fat = req.body.fat;
+        food.carbs = req.body.carbs;
+        food.sugar = req.body.sugar;
+        food.fiber = req.body.fiber;
+        food.fatSat = req.body.fatSat;
+        food.fatMono = req.body.fatMono;
+        food.fatPoly = req.body.fatPoly;
+        food.sodium = req.body.sodium;
+        food.cholesterol = req.body.cholesterol;
 
         food.save(function(err) {
             if (err)
@@ -59,6 +72,19 @@ router.route('/:id')
             }
 
             food.name = req.body.name;
+            food.amount = req.body.amount;
+            food.unit = req.body.unit;
+            food.calories = req.body.calories;
+            food.protein = req.body.protein;
+            food.fat = req.body.fat;
+            food.carbs = req.body.carbs;
+            food.sugar = req.body.sugar;
+            food.fiber = req.body.fiber;
+            food.fatSat = req.body.fatSat;
+            food.fatMono = req.body.fatMono;
+            food.fatPoly = req.body.fatPoly;
+            food.sodium = req.body.sodium;
+            food.cholesterol = req.body.cholesterol;
 
             food.save(function(err) {
                 if (err)

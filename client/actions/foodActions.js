@@ -33,6 +33,19 @@ export function addFood( data) {
 
         axios.post('http://localhost:9000/api/foods', {
             name: data.name,
+            amount: data.amount,
+            unit: data.unit,
+            calories: data.calories,
+            protein: data.protein,
+            fat: data.fat,
+            carbs: data.carbs,
+            sugar: data.sugar,
+            fiber: data.fiber,
+            cholesterol:data.cholesterol,
+            fatMono: data.fatMono,
+            fatPoly: data.fatPoly,
+            fatSat: data.fatSat,
+            sodium: data.sodium,
         }, {
             'headers':{
                 'Authorization': 'Bearer ' + token,
@@ -56,6 +69,19 @@ export function updateFood( data) {
         axios.put('http://localhost:9000/api/foods/' + data.id, {
             id: data.id,
             name: data.name,
+            amount: data.amount,
+            unit: data.unit,
+            calories: data.calories,
+            protein: data.protein,
+            fat: data.fat,
+            carbs: data.carbs,
+            sugar: data.sugar,
+            fiber: data.fiber,
+            cholesterol:data.cholesterol,
+            fatMono: data.fatMono,
+            fatPoly: data.fatPoly,
+            fatSat: data.fatSat,
+            sodium: data.sodium,
         }, {
             'headers':{
                 'Authorization': 'Bearer ' + token,

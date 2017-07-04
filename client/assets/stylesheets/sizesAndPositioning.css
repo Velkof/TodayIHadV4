@@ -67,6 +67,12 @@
     padding-left: 0!important;
 }
 
+/*margin*/
+.mx-0{
+    margin-right: 0!important;
+    margin-left: 0!important;
+}
+
 /* extend bootstrap with 5 columns */
 
 .col-xs-5ths,

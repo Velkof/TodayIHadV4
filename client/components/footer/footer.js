@@ -6,15 +6,18 @@ import {NavLink} from "react-router-dom";
 import styles from './footer.css';
 
 class Footer extends Component {
-    componentWillMount(){
-        this.setState({ selectedItem: "sa" });
-    }
-    handleClick(event){
-        this.setState({ selectedItem: "none"});
-    }
     dashboardActive (match, location){
-        console.log("match", location, this);
         if (location.pathname === "/" || location.pathname === "/dashboard") {
+            return true
+        }
+    }
+    foodsActive (match, location){
+        if (location.pathname === "/foods") {
+            return true
+        }
+    }
+    addFoodActive(match, location){
+        if (location.pathname === "/foods/add") {
             return true
         }
     }
@@ -23,17 +26,17 @@ class Footer extends Component {
         <div className="footer">
             <div className="container-mob px-0">
                 <div className="col-xs-5ths">
-                    <NavLink exact to={'/dashboard'} style={{color: 'grey'}}  isActive={this.dashboardActive}  activeStyle={{color: 'black'}} className={'active'} onClick={this.handleClick.bind(this)} data-id="1">
+                    <NavLink exact to={'/dashboard'} style={{color: 'grey'}}   activeStyle={{color: 'black'}} isActive={this.dashboardActive} >
                         <span className={"glyphicon glyphicon-home footer-tab"}></span>
                     </NavLink>
                 </div>
                 <div className="col-xs-5ths">
-                    <NavLink exact to={'/foods'} style={{color: 'grey'}} activeStyle={{color: 'black'}}>
+                    <NavLink exact to={'/foods'} style={{color: 'grey'}} activeStyle={{color: 'black'}}  isActive={this.foodsActive.bind(this)}>
                         <span className={"glyphicon glyphicon-apple footer-tab"}></span>
                     </NavLink>
                 </div>
                 <div className="col-xs-5ths">
-                    <NavLink exact to={'/foods/add'} style={{color: 'grey'}} activeStyle={{color:"black"}} >
+                    <NavLink exact to={'/foods/add'} style={{color: 'grey'}} activeStyle={{color:"black"}} isActive={this.addFoodActive.bind(this)} >
                         <span className={"glyphicon glyphicon-plus footer-tab"}></span>
                     </NavLink>
                 </div>
