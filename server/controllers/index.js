@@ -1,15 +1,15 @@
 const router = require('express').Router();
 
-router.use('/foods', require('./foods'));
-router.use('/users', require('./users'));
+router.use('/api/foods', require('./foods'));
+router.use('/api/users', require('./users'));
 
 router.get('/', function (req, res) {
     res.render('home');
 });
 
-// router.get('*', function (req, res) {
-//     res.render('home');
-// });
+router.get('*', function (req, res) {
+    res.render('home');
+});
 
 router.use(function(err, req, res, next){
     if(err.name === 'ValidationError'){
