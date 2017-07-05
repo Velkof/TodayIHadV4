@@ -7,5 +7,10 @@
     z-index: 9;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
-    background-color: black;
+    background-color: #15854f;
+    color:white;
+}
+
+.dropdown-menu.dropdown-menu-right > li > span:hover{
+    color: #009688;
 }

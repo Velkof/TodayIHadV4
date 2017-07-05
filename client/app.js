@@ -10,6 +10,8 @@ import Bootstrap from 'bootstrap/dist/css/bootstrap.css';
 import BootstrapMaterialDesign from "bootstrap-material-design/dist/css/bootstrap-material-design.css";
 import Ripples from "bootstrap-material-design/dist/css/ripples.css";
 
+import '../node_modules/bootstrap/dist/js/bootstrap.js';
+import '../node_modules/bootstrap/dist/js/npm.js';
 import '../node_modules/bootstrap-material-design/dist/js/material.js';
 import '../node_modules/bootstrap-material-design/dist/js/ripples.js';
 

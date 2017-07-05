@@ -239,6 +239,7 @@ body, html{
     top: 5em;
     bottom: 0;
     right: 0;
+    height: 100%;
 }
 
 @media (min-width: 576px) {
@@ -259,4 +260,8 @@ body, html{
     black calc(50% + 0.8px),
     transparent calc(50% + 0.81px),
     transparent 100%);
+}
+
+.cursor-pointer {
+    cursor: pointer;
 }
