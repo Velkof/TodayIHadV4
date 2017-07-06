@@ -25,10 +25,9 @@ export default class Dashboard extends React.Component {
     }
 
     render() {
-
         return (
-            <div>
-                <div className="container-mob bg-c-white main-layout">
+            <div className="main-layout">
+                <div className="container-mob bg-c-white" style={{overflow:'hidden'}}>
                     <span className="f-size-2">DASHSOARSFFRSDDF</span>
                     <a href="javascript:void(0)" className="btn btn-fab btn-success"><i className="material-icons glyphicon glyphicon-search"></i></a>
 

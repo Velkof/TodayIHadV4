@@ -19,6 +19,13 @@ export function login() {
             responseType: 'token',
             params: {scope: 'openid name email picture roles user_metadata app_metadata'},
         },
+        theme: {
+            logo: '',
+            primaryColor: '#15854f'
+        },
+        languageDictionary: {
+            title: "TodayIHad"
+        },
         autoclose: true,
     };
 

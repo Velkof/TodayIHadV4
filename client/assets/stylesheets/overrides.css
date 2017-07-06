@@ -1,0 +1,49 @@
+/*auth0-lock widget overrides*/
+
+.auth0-lock-header{
+    height: inherit!important;
+}
+
+/*.auth0-lock-input-wrap.auth0-lock-input-wrap-with-icon {*/
+    /*border-top:0!important;*/
+    /*border-left:0!important;*/
+    /*border-right:0!important;*/
+/*}*/
+
+/*.auth0-lock-input-wrap.auth0-lock-input-wrap-with-icon span {*/
+    /*display: none!important;*/
+/*}*/
+
+/*.auth0-lock-input-wrap.auth0-lock-input-wrap-with-icon input:focus {*/
+    /*box-shadow: 0 1px 0 0 #009688!important;*/
+/*}*/
+
+.auth0-lock.auth0-lock .auth0-lock-tabs li.auth0-lock-tabs-current {
+     box-shadow: 0 1px 0 0 #009688!important;
+ }
+
+/*bootstrap overrides*/
+
+.nav.nav-tabs {
+    background-color: white !important;
+}
+
+.nav.nav-tabs > li  {
+    padding-left: 0!important;
+    padding-right: 0!important;
+}
+
+.nav.nav-tabs > li > a  {
+    color: grey!important;
+}
+
+.nav.nav-tabs > li > .nav-link  {
+    font-size: 1.7em;
+    color: lightgrey!important;
+    text-align: center!important;
+}
+
+.nav.nav-tabs > li > .nav-link.active  {
+    color: black!important;
+    border-bottom: 2px solid #009688!important;
+}

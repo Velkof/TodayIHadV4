@@ -33,8 +33,8 @@ class DeleteFood extends Component {
     }
     render() {
         return (
-            <div>
-                <div className="container-mob bg-c-white main-layout">
+            <div className="main-layout">
+                <div className="container-mob bg-c-white" style={{overflow:'hidden'}}>
                     <h1>Delete Food</h1>
                     <p> Are you sure you want to delete "{this.currentFood.name}"?</p>
                     <button className="col-xs-12 btn btn-raised btn-primary" onClick={this.deleteFood.bind(this)}><Link className="c-white" to={'/foods'}>Delete Food</Link> </button>

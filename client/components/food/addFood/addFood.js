@@ -3,13 +3,9 @@
  */
 import React, {Component} from 'react';
 import { addFood } from "../../../actions/foodActions"
-import { connect } from "react-redux"
 import {Link} from "react-router-dom";
 import Footer from "../../footer/footer";
 
-@connect((store) => {
-    return {};
-})
 
 class AddFood extends Component {
     constructor(props) {
@@ -88,15 +84,29 @@ class AddFood extends Component {
     }
     render() {
         return (
-            <div>
-                <div className="container-mob bg-c-white main-layout">
-                    <h1>Add Food</h1>
+            <div className="main-layout">
+                <div className="container-mob bg-c-white" style={{overflow:'hidden'}}>
 
-                    <div className="form-group label-floating">
+                    <br/>
+                    <ul className="nav nav-tabs">
+                        <li className="col-xs-4 nav-item">
+                            <a className="nav-link active" href="#">Add food</a>
+                        </li>
+                        <li className="col-xs-4 nav-item">
+                            <a className="nav-link" href="#">Add recipe</a>
+                        </li>
+                        <li className="col-xs-4 nav-item">
+                            <a className="nav-link" href="#">My foods </a>
+                        </li>
+                    </ul>
+                    <br/>
+                    <br/>
+
+                    <div className="form-group required label-floating">
                         <label className="control-label">Name</label>
                         <input id="name" type="text" value={this.state.name  || ''} onChange={this.handleChange.bind(this)} className="form-control"/>
                     </div>
-                    <div className="col-xs-6 form-group label-floating pl-0">
+                    <div className="col-xs-6 form-group required label-floating pl-0">
                         <label className="control-label">Amount</label>
                         <input id="amount" type="number" value={this.state.amount  || ''} onChange={this.handleChange.bind(this)} className="form-control"/>
                     </div>
@@ -110,7 +120,11 @@ class AddFood extends Component {
                     <div className="col-xs-1 form-group label-floating px-0 mx-0">
                         <button className="btn btn-sm btn-default px-0 mx-0">Add</button>
                     </div>
-                    <div className="col-xs-6 form-group label-floating pl-0">
+                    <div className="col-xs-12 form-group alert alert-dismissible f-size-1_2" style={{backgroundColor:"#f2dede", color:"#a94442",}}>
+                        <button type="button" className="close" data-dismiss="alert">×</button>
+                        <p className>All nutrient values should be per selected weight:<strong> 100 x gr or 100 grams</strong>.</p>
+                    </div>
+                    <div className="col-xs-6 form-group required label-floating pl-0">
                         <label className="control-label">Calories</label>
                         <input id="calories" type="number" value={this.state.calories  || ''} onChange={this.handleChange.bind(this)} className="form-control"/>
                     </div>
@@ -156,8 +170,8 @@ class AddFood extends Component {
                     </div>
                     <br/>
                     <button className="col-xs-12 btn btn-raised btn-primary" onClick={this.addFood.bind(this)}><Link className="c-white" to={'/foods'}>Add Food</Link> </button>
-                    <Footer/>
                 </div>
+                <Footer/>
             </div>
         );
     };

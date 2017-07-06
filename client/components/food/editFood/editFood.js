@@ -21,9 +21,9 @@ class EditFood extends Component {
 
     }
     componentWillMount(){
-        this.props.dispatch(fetchFoods());
-
         let id = window.location.href.substr(window.location.href.length - 24);
+
+        this.props.dispatch(fetchFoods());
 
         this.currentFood = this.props.foods.filter(function(food){
             return food._id === id;
@@ -50,8 +50,6 @@ class EditFood extends Component {
         };
     }
     updateFood() {
-        console.log("this.state", this.state);
-
         this.props.dispatch(updateFood(this.state));
     }
     handleChange(e) {
@@ -105,8 +103,8 @@ class EditFood extends Component {
 
     render() {
         return (
-            <div>
-                <div className="container-mob bg-c-white main-layout">
+            <div className="main-layout">
+                <div className="container-mob bg-c-white" style={{overflow:'hidden'}}>
                     <h1>Edit Food</h1>
 
                     <div className="form-group label-floating">

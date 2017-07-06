@@ -27,8 +27,8 @@ class ViewFood extends Component {
     }
     render() {
         return (
-            <div>
-                <div className="container-mob bg-c-white main-layout">
+            <div className="main-layout">
+                <div className="container-mob bg-c-white" style={{overflow:'hidden'}}>
                     <h1>Food</h1>
                     <div className="form-group label-floating">
                         <label className="control-label">Name</label>
