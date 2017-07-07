@@ -279,3 +279,17 @@ body, html{
     content:" *";
     color:red;
 }
+
+
+#searchBtn {
+    position: fixed;
+    bottom: 5.2rem;
+    right: 2rem;
+    min-width: .5em;
+    width:3.8rem;
+    height:3.8rem;
+}
+
+#searchBtn i {
+    font-size: 1.7rem;
+}

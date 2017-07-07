@@ -27,10 +27,13 @@ export default class Dashboard extends React.Component {
     render() {
         return (
             <div className="main-layout">
+                <a id="searchBtn" href="javascript:void(0)" className="btn btn-fab btn-success">
+                    <i className="material-icons glyphicon glyphicon-search"></i>
+                </a>
                 <div className="container-mob">
                     <div className="container-mob-child">
                         <span className="f-size-2">DASHSOARSFFRSDDF</span>
-                        <a href="javascript:void(0)" className="btn btn-fab btn-success"><i className="material-icons glyphicon glyphicon-search"></i></a>
+
 
                         <div className="line-in-middle"></div>
                         <div className="divlevel1 c-white">

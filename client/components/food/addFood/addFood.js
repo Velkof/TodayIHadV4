@@ -4,6 +4,8 @@
 import React, {Component} from 'react';
 import { addFood } from "../../../actions/foodActions"
 import {Link} from "react-router-dom";
+import {connect} from "react-redux";
+
 
 class AddFood extends Component {
     constructor(props) {
@@ -81,6 +83,7 @@ class AddFood extends Component {
         }
     }
     render() {
+
         return (
                 <div>
                     <div className="c-grey mt-1 f-size-1_5 pl-0_5">
@@ -160,7 +163,9 @@ class AddFood extends Component {
                         </div>
                         <br/>
                     </div>
-                    <button className="col-xs-12 btn btn-raised btn-primary my-1" onClick={this.addFood.bind(this)}><Link className="c-white" to={'/foods'}>Add Food</Link> </button>
+                    <Link className="c-white" to={'/foods'}><button className="col-xs-12 btn btn-raised btn-primary my-1 f-size-2" onClick={this.addFood.bind(this)}>
+                    Save Food
+                </button></Link>
                 </div>
         );
     };

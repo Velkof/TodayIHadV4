@@ -18,6 +18,9 @@ export default class Foods extends React.Component {
 
         return (
             <div>
+                <div className="c-grey mt-1 f-size-1_5 pl-0_5">
+                    <p>MY FOODS AND RECIPES</p>
+                </div>
                 <ul className="pl-0">{mappedFoods}</ul>
             </div>
         )

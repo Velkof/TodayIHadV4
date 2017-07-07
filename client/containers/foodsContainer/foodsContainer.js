@@ -7,13 +7,14 @@ import { connect } from "react-redux";
 
 import Footer from "../../components/footer/footer";
 import Foods from "../foods/foods";
-import AddFood from "../../components/food/addFood/addFood";
 import EditFood from "../../components/food/editFood/editFood";
 import AddRecipe from "../../components/food/addRecipe/addRecipe";
 import FoodsNavBar from "../../components/food/foodsNavBar/foodsNavBar";
 
 import {showAddFood, showAddRecipe, showFoods} from "../../actions/renderActions";
-import { fetchFoods } from "../../actions/foodActions";
+import {addFood, fetchFoods} from "../../actions/foodActions";
+import AddFood from "../../components/food/addFood/addFood";
+import dispatch from "redux/src/createStore";
 
 @connect((store) => {
     return {
@@ -48,16 +49,18 @@ class FoodsContainer extends React.Component {
         let foodComponentsToRender = null;
 
         if (this.props.render.showAddRecipe === true) {
-            foodComponentsToRender = <AddRecipe/>;
+            foodComponentsToRender = <AddRecipe foods={this.props.foods}/>;
         } else if (this.props.render.showAddFood === true) {
             foodComponentsToRender = <AddFood/>;
         } else {
             foodComponentsToRender = <Foods foods={this.props.foods}/>;
         }
 
+
+        // foodComponentsToRender = <AddRecipe foods={this.props.foods}/>
+
         return (
             <div className="main-layout">
-
                 <div className="container-mob" style={{overflow:'hidden'}}>
                     <FoodsNavBar
                         showAddFood = {this.props.render.showAddFood}

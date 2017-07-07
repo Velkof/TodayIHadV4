@@ -53,7 +53,14 @@
     color: black!important;
     border-bottom: 3px solid #009688!important;
 }
-
-.dropdown-menu, .btn, .input-group-btn .btn {
+.dropdown-menu, .btn {
     border-radius:0!important;
+}
+
+.btn-fab{
+    border-radius: 50%!important;
+}
+
+.btn.btn-raised.btn-primary {
+    background-color: #15854f!important;
 }
