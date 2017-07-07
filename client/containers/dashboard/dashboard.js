@@ -27,19 +27,20 @@ export default class Dashboard extends React.Component {
     render() {
         return (
             <div className="main-layout">
-                <div className="container-mob bg-c-white" style={{overflow:'hidden'}}>
-                    <span className="f-size-2">DASHSOARSFFRSDDF</span>
-                    <a href="javascript:void(0)" className="btn btn-fab btn-success"><i className="material-icons glyphicon glyphicon-search"></i></a>
+                <div className="container-mob">
+                    <div className="container-mob-child">
+                        <span className="f-size-2">DASHSOARSFFRSDDF</span>
+                        <a href="javascript:void(0)" className="btn btn-fab btn-success"><i className="material-icons glyphicon glyphicon-search"></i></a>
 
-                    <div className="line-in-middle"></div>
-                    <div className="divlevel1 c-white">
-                        <div className="divlevel2 c-white  f-size-11">
-                            <div className="divlevel3 c-white  f-size-11">
+                        <div className="line-in-middle"></div>
+                        <div className="divlevel1 c-white">
+                            <div className="divlevel2 c-white  f-size-11">
+                                <div className="divlevel3 c-white  f-size-11">
 
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <img src="../../public/images/kiwi.svg" alt="Smiley face" height="42" width="42"></img>
                 </div>
                 <Footer/>
             </div>

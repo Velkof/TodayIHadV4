@@ -7,6 +7,8 @@ const Food = require('../models/Food');
 const jwt = require('express-jwt');
 const cors = require('cors');
 const config = require('../config');
+const validator = require('validator');
+
 
 router.use(cors());
 

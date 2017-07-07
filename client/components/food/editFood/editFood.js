@@ -18,10 +18,12 @@ import {Link} from "react-router-dom";
 class EditFood extends Component {
     constructor(props) {
         super(props);
-
     }
     componentWillMount(){
-        let id = window.location.href.substr(window.location.href.length - 24);
+        console.log("dasd",location, history, this.props, this);
+
+        // let id = this.props.match.params.id;
+        let id = location.href.substr(location.href.length - 24);
 
         this.props.dispatch(fetchFoods());
 
@@ -48,6 +50,7 @@ class EditFood extends Component {
             sodium:  this.currentFood.sodium,
             cholesterol: this.currentFood.cholesterol,
         };
+
     }
     updateFood() {
         this.props.dispatch(updateFood(this.state));

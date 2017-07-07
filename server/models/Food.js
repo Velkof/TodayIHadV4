@@ -5,13 +5,34 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const FoodSchema = new Schema({
-    name: String,
-    amount: Number,
-    unit: String,
-    calories: Number,
-    protein: Number,
-    fat: Number,
-    carbs: Number,
+    name: {
+        type: String,
+        required: true
+    },
+    amount:  {
+        type: Number,
+        required: true
+    },
+    unit:  {
+        type: String,
+        required: true
+    },
+    calories:  {
+        type: Number,
+        required: true
+    },
+    protein:  {
+        type: Number,
+        required: true
+    },
+    fat:  {
+        type: Number,
+        required: true
+    },
+    carbs:  {
+        type: Number,
+        required: true
+    },
     sugar: Number,
     fiber: Number,
     fatSat: Number,

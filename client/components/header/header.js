@@ -54,5 +54,3 @@ export default connect(mapStateToProps, {
     login,
     logout
 })(Header)
-
-// export default Header;
