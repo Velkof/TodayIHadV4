@@ -43,7 +43,7 @@ router.route('/')
             res.json({ message: 'Food created!' });
         });
 
-    }).get( function(req, res) {
+    }).get(authCheck, function(req, res) {
 
         Food.find({}, function(err, foods) {
             if (err){

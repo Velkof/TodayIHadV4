@@ -12,15 +12,11 @@ class Footer extends Component {
         }
     }
     foodsActive (match, location){
-        if (location.pathname === "/foods") {
+        if (location.pathname.substring(0, 6) === "/foods") {
             return true
         }
     }
-    addFoodActive(match, location){
-        if (location.pathname === "/foods/add") {
-            return true
-        }
-    }
+
     render() {
       return (
         <div className="footer">
@@ -31,7 +27,7 @@ class Footer extends Component {
                     </NavLink>
                 </div>
                 <div className="col-xs-5ths">
-                    <NavLink exact to={'/foods'} style={{color: 'grey'}} activeStyle={{color: 'black'}}  isActive={this.foodsActive.bind(this)}>
+                    <NavLink to={'/foods'} style={{color: 'grey'}} activeStyle={{color: 'black'}}  isActive={this.foodsActive.bind(this)}>
                         <span className={"glyphicon glyphicon-apple footer-tab"}></span>
                     </NavLink>
                 </div>

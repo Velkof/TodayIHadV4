@@ -31,6 +31,10 @@ export default class Dashboard extends React.Component {
                     <i className="material-icons glyphicon glyphicon-search"></i>
                 </a>
                 <div className="container-mob">
+                    <div id="searchFoods" className="form-group has-feedback mt-2">
+                        <input type="text"  defaultValue="" placeholder="Search food" className=""/>
+                        <i className="glyphicon glyphicon-search form-control-feedback"></i>
+                    </div>
                     <div className="container-mob-child">
                         <span className="f-size-2">DASHSOARSFFRSDDF</span>
 

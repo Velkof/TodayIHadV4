@@ -8,17 +8,17 @@ class FoodsNavBar extends Component {
         super(props)
     }
     render() {
-        const { onAddFoodClick, onAddRecipeClick, onShowFoodsClick, showAddFood, showAddRecipe, showFoods } = this.props;
+        const { onAddFoodClick, onAddRecipeClick, onShowFoodsClick, render } = this.props;
 
         let showFoodsActive = "";
         let addFoodActive = "";
         let addRecipeActive = "";
 
-        if(showFoods === true) {
+        if(render === "showFoods") {
             showFoodsActive = "active";
             addFoodActive = "";
             addRecipeActive = "";
-        } else if (showAddRecipe === true) {
+        } else if (render === "addRecipe") {
             showFoodsActive = "";
             addFoodActive = "";
             addRecipeActive = "active";
@@ -28,17 +28,13 @@ class FoodsNavBar extends Component {
             addRecipeActive = "";
         }
 
-        // showFoodsActive = "";
-        // addFoodActive = "";
-        // addRecipeActive = "active";
-
         return (
             <div className="container-mob-child px-0">
                 <ul className="nav nav-tabs">
                     <li className="col-xs-4 nav-item" onClick={onShowFoodsClick}>
                         <a className={"nav-link " + showFoodsActive} href="javascript:void(0)">My foods </a>
                     </li>
-                    <li className={"col-xs-4 nav-item " + addRecipeActive} onClick={onAddRecipeClick}>
+                    <li className="col-xs-4 nav-item" onClick={onAddRecipeClick}>
                         <a className={"nav-link "  + addRecipeActive} href="javascript:void(0)">Add recipe</a>
                     </li>
                     <li className="col-xs-4 nav-item" onClick={onAddFoodClick}>

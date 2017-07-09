@@ -7,7 +7,7 @@ import store from "./store";
 import Header from './components/header/header';
 import {Provider} from "react-redux";
 import Dashboard from "./containers/dashboard/dashboard";
-import Foods from "./containers/foods/foods";
+import Foods from "./components/food/foods/foods";
 import EditFood from "./components/food/editFood/editFood";
 import ViewFood from "./components/food/viewFood/viewFood";
 import AddFood from "./components/food/addFood/addFood";
@@ -42,8 +42,8 @@ export const Routes = () => {
                 {/*<Route exact path="/foods/edit/:id" component={EditFood}/>*/}
 
                 <Route exact path="/foods/delete/:id"  render={() => ( requireAuth() ? ( <DeleteFood/>) : ( <Redirect to="/homepage"/>) )}/>
-                <Route exact path="/foods/view/:id"  render={() => ( requireAuth() ? ( <FoodsContainer/>) : ( <Redirect to="/homepage"/>) )}/>
-                {/*<Route exact path="/foods/add"  render={() => ( requireAuth() ? ( <FoodsContainer/>) : ( <Redirect to="/homepage"/>) )}/>*/}
+                <Route exact path="/foods/view/:id"  render={() => ( requireAuth() ? ( <ViewFood/>) : ( <Redirect to="/homepage"/>) )}/>
+                <Route exact path="/foods/add"  render={() => ( requireAuth() ? ( <FoodsContainer/>) : ( <Redirect to="/homepage"/>) )}/>
                 {/*<Route exact path="/foods"  render={() => ( requireAuth() ? ( <Foods/>) : ( <Redirect to="/homepage"/>) )}/>*/}
                 {/*<Route exact path="/foods/edit/:id"   render={() => ( requireAuth() ? ( <EditFood/>) : ( <Redirect to="/homepage"/>) )}/>*/}
                 {/*<Route exact path="/foods/delete/:id"  render={() => ( requireAuth() ? ( <DeleteFood/>) : ( <Redirect to="/homepage"/>) )}/>*/}

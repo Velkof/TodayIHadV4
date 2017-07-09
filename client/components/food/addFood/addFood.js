@@ -34,6 +34,10 @@ class AddFood extends Component {
     addFood() {
         this.props.dispatch(addFood(this.state));
     }
+    openModal(){
+        $("#addUnitModal").modal();
+        $("#addUnitModal").modal('show')
+    }
     handleChange(e) {
         switch(e.target.id) {
             case "name":
@@ -85,7 +89,10 @@ class AddFood extends Component {
     render() {
 
         return (
-                <div>
+            <div className="main-layout">
+                <div className="container-mob" style={{overflow:'hidden'}}>
+                    {this.props.foodsNavBar}
+
                     <div className="c-grey mt-1 f-size-1_5 pl-0_5">
                         <p>MANDATORY FIELDS</p>
                     </div>
@@ -94,7 +101,7 @@ class AddFood extends Component {
                             <label className="control-label">Name</label>
                             <input id="name" type="text" value={this.state.name  || ''} onChange={this.handleChange.bind(this)} className="form-control"/>
                         </div>
-                        <div className="col-xs-6 form-group required label-floating pl-0">
+                        <div className="col-xs-5 form-group required label-floating pl-0">
                             <label className="control-label">Amount</label>
                             <input id="amount" type="number" value={this.state.amount  || ''} onChange={this.handleChange.bind(this)} className="form-control"/>
                         </div>
@@ -105,9 +112,27 @@ class AddFood extends Component {
                                 <option>oz</option>
                             </select>
                         </div>
-                        <div className="col-xs-1 form-group label-floating px-0 mx-0">
-                            <button className="btn btn-sm btn-default px-0 mx-0">Add</button>
+                        <div className="col-xs-2 form-group px-0" onChange={this.openModal.bind(this)}>
+                            <span id="addUnitBtn" className="btn btn-sm btn-default px-0 mx-0">Add Unit</span>
                         </div>
+                        <div id="addUnitModal"  className="modal fade">
+                            <div className="modal-dialog bg-c-white">
+                                <div className="modal-content">
+                                    <div className="modal-header">
+                                        <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 className="modal-title">Modal title</h4>
+                                    </div>
+                                    <div className="modal-body">
+                                        <p>One fine body&hellip;</p>
+                                    </div>
+                                    <div className="modal-footer">
+                                        <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
+                                        <button type="button" className="btn btn-primary">Save changes</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <div className="col-xs-12 form-group alert alert-dismissible f-size-1_2" style={{backgroundColor:"#f2dede", color:"#a94442",}}>
                             <button type="button" className="close" data-dismiss="alert">×</button>
                             <p className>All nutrient values should be per selected weight:<strong> 100 x gr or 100 grams</strong>.</p>
@@ -163,10 +188,12 @@ class AddFood extends Component {
                         </div>
                         <br/>
                     </div>
-                    <Link className="c-white" to={'/foods'}><button className="col-xs-12 btn btn-raised btn-primary my-1 f-size-2" onClick={this.addFood.bind(this)}>
-                    Save Food
-                </button></Link>
+
+                    <Link className="c-white" to={'/foods'}>
+                        <button className="col-xs-12 btn btn-raised btn-success my-1 f-size-2" onClick={this.addFood.bind(this)}> Save Food </button>
+                    </Link>
                 </div>
+            </div>
         );
     };
 }

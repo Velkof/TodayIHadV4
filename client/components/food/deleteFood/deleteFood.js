@@ -2,44 +2,37 @@
  * Created by Marjan on 23-Jun-17.
  */
 import React, {Component} from 'react';
-import { connect } from "react-redux"
 
-import {deleteFood, fetchFoods } from "../../../actions/foodActions";
+import {deleteFood } from "../../../actions/foodActions";
 import Footer from "../../footer/footer";
 import {Link} from "react-router-dom";
 
-@connect((store) => {
-    return {
-        foods: store.foods.foods,
-    };
-})
-
 class DeleteFood extends Component {
     componentWillMount(){
-        this.props.dispatch(fetchFoods());
+        console.log("this props", this.props);
 
-        let id = window.location.href.substr(window.location.href.length - 24);
 
-        this.setState({id: id});
-
-        this.currentFood = this.props.foods.filter(function(food){
-            return food._id === id;
-        });
-
-        this.currentFood = this.currentFood[0];
     }
     deleteFood() {
-        this.props.dispatch(deleteFood(this.state));
+        this.props.dispatch(deleteFood(this.props.food._id));
     }
     render() {
         return (
             <div className="main-layout">
-                <div className="container-mob bg-c-white" style={{overflow:'hidden'}}>
-                    <h1>Delete Food</h1>
-                    <p> Are you sure you want to delete "{this.currentFood.name}"?</p>
-                    <button className="col-xs-12 btn btn-raised btn-primary" onClick={this.deleteFood.bind(this)}><Link className="c-white" to={'/foods'}>Delete Food</Link> </button>
+                <div className="container-mob">
+                    {this.props.foodNavBar}
 
+                    <div className="c-grey mt-1 f-size-1_5 pl-0_5">
+                        <p>DELETE FOOD</p>
+                    </div>
+                    <div className="container-mob-child">
+                        <p className="f-size-2"> Are you sure you want to delete "{this.props.food.name}"?</p>
+                    </div>
+                    <Link className="c-white" to={'/foods'}>
+                        <button className="col-xs-12 btn btn-raised btn-danger my-1 f-size-2" onClick={this.deleteFood.bind(this)}> Delete Food </button>
+                    </Link>
                 </div>
+
                 <Footer/>
             </div>
         );
