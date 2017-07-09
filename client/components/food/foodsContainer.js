@@ -5,14 +5,14 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import Footer from "../../components/footer/footer";
-import Foods from "../../components/food/foods/foods";
-import EditFood from "../../components/food/editFood/editFood";
-import AddRecipe from "../../components/food/addRecipe/addRecipe";
-import FoodsNavBar from "../../components/food/foodsNavBar/foodsNavBar";
-import AddFood from "../../components/food/addFood/addFood";
-import DeleteFood from "../../components/food/deleteFood/deleteFood";
-import FoodNavBar from "../../components/food/foodNavBar/foodNavBar";
+import Footer from "../footer/footer";
+import Foods from "./foods/foods";
+import EditFood from "./editFood/editFood";
+import AddRecipe from "./addRecipe/addRecipe";
+import FoodsNavBar from "./foodsNavBar/foodsNavBar";
+import AddFood from "./addFood/addFood";
+import DeleteFood from "./deleteFood/deleteFood";
+import FoodNavBar from "./foodNavBar/foodNavBar";
 
 import {addFood, fetchFoods, updateFood, deleteFood} from "../../actions/foodActions";
 
@@ -94,12 +94,8 @@ export default class FoodsContainer extends React.Component {
 
         } else if (this.state.render === "showFoods"){
             foodComponentsToRender = <Foods
-                                        onEditFoodClick = {this.handleEditFoodClick}
-                                        onDeleteFoodClick = {this.handleDeleteFoodClick}
                                         sendData={this.getFoodFromClickedFood.bind(this)}
                                         foods={this.props.foods}
-                                        // foodsNavBar={foodsNavBar}
-                                        // foodNavBar={foodNavBar}
                                     />;
         } else if (this.state.render === "editFood"){
             foodComponentsToRender = <EditFood

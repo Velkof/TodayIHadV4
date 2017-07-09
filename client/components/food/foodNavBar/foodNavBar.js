@@ -8,7 +8,7 @@ class FoodNavBar extends Component {
         super(props)
     }
     render() {
-        const { onShowFoodsClick, onDeleteFoodClick, onEditFoodClick, render } = this.props;
+        const { onShowFoodsClick, onDeleteFoodClick, onEditFoodClick, render} = this.props;
 
         let showEditFoodActive = "";
         let showDeleteFoodActive = "";

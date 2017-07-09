@@ -19,13 +19,14 @@ export default class Foods extends React.Component {
         this.props.onEditFoodClick();
     }
     render() {
-        const {  onEditFoodClick, onDeleteFoodClick } = this.props;
 
         const mappedFoods = this.props.foods.map(food =>
-            <div className="container-mob-child" key={food._id}>
-                {food.name}
-                <button onClick={this.sendFoodToEditToParent.bind(this, food)}>Edit</button>
-                <button onClick={this.sendFoodToDeleteToParent.bind(this, food)}>Delete</button>
+            <div className="container-mob-child" key={food._id} onClick={this.sendFoodToEditToParent.bind(this, food)}>
+
+                <span className="f-size-2">{food.name}</span>
+
+                <span className="f-size-2 glyphicon glyphicon-chevron-right" style={{float:"right"}}></span>
+
             </div>);
 
         return (

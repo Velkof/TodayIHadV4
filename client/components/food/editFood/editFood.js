@@ -93,7 +93,7 @@ class EditFood extends Component {
                     {this.props.foodNavBar}
 
                     <div className="c-grey mt-1 f-size-1_5 pl-0_5">
-                        <p>MANDATORY FIELDS</p>
+                        <p>EDIT FOOD - {this.state.name}</p>
                     </div>
                     <div className="container-mob-child">
                         <div className="form-group required label-floating">

@@ -13,7 +13,7 @@ import ViewFood from "./components/food/viewFood/viewFood";
 import AddFood from "./components/food/addFood/addFood";
 import DeleteFood from "./components/food/deleteFood/deleteFood";
 import Homepage from "./containers/homepage/homepage";
-import FoodsContainer from "./containers/foodsContainer/foodsContainer";
+import FoodsContainer from "./components/food/foodsContainer";
 
 
 

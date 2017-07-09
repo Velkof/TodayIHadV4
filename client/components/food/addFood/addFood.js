@@ -4,8 +4,6 @@
 import React, {Component} from 'react';
 import { addFood } from "../../../actions/foodActions"
 import {Link} from "react-router-dom";
-import {connect} from "react-redux";
-
 
 class AddFood extends Component {
     constructor(props) {

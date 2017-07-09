@@ -8,11 +8,6 @@ import Footer from "../../footer/footer";
 import {Link} from "react-router-dom";
 
 class DeleteFood extends Component {
-    componentWillMount(){
-        console.log("this props", this.props);
-
-
-    }
     deleteFood() {
         this.props.dispatch(deleteFood(this.props.food._id));
     }
@@ -23,7 +18,7 @@ class DeleteFood extends Component {
                     {this.props.foodNavBar}
 
                     <div className="c-grey mt-1 f-size-1_5 pl-0_5">
-                        <p>DELETE FOOD</p>
+                        <p>DELETE FOOD - {this.props.food.name}</p>
                     </div>
                     <div className="container-mob-child">
                         <p className="f-size-2"> Are you sure you want to delete "{this.props.food.name}"?</p>
