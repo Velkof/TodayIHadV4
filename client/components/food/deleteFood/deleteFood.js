@@ -5,7 +5,6 @@ import React, {Component} from 'react';
 
 import {deleteFood } from "../../../actions/foodActions";
 import Footer from "../../footer/footer";
-import {Link} from "react-router-dom";
 
 class DeleteFood extends Component {
     deleteFood() {
@@ -14,21 +13,22 @@ class DeleteFood extends Component {
     render() {
         return (
             <div className="main-layout">
-                <div className="container-mob">
+                <div className="container-mob"  style={{overflow:'hidden'}}>
+                    {this.props.backToFoodsNav}
+
+                    <div className="c-grey f-size-2 pl-0_5" style={{textAlign:"center"}}>
+                        <span>{this.props.food.name}</span>
+                    </div>
+
                     {this.props.foodNavBar}
 
-                    <div className="c-grey mt-1 f-size-1_5 pl-0_5">
-                        <p>DELETE FOOD - {this.props.food.name}</p>
-                    </div>
                     <div className="container-mob-child">
                         <p className="f-size-2"> Are you sure you want to delete "{this.props.food.name}"?</p>
                     </div>
-                    <Link className="c-white" to={'/foods'}>
+                    <div onClick={this.props.onShowFoodsClick}>
                         <button className="col-xs-12 btn btn-raised btn-danger my-1 f-size-2" onClick={this.deleteFood.bind(this)}> Delete Food </button>
-                    </Link>
+                    </div>
                 </div>
-
-                <Footer/>
             </div>
         );
     };

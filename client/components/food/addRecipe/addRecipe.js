@@ -3,7 +3,6 @@
  */
 import React, {Component} from 'react';
 import styles from "./addRecipe.css";
-import {Link} from "react-router-dom";
 import {addFood} from "../../../actions/foodActions";
 
 class AddRecipe extends Component {
@@ -26,8 +25,6 @@ class AddRecipe extends Component {
             sodium: null,
             cholesterol:null,
         };
-
-        console.log("props", this, props);
     }
     componentDidMount(){
         $.material.init();
@@ -56,7 +53,7 @@ class AddRecipe extends Component {
                 <div className="container-mob" style={{overflow:'hidden'}}>
                     {this.props.foodsNavBar}
 
-                    <div id="searchAddRecipe" className="form-group has-feedback mt-2">
+                    <div id="searchAddRecipe" className="form-group has-feedback mt-1">
                         <input type="text"  defaultValue="" placeholder="Add ingredients" className=""/>
                         <i className="glyphicon glyphicon-search form-control-feedback"></i>
                     </div>
@@ -92,9 +89,9 @@ class AddRecipe extends Component {
                             <button className="btn btn-sm btn-default px-0 mx-0">Add</button>
                         </div>
                     </div>
-                    <Link className="c-white" to={'/foods'}><button className="col-xs-12 btn btn-raised btn-success my-1 f-size-2" onClick={this.addFood.bind(this)}>
-                        Save Recipe
-                    </button></Link>
+                    <div onClick={this.props.onShowFoodsClick}>
+                        <button className="col-xs-12 btn btn-raised btn-success my-1 f-size-2" onClick={this.addFood.bind(this)}> Save Recipe </button>
+                    </div>
                 </div>
             </div>
         );

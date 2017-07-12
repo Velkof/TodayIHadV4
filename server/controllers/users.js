@@ -23,7 +23,6 @@ router.route('/')
                 if (err) {
                    console.log("error", err);
                 }
-                console.log("user", user);
                 if(user === null) {
                     const user = new User();
                     user.name = req.body.name;

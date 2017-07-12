@@ -1,0 +1,18 @@
+.closeBtn {
+    float: right;
+    font-size: 21px;
+    font-weight: bold;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    filter: alpha(opacity=20);
+    opacity: .2;
+}
+
+#addUnitModal {
+    margin:0 auto;
+    margin-top: 10em;
+    z-index: 9999;
+    width: 100%;
+    max-width: 540px!important;
+}

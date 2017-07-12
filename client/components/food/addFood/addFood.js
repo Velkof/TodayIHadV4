@@ -3,7 +3,7 @@
  */
 import React, {Component} from 'react';
 import { addFood } from "../../../actions/foodActions"
-import {Link} from "react-router-dom";
+import AddUnitModal from '../../modals/addUnitModal';
 
 class AddFood extends Component {
     constructor(props) {
@@ -11,8 +11,8 @@ class AddFood extends Component {
 
         this.state = {
             name:"",
-            amount: null,
-            unit:"gr",
+            amount: 0,
+            unit:"g",
             calories: null,
             protein:null,
             fat:null,
@@ -24,18 +24,44 @@ class AddFood extends Component {
             fatPoly:null,
             sodium: null,
             cholesterol:null,
+            units:[{
+                name:"g",
+                amountInGrams:1,
+            }, {
+                name:"oz",
+                amountInGrams: 28.35
+            }]
         };
     }
+
     componentDidMount(){
         $.material.init();
     }
+
     addFood() {
         this.props.dispatch(addFood(this.state));
     }
-    openModal(){
-        $("#addUnitModal").modal();
-        $("#addUnitModal").modal('show')
+
+    getUserAddedUnits(val){
+        let _this = this;
+
+        this.userAddedUnits = [{
+            name:"g",
+            amountInGrams: 1,
+        }, {
+            name:"oz",
+            amountInGrams: 28.35
+        }];
+
+        val.forEach(function (unit) {
+            _this.userAddedUnits.push(unit);
+        });
+
+        let lastUnitInArray = this.userAddedUnits[this.userAddedUnits.length - 1].name;
+
+        this.setState({units:this.userAddedUnits, unit:lastUnitInArray});
     }
+
     handleChange(e) {
         switch(e.target.id) {
             case "name":
@@ -84,16 +110,18 @@ class AddFood extends Component {
                 break;
         }
     }
+
     render() {
+        let unitsArray = [];
+        this.state.units.forEach(function (unit) {
+                        unitsArray.push(<option key={unitsArray.length} defaultValue={unit.amountInGrams}>{unit.name}</option>);
+                    });
 
         return (
             <div className="main-layout">
                 <div className="container-mob" style={{overflow:'hidden'}}>
                     {this.props.foodsNavBar}
 
-                    <div className="c-grey mt-1 f-size-1_5 pl-0_5">
-                        <p>MANDATORY FIELDS</p>
-                    </div>
                     <div className="container-mob-child">
                         <div className="form-group required label-floating">
                             <label className="control-label">Name</label>
@@ -106,35 +134,22 @@ class AddFood extends Component {
                         <div className="col-xs-5 form-group required label-floating pl-0">
                             <label className="control-label">Select Unit</label>
                             <select id="unit" value={this.state.unit  || ''} onChange={this.handleChange.bind(this)} className="form-control">
-                                <option>gr</option>
-                                <option>oz</option>
+                                {unitsArray}
                             </select>
                         </div>
-                        <div className="col-xs-2 form-group px-0" onChange={this.openModal.bind(this)}>
-                            <span id="addUnitBtn" className="btn btn-sm btn-default px-0 mx-0">Add Unit</span>
+                        <div className="col-xs-2 form-group px-0">
+                            <AddUnitModal
+                                sendData={this.getUserAddedUnits.bind(this)}
+                            />
                         </div>
-                        <div id="addUnitModal"  className="modal fade">
-                            <div className="modal-dialog bg-c-white">
-                                <div className="modal-content">
-                                    <div className="modal-header">
-                                        <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                        <h4 className="modal-title">Modal title</h4>
-                                    </div>
-                                    <div className="modal-body">
-                                        <p>One fine body&hellip;</p>
-                                    </div>
-                                    <div className="modal-footer">
-                                        <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
-                                        <button type="button" className="btn btn-primary">Save changes</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    </div>
 
-                        <div className="col-xs-12 form-group alert alert-dismissible f-size-1_2" style={{backgroundColor:"#f2dede", color:"#a94442",}}>
-                            <button type="button" className="close" data-dismiss="alert">×</button>
-                            <p className>All nutrient values should be per selected weight:<strong> 100 x gr or 100 grams</strong>.</p>
-                        </div>
+                    <div className="c-grey mt-1 f-size-1_5 pl-0_5 c-red-important-info">
+                            <p className="">All nutrient values below should be per: <strong> {this.state.amount} {this.state.unit}</strong>.</p>
+                    </div>
+
+                    <div className="container-mob-child">
+
                         <div className="col-xs-6 form-group required label-floating pl-0">
                             <label className="control-label">Calories</label>
                             <input id="calories" type="number" value={this.state.calories  || ''} onChange={this.handleChange.bind(this)} className="form-control"/>
@@ -152,9 +167,11 @@ class AddFood extends Component {
                             <input id="carbs" type="number" value={this.state.carbs  || ''} onChange={this.handleChange.bind(this)} className="form-control"/>
                         </div>
                     </div>
+
                     <div className="c-grey mt-1 f-size-1_5 pl-0_5">
                         <p>OPTIONAL FIELDS</p>
                     </div>
+
                     <div className="container-mob-child">
                         <div className="col-xs-6 form-group label-floating pl-0">
                             <label className="control-label">Sat. Fat (g)</label>
@@ -187,9 +204,9 @@ class AddFood extends Component {
                         <br/>
                     </div>
 
-                    <Link className="c-white" to={'/foods'}>
+                    <div onClick={this.props.onShowFoodsClick}>
                         <button className="col-xs-12 btn btn-raised btn-success my-1 f-size-2" onClick={this.addFood.bind(this)}> Save Food </button>
-                    </Link>
+                    </div>
                 </div>
             </div>
         );

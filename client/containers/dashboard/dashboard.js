@@ -27,6 +27,7 @@ export default class Dashboard extends React.Component {
     render() {
         return (
             <div className="main-layout">
+
                 <a id="searchBtn" href="javascript:void(0)" className="btn btn-fab btn-success">
                     <i className="material-icons glyphicon glyphicon-search"></i>
                 </a>

@@ -36,7 +36,6 @@ export function login() {
     return function(dispatch) {
 
         lock.on("authenticated", function(authResult) {
-            console.log("authResult", authResult);
             lock.getUserInfo(authResult.accessToken, function(error, profile) {
                 if (error) {
                     return dispatch(loginRejected(error))

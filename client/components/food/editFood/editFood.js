@@ -31,11 +31,12 @@ class EditFood extends Component {
             cholesterol: this.food.cholesterol,
         };
     }
-
     updateFood() {
         this.props.dispatch(updateFood(this.state));
     }
-
+    componentDidMount(){
+        $.material.init();
+    }
     handleChange(e) {
         switch(e.target.id) {
             case "name":
@@ -89,12 +90,14 @@ class EditFood extends Component {
         return (
             <div className="main-layout">
                 <div className="container-mob" style={{overflow:'hidden'}}>
+                    {this.props.backToFoodsNav}
+
+                    <div className="c-grey f-size-2 pl-0_5" style={{textAlign:"center"}}>
+                        <span>{this.props.food.name}</span>
+                    </div>
 
                     {this.props.foodNavBar}
 
-                    <div className="c-grey mt-1 f-size-1_5 pl-0_5">
-                        <p>EDIT FOOD - {this.state.name}</p>
-                    </div>
                     <div className="container-mob-child">
                         <div className="form-group required label-floating">
                             <label className="control-label">Name</label>
@@ -169,11 +172,10 @@ class EditFood extends Component {
                         </div>
                         <br/>
                     </div>
-                    <Link className="c-white" to={'/foods'}>
+                    <div onClick={this.props.onShowFoodsClick}>
                         <button className="col-xs-12 btn btn-raised btn-info my-1 f-size-2" onClick={this.updateFood.bind(this)}> Update Food </button>
-                    </Link>
+                    </div>
                 </div>
-                <Footer/>
             </div>
         );
     };

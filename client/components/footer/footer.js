@@ -6,6 +6,10 @@ import {NavLink} from "react-router-dom";
 import styles from './footer.css';
 
 class Footer extends Component {
+    constructor(props) {
+        super(props);
+    }
+
     dashboardActive (match, location){
         if (location.pathname === "/" || location.pathname === "/dashboard") {
             return true
@@ -13,12 +17,15 @@ class Footer extends Component {
     }
     foodsActive (match, location){
         if (location.pathname.substring(0, 6) === "/foods") {
-            return true
+            return true;
         }
+
     }
 
     render() {
-      return (
+        const {  onShowFoodsClick} = this.props;
+
+        return (
         <div className="footer">
             <div className="container-mob px-0">
                 <div className="col-xs-5ths">
@@ -26,7 +33,7 @@ class Footer extends Component {
                         <span className={"glyphicon glyphicon-home footer-tab"}></span>
                     </NavLink>
                 </div>
-                <div className="col-xs-5ths">
+                <div className="col-xs-5ths" onClick={onShowFoodsClick}>
                     <NavLink to={'/foods'} style={{color: 'grey'}} activeStyle={{color: 'black'}}  isActive={this.foodsActive.bind(this)}>
                         <span className={"glyphicon glyphicon-apple footer-tab"}></span>
                     </NavLink>

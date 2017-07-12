@@ -1,18 +1,19 @@
 /**
  * Created by Marjan on 06-Jul-17.
  */
-
 import React from "react";
 import { connect } from "react-redux";
 
-import Footer from "../footer/footer";
 import Foods from "./foods/foods";
-import EditFood from "./editFood/editFood";
-import AddRecipe from "./addRecipe/addRecipe";
-import FoodsNavBar from "./foodsNavBar/foodsNavBar";
 import AddFood from "./addFood/addFood";
+import FoodDetails from "./foodDetails/foodDetails";
+import EditFood from "./editFood/editFood";
 import DeleteFood from "./deleteFood/deleteFood";
+import AddRecipe from "./addRecipe/addRecipe";
 import FoodNavBar from "./foodNavBar/foodNavBar";
+import FoodsNavBar from "./foodsNavBar/foodsNavBar";
+import Footer from "../footer/footer";
+import BackToFoodsNav from "./backToFoodsNav/backToFoodsNav";
 
 import {addFood, fetchFoods, updateFood, deleteFood} from "../../actions/foodActions";
 
@@ -30,10 +31,14 @@ export default class FoodsContainer extends React.Component {
         this.handleAddFoodClick = this.handleAddFoodClick.bind(this);
         this.handleAddRecipeClick = this.handleAddRecipeClick.bind(this);
         this.handleEditFoodClick = this.handleEditFoodClick.bind(this);
+        this.handleFoodDetailsClick = this.handleFoodDetailsClick.bind(this);
         this.handleDeleteFoodClick = this.handleDeleteFoodClick.bind(this);
 
         this.state = {
             render: "showFoods",
+        };
+        this.clickedFood = {
+            _id: "",
         };
     }
     handleShowFoodsClick() {
@@ -44,6 +49,9 @@ export default class FoodsContainer extends React.Component {
     }
     handleAddRecipeClick() {
         this.setState({render:"addRecipe"});
+    }
+    handleFoodDetailsClick() {
+        this.setState({render:"foodDetails"});
     }
     handleEditFoodClick() {
         this.setState({render:"editFood"});
@@ -62,51 +70,69 @@ export default class FoodsContainer extends React.Component {
         let foodComponentsToRender = null;
 
         let foodsNavBar =  <FoodsNavBar
-            render = {this.state.render}
-            onAddFoodClick={this.handleAddFoodClick}
-            onAddRecipeClick={this.handleAddRecipeClick}
-            onShowFoodsClick={this.handleShowFoodsClick}
-        />;
+                            render = {this.state.render}
+                            onAddFoodClick={this.handleAddFoodClick}
+                            onAddRecipeClick={this.handleAddRecipeClick}
+                            onShowFoodsClick={this.handleShowFoodsClick}
+                        />;
 
         let foodNavBar =  <FoodNavBar
-            render = {this.state.render}
-            onEditFoodClick = {this.handleEditFoodClick}
-            onDeleteFoodClick = {this.handleDeleteFoodClick}
-            onShowFoodsClick = {this.handleShowFoodsClick}
-        />;
+                            render = {this.state.render}
+                            onFoodDetailsClick = {this.handleFoodDetailsClick}
+                            onEditFoodClick = {this.handleEditFoodClick}
+                            onDeleteFoodClick = {this.handleDeleteFoodClick}
+                            foodId = {this.clickedFood._id}
+                        />;
+
+         let backToFoodsNav = <BackToFoodsNav
+                                 onShowFoodsClick={this.handleShowFoodsClick}
+                             />
 
         if(this.state.render === "showFoods"){
             foodComponentsToRender = <Foods
-                onEditFoodClick = {this.handleEditFoodClick}
-                onDeleteFoodClick = {this.handleDeleteFoodClick}
-                sendData={this.getFoodFromClickedFood.bind(this)}
-                foods={this.props.foods}
-                foodsNavBar={foodsNavBar}
-                foodNavBar={foodNavBar}
-            />;
-
-        }
-        else if (this.state.render === "addRecipe") {
-            foodComponentsToRender = <AddRecipe foods={this.props.foods} foodsNavBar={foodsNavBar}/>;
-
-        } else if (this.state.render === "addFood"){
-            foodComponentsToRender = <AddFood  dispatch={this.props.dispatch} foodsNavBar={foodsNavBar}/>;
-
-        } else if (this.state.render === "showFoods"){
-            foodComponentsToRender = <Foods
+                                        onEditFoodClick = {this.handleEditFoodClick}
+                                        onFoodDetailsClick = {this.handleFoodDetailsClick}
+                                        onDeleteFoodClick = {this.handleDeleteFoodClick}
                                         sendData={this.getFoodFromClickedFood.bind(this)}
                                         foods={this.props.foods}
+                                        foodsNavBar={foodsNavBar}
+                                        foodNavBar={foodNavBar}
+                                    />;
+        }
+        else if (this.state.render === "addRecipe") {
+            foodComponentsToRender = <AddRecipe
+                                        foods={this.props.foods}
+                                        foodsNavBar={foodsNavBar}
+                                        onShowFoodsClick = {this.handleShowFoodsClick}
+                                    />;
+
+        } else if (this.state.render === "addFood"){
+            foodComponentsToRender = <AddFood
+                                        dispatch={this.props.dispatch}
+                                        onShowFoodsClick = {this.handleShowFoodsClick}
+                                        foodsNavBar={foodsNavBar}
                                     />;
         } else if (this.state.render === "editFood"){
             foodComponentsToRender = <EditFood
                                         dispatch={this.props.dispatch}
                                         foodNavBar={foodNavBar}
+                                        backToFoodsNav = {backToFoodsNav}
+                                        onShowFoodsClick = {this.handleShowFoodsClick}
+                                        food = {this.clickedFood}
+                                    />
+        } else if (this.state.render === "foodDetails") {
+            foodComponentsToRender = <FoodDetails
+                                        foodNavBar={foodNavBar}
+                                        backToFoodsNav = {backToFoodsNav}
+                                        onShowFoodsClick = {this.handleShowFoodsClick}
                                         food = {this.clickedFood}
                                     />
         } else {
             foodComponentsToRender = <DeleteFood
                                         dispatch={this.props.dispatch}
                                         foodNavBar={foodNavBar}
+                                        backToFoodsNav = {backToFoodsNav}
+                                        onShowFoodsClick = {this.handleShowFoodsClick}
                                         food = {this.clickedFood}
                                     />
         }
@@ -114,7 +140,9 @@ export default class FoodsContainer extends React.Component {
         return (
                 <div>
                     {foodComponentsToRender}
-                    <Footer/>
+                    <Footer
+                        onShowFoodsClick = {this.handleShowFoodsClick}
+                    />
                 </div>
         )
     }

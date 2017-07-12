@@ -31,6 +31,8 @@ export function addFood( data) {
 
         dispatch({type: 'ADD_FOOD', payload: data});
 
+
+
         axios.post('http://localhost:9000/api/foods', {
             name: data.name,
             amount: data.amount,

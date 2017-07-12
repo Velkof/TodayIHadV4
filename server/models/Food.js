@@ -39,7 +39,8 @@ const FoodSchema = new Schema({
     fatMono: Number,
     fatPoly: Number,
     sodium: Number,
-    cholesterol: Number
+    cholesterol: Number,
+    units: Array,
 });
 
 module.exports = mongoose.model('Food', FoodSchema);

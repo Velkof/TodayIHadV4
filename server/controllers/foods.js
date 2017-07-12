@@ -36,6 +36,7 @@ router.route('/')
         food.fatPoly = req.body.fatPoly;
         food.sodium = req.body.sodium;
         food.cholesterol = req.body.cholesterol;
+        food.units = req.body.units;
 
         food.save(function(err) {
             if (err)
@@ -87,6 +88,7 @@ router.route('/:id')
             food.fatPoly = req.body.fatPoly;
             food.sodium = req.body.sodium;
             food.cholesterol = req.body.cholesterol;
+            food.units = req.body.units;
 
             food.save(function(err) {
                 if (err)

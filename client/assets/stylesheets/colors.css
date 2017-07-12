@@ -10,6 +10,26 @@
     color: grey;
 }
 
+.c-grey-light {
+    color:#d8d8d8;
+}
+
+.c-green {
+    color: green;
+}
+
+.c-green-light {
+    color: #59b75c;
+}
+
+.c-green-dark {
+    color: #009688;
+}
+
+.c-red-important-info {
+    color: #a94442;
+}
+
 .bg-c-white {
     background-color:white;
 }
@@ -18,4 +38,7 @@
     background-color:#fafafa;
 }
 
+.bg-c-grey-light {
+    background-color:#d8d8d8;
+}
 

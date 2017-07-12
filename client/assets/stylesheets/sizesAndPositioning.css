@@ -3,6 +3,9 @@
 .f-size-0_5{
     font-size: 0.5em!important;
 }
+.f-size-0_8{
+    font-size: 0.8em!important;
+}
 .f-size-1{
     font-size: 1em!important;
 }
@@ -15,6 +18,11 @@
 .f-size-1_5{
     font-size: 1.5em!important;
 }
+
+.f-size-1_7{
+    font-size: 1.7em!important;
+}
+
 .f-size-2{
     font-size: 2em!important;
 }
@@ -47,12 +55,12 @@
 
 /*width*/
 
-.w-2 {
-    width: 2em!important;
-}
-
 .full-width {
     width: 100%;
+}
+
+.w-2 {
+    width: 2em!important;
 }
 
 /*line-height*/
@@ -70,6 +78,13 @@
 }
 
 /* padding */
+.p-0{
+    padding: 0!important;
+}
+
+.p-1{
+    padding: 1em!important;
+}
 
 .px-0{
     padding-right: 0!important;
@@ -78,6 +93,10 @@
 
 .pt-0{
     padding-top: 0!important;
+}
+
+.pt-0_5{
+    top: 0.5em!important;
 }
 
 .pr-0{
@@ -100,7 +119,19 @@
     padding-left: 1em!important;
 }
 
+.pl-2{
+    padding-left: 2em!important;
+}
+
+.pl-3{
+    padding-left: 3em!important;
+}
+
 /*margin*/
+.m-0{
+    margin: 0!important;
+}
+
 .mx-0{
     margin-right: 0!important;
     margin-left: 0!important;
@@ -120,12 +151,20 @@
     margin-top: 0!important;
 }
 
+.mt-0_5{
+    margin-top: 0.5em!important;
+}
+
 .mt-1{
     margin-top: 1em!important;
 }
 
 .mt-2{
     margin-top: 2em!important;
+}
+
+.mt-3{
+    margin-top: 3em!important;
 }
 
 .mr-0{
@@ -136,10 +175,29 @@
     margin-bottom: 0!important;
 }
 
-.ml-0{
-    margin-left: 0!important;
+.mb-0_5{
+    margin-bottom: 0.5em!important;
 }
 
+.mb-1{
+    margin-bottom: 1em!important;
+}
+
+.ml-0{
+    margin-left: 0!important;
+
+}
+.ml-0_3{
+    margin-left: 0.3em!important;
+}
+
+.ml-0_5{
+    margin-left: 0.5em!important;
+}
+
+.mr-1{
+    margin-right: 1em!important;
+}
 
 /* extend bootstrap with 5 columns */
 

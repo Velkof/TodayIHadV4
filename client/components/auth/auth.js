@@ -27,7 +27,7 @@ export default class Auth extends Component {
                     </ul>
                 ) : (
                     <ul className="list-inline" style={{listStyle: "none", lineHeight:"5em", position:"relative", zIndex:"999"}}>
-                        <li className="f-size-2">TodayIHad</li>
+                        <li className="f-size-2 ml-0_3">TodayIHad</li>
                         <li className="dropdown" style={{float:"right"}}>
                             <a href="javascript:void(0)" className="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                                 <img id="avatar" style={{height:"2.5rem"}} src={profile.picture} />
