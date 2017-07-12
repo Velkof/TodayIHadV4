@@ -25,6 +25,7 @@ router.route('/')
         food.name = req.body.name;
         food.amount = req.body.amount;
         food.unit = req.body.unit;
+        food.units = req.body.units;
         food.calories = req.body.calories;
         food.protein = req.body.protein;
         food.fat = req.body.fat;
@@ -36,7 +37,8 @@ router.route('/')
         food.fatPoly = req.body.fatPoly;
         food.sodium = req.body.sodium;
         food.cholesterol = req.body.cholesterol;
-        food.units = req.body.units;
+        food.createdAt = new Date();
+        food.updatedAt = new Date();
 
         food.save(function(err) {
             if (err)
@@ -77,6 +79,7 @@ router.route('/:id')
             food.name = req.body.name;
             food.amount = req.body.amount;
             food.unit = req.body.unit;
+            food.units = req.body.units;
             food.calories = req.body.calories;
             food.protein = req.body.protein;
             food.fat = req.body.fat;
@@ -88,7 +91,7 @@ router.route('/:id')
             food.fatPoly = req.body.fatPoly;
             food.sodium = req.body.sodium;
             food.cholesterol = req.body.cholesterol;
-            food.units = req.body.units;
+            food.updatedAt = new Date();
 
             food.save(function(err) {
                 if (err)

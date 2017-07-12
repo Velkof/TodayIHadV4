@@ -10,25 +10,37 @@ import Footer from "../../footer/footer";
 class EditFood extends Component {
     constructor(props) {
         super(props);
-
+        const _this = this;
         this.food = this.props.food;
+
+        //display values per user selected unit and amount
+        let chosenUnit = this.food.units.filter(function( obj ) {
+            return obj.name === _this.food.unit;
+        });
+
+        let times100g = chosenUnit[0].amountInGrams / 100;
+
+        function valuesToSelectedUnitAndAmount(value){
+            return Math.round(value * times100g * _this.food.amount * 10) / 10;
+        }
 
         this.state = {
             id: this.food._id,
             name: this.food.name,
             amount: this.food.amount,
             unit: this.food.unit,
-            calories:  this.food.calories,
-            protein: this.food.protein,
-            fat: this.food.fat,
-            carbs: this.food.carbs,
-            sugar: this.food.sugar,
-            fiber: this.food.fiber,
-            fatSat: this.food.fatSat,
-            fatMono: this.food.fatMono,
-            fatPoly: this.food.fatPoly,
-            sodium:  this.food.sodium,
-            cholesterol: this.food.cholesterol,
+            units: this.food.units,
+            calories:  valuesToSelectedUnitAndAmount(this.food.calories),
+            protein: valuesToSelectedUnitAndAmount(this.food.protein),
+            fat: valuesToSelectedUnitAndAmount(this.food.fat),
+            carbs: valuesToSelectedUnitAndAmount(this.food.carbs),
+            sugar: valuesToSelectedUnitAndAmount(this.food.sugar),
+            fiber: valuesToSelectedUnitAndAmount(this.food.fiber),
+            fatSat: valuesToSelectedUnitAndAmount(this.food.fatSat),
+            fatMono: valuesToSelectedUnitAndAmount(this.food.fatMono),
+            fatPoly: valuesToSelectedUnitAndAmount(this.food.fatPoly),
+            sodium:  valuesToSelectedUnitAndAmount(this.food.sodium),
+            cholesterol: valuesToSelectedUnitAndAmount(this.food.cholesterol),
         };
     }
     updateFood() {
@@ -87,6 +99,12 @@ class EditFood extends Component {
     }
 
     render() {
+
+        let unitsArray = [];
+        this.state.units.forEach(function (unit) {
+            unitsArray.push(<option key={unitsArray.length} defaultValue={unit.amountInGrams}>{unit.name}</option>);
+        });
+
         return (
             <div className="main-layout">
                 <div className="container-mob" style={{overflow:'hidden'}}>
@@ -110,17 +128,17 @@ class EditFood extends Component {
                         <div className="col-xs-5 form-group required label-floating pl-0">
                             <label className="control-label">Select Unit</label>
                             <select id="unit" value={this.state.unit  || ''} onChange={this.handleChange.bind(this)} className="form-control">
-                                <option>gr</option>
-                                <option>oz</option>
+                                {unitsArray}
                             </select>
                         </div>
                         <div className="col-xs-2 form-group px-0">
                             <span id="addUnitBtn" className="btn btn-sm btn-default px-0 mx-0">Add Unit</span>
                         </div>
-                        <div className="col-xs-12 form-group alert alert-dismissible f-size-1_2" style={{backgroundColor:"#f2dede", color:"#a94442",}}>
-                            <button type="button" className="close" data-dismiss="alert">×</button>
-                            <p className>All nutrient values should be per selected weight:<strong> 100 x gr or 100 grams</strong>.</p>
+                    </div>
+                        <div className="c-grey mt-1 f-size-1_5 pl-0_5 c-red-important-info">
+                            <p className="">All nutrient values below should be per: <strong> {this.state.amount} {this.state.unit}</strong>.</p>
                         </div>
+                    <div className="container-mob-child">
                         <div className="col-xs-6 form-group required label-floating pl-0">
                             <label className="control-label">Calories</label>
                             <input id="calories" type="number" value={this.state.calories  || ''} onChange={this.handleChange.bind(this)} className="form-control"/>
