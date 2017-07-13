@@ -130,21 +130,22 @@ export function updateFood( data) {
     }
 }
 
-export function deleteFood(data) {
+export function deleteFood(id) {
     return function (dispatch) {
 
-        dispatch({type: 'DELETE_FOOD', payload: data});
 
-        axios.delete('http://localhost:9000/api/foods/' + data.id, {
+        dispatch({type: 'DELETE_FOOD', payload: id});
+
+        axios.delete('http://localhost:9000/api/foods/' + id, {
             'headers':{
                 'Authorization': 'Bearer ' + token,
             }
         })
-        .then(function (response) {
-            dispatch({type: "DELETE_FOOD_FULFILLED", payload: response.data})
-        })
-        .catch(function (err) {
-            dispatch({type: "DELETE_FOOD_REJECTED", payload: err})
-        });
+            .then(function (response) {
+                dispatch({type: "DELETE_FOOD_FULFILLED", payload: response.data})
+            })
+            .catch(function (err) {
+                dispatch({type: "DELETE_FOOD_REJECTED", payload: err})
+            });
     }
 }
