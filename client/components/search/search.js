@@ -10,10 +10,15 @@ export default class Search extends React.Component {
     }
     render() {
         return (
-            <div>
-                <h4>SEARCH COMPONENT</h4>
+            <div className="container-mob" style={{overflow:'hidden'}}>
+                <div className="px-0">
+                    <div className="btn btn-default pl-0 f-size-1_5" onClick={this.props.onShowFoodsClick}>
+                        <span className="glyphicon glyphicon-chevron-left" style={{float:"left", lineHeight:"1.2em"}}></span>
+                        <span style={{float:"left",}}>Back to foods</span>
+                    </div>
+                </div>
                 <div id="searchAddRecipe" className="searchBar form-group has-feedback mt-1">
-                    <input type="text" placeholder="Add ingredients" value=""/>
+                    <input type="text" autoFocus placeholder="Add ingredients" value=""/>
                         <i className="glyphicon glyphicon-search form-control-feedback"></i>
                 </div>
             </div>

@@ -26,6 +26,7 @@ router.route('/')
         food.amount = req.body.amount;
         food.unit = req.body.unit;
         food.units = req.body.units;
+        food.type = req.body.type;
         food.calories = req.body.calories;
         food.protein = req.body.protein;
         food.fat = req.body.fat;
@@ -80,6 +81,7 @@ router.route('/:id')
             food.amount = req.body.amount;
             food.unit = req.body.unit;
             food.units = req.body.units;
+            food.type = req.body.type;
             food.calories = req.body.calories;
             food.protein = req.body.protein;
             food.fat = req.body.fat;

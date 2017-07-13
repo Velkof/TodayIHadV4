@@ -67,8 +67,6 @@ export default class FoodsContainer extends React.Component {
     }
     render() {
 
-        console.log(this)
-
         let foodComponentsToRender = null;
 
         let foodsNavBar =  <FoodsNavBar

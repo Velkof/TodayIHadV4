@@ -17,8 +17,6 @@ export default class Foods extends React.Component {
         this.props.onFoodDetailsClick();
     }
     updateSearch(e) {
-        console.log("target", e.target, e)
-
         this.setState({
             search: e.target.value
             })
@@ -54,7 +52,6 @@ export default class Foods extends React.Component {
                 <p className="f-size-2">You haven't added any custom foods or recipes.</p>
             </div>;
         }
-
         return (
             <div className="main-layout">
                 <div className="container-mob" style={{overflow:'hidden'}}>

@@ -51,6 +51,7 @@ export function addFood( data) {
             amount: data.amount,
             unit: data.unit,
             units: data.units,
+            type: data.type,
             calories: valuePer100g(data.calories),
             protein: valuePer100g(data.protein),
             fat: valuePer100g(data.fat),
