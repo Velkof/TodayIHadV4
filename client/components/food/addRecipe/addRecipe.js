@@ -53,7 +53,7 @@ class AddRecipe extends Component {
                 <div className="container-mob" style={{overflow:'hidden'}}>
                     {this.props.foodsNavBar}
 
-                    <div id="searchAddRecipe" className="form-group has-feedback mt-1">
+                    <div id="searchAddRecipe" className="searchBar form-group has-feedback mt-1">
                         <input type="text"  defaultValue="" placeholder="Add ingredients" className=""/>
                         <i className="glyphicon glyphicon-search form-control-feedback"></i>
                     </div>
@@ -70,10 +70,11 @@ class AddRecipe extends Component {
                             <label className="control-label">Name</label>
                             <input id="name" type="text" value={this.state.name  || ''} onChange={this.handleChange.bind(this)} className="form-control"/>
                         </div>
-                        <div className="col-xs-12 form-group alert alert-dismissible f-size-1_2" style={{backgroundColor:"#f2dede", color:"#a94442",}}>
-                            <button type="button" className="close" data-dismiss="alert">×</button>
-                            <p className>By default, only the gram and ounce units are created. You can add your own units below <strong>(optional)</strong>.</p>
-                        </div>
+                    </div>
+                    <div className="c-grey mt-1 f-size-1_5 pl-0_5 c-red-important-info">
+                        <p className>By default, only the gram and ounce units are created. You can add your own units below <strong>(optional)</strong>.</p>
+                    </div>
+                     <div className="container-mob-child">
                         <div className="col-xs-6 form-group label-floating pl-0">
                             <label className="control-label">Amount</label>
                             <input id="amount" type="number" value={this.state.amount  || ''} onChange={this.handleChange.bind(this)} className="form-control"/>

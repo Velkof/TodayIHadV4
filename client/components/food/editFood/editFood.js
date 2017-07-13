@@ -6,6 +6,7 @@ import {Link} from "react-router-dom";
 
 import { updateFood } from "../../../actions/foodActions";
 import Footer from "../../footer/footer";
+import AddUnitModal from "../../modals/addUnitModal";
 
 class EditFood extends Component {
     constructor(props) {
@@ -21,6 +22,9 @@ class EditFood extends Component {
         let times100g = chosenUnit[0].amountInGrams / 100;
 
         function valuesToSelectedUnitAndAmount(value){
+            if(value === null){
+                return null;
+            }
             return Math.round(value * times100g * _this.food.amount * 10) / 10;
         }
 
@@ -43,11 +47,30 @@ class EditFood extends Component {
             cholesterol: valuesToSelectedUnitAndAmount(this.food.cholesterol),
         };
     }
+    componentDidMount(){
+        $.material.init();
+    }
     updateFood() {
         this.props.dispatch(updateFood(this.state));
     }
-    componentDidMount(){
-        $.material.init();
+    getUserAddedUnits(val){
+        let _this = this;
+
+        this.userAddedUnits = [{
+            name:"g",
+            amountInGrams: 1,
+        }, {
+            name:"oz",
+            amountInGrams: 28.35
+        }];
+
+        val.forEach(function (unit) {
+            _this.userAddedUnits.push(unit);
+        });
+
+        let lastUnitInArray = this.userAddedUnits[this.userAddedUnits.length - 1].name;
+
+        this.setState({units:this.userAddedUnits, unit:lastUnitInArray});
     }
     handleChange(e) {
         switch(e.target.id) {
@@ -132,7 +155,9 @@ class EditFood extends Component {
                             </select>
                         </div>
                         <div className="col-xs-2 form-group px-0">
-                            <span id="addUnitBtn" className="btn btn-sm btn-default px-0 mx-0">Add Unit</span>
+                            <AddUnitModal
+                                sendData={this.getUserAddedUnits.bind(this)}
+                            />
                         </div>
                     </div>
                         <div className="c-grey mt-1 f-size-1_5 pl-0_5 c-red-important-info">

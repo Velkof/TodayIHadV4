@@ -294,3 +294,21 @@ body, html{
 #searchBtn i {
     font-size: 1.7rem;
 }
+
+.searchBar input::placeholder {
+    color: darkgrey!important;
+}
+
+.searchBar  .form-control-feedback{
+    line-height: 2.5em!important;
+    font-size: 2em!important;
+    width: 2em!important;
+    color:darkgrey!important;;
+}
+
+.searchBar  input {
+    width:100%;
+    height:2.5em;
+    padding-left: 0.8rem;
+    font-size: 2em;
+}

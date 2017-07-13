@@ -12,7 +12,7 @@ export default class Search extends React.Component {
         return (
             <div>
                 <h4>SEARCH COMPONENT</h4>
-                <div id="searchAddRecipe" className="form-group has-feedback mt-1">
+                <div id="searchAddRecipe" className="searchBar form-group has-feedback mt-1">
                     <input type="text" placeholder="Add ingredients" value=""/>
                         <i className="glyphicon glyphicon-search form-control-feedback"></i>
                 </div>
