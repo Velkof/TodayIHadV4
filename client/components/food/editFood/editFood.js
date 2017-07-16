@@ -34,6 +34,8 @@ class EditFood extends Component {
             amount: this.food.amount,
             unit: this.food.unit,
             units: this.food.units,
+            type: this.food.type,
+            ingredients: this.food.ingredients,
             calories:  valuesToSelectedUnitAndAmount(this.food.calories),
             protein: valuesToSelectedUnitAndAmount(this.food.protein),
             fat: valuesToSelectedUnitAndAmount(this.food.fat),
@@ -51,7 +53,43 @@ class EditFood extends Component {
         $.material.init();
     }
     updateFood() {
-        this.props.dispatch(updateFood(this.state));
+        let _this = this;
+        //nutrient values will always be per 100g
+        let chosenUnit = this.state.units.filter(function( obj ) {
+            return obj.name === _this.state.unit;
+        });
+
+        let times100g = chosenUnit[0].amountInGrams / 100;
+
+        function valuePer100g(value){
+            if(value === null){
+                return null;
+            }
+            return Math.round(value / times100g / _this.state.amount * 10) / 10;
+        }
+
+        let food = {
+            id: this.state.id,
+            name: this.state.name,
+            amount: this.state.amount,
+            unit: this.state.unit,
+            units: this.state.units,
+            type: this.state.type,
+            ingredients: this.state.ingredients,
+            calories: valuePer100g(this.state.calories),
+            protein: valuePer100g(this.state.protein),
+            fat: valuePer100g(this.state.fat),
+            carbs: valuePer100g(this.state.carbs),
+            sugar: valuePer100g(this.state.sugar),
+            fiber: valuePer100g(this.state.fiber),
+            cholesterol:valuePer100g(this.state.cholesterol),
+            fatMono: valuePer100g(this.state.fatMono),
+            fatPoly: valuePer100g(this.state.fatPoly),
+            fatSat: valuePer100g(this.state.fatSat),
+            sodium: valuePer100g(this.state.sodium),
+        };
+
+        this.props.dispatch(updateFood(food));
     }
     getUserAddedUnits(val){
         let _this = this;

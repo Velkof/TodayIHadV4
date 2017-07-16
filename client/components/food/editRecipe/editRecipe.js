@@ -1,56 +1,60 @@
 /**
- * Created by Marjan on 06-Jul-17.
+ * Created by Marjan on 16-Jul-17.
  */
 import React, {Component} from 'react';
-import styles from "./addRecipe.css";
-import {addFood} from "../../../actions/foodActions";
+import styles from "../addRecipe/addRecipe.css";
+import {updateFood} from "../../../actions/foodActions";
 import Search from "../../search/search";
 import IngredientModal from "../../modals/ingredientModal";
 import AddUnitModal from "../../modals/addUnitModal";
 
-class AddRecipe extends Component {
+class EditRecipe extends Component {
     constructor(props) {
         super(props);
+        const _this = this;
+        this.food = this.props.food;
+        this.foods = this.props.foods;
+
+        this.ingredients = [];
+
+        this.food.ingredients.forEach(function (ingredient) {
+            let fullIngredient = _this.foods.filter(x => x._id === ingredient.id);
+
+            fullIngredient[0].amount = ingredient.amount;
+
+            if(fullIngredient.length > 0){
+                _this.ingredients.push(fullIngredient[0])
+            }
+        });
 
         this.state = {
-            name:"",
-            amount: null,
+            id: this.food._id,
+            name: this.food.name,
+            amount: 100,
             unit:"gr",
-            units: [{
-                name:"g",
-                amountInGrams: 1,
-            }, {
-                name:"oz",
-                amountInGrams: 28.35
-            }, {
-                name: "recipe",
-                amountInGrams: null,
-            }],
-            calories: null,
-            protein:null,
-            fat:null,
-            carbs:null,
-            sugar:null,
-            fiber:null,
-            fatSat:null,
-            fatMono:null,
-            fatPoly:null,
-            sodium: null,
-            cholesterol:null,
-            ingredients: [],
+            units: this.food.units,
+            calories: this.food.calories,
+            protein: this.food.protein,
+            fat: this.food.fat,
+            carbs: this.food.carbs,
+            sugar: this.food.sugar,
+            fiber: this.food.fiber,
+            fatSat: this.food.fatSat,
+            fatMono: this.food.fatMono,
+            fatPoly: this.food.fatPoly,
+            sodium: this.food.sodium,
+            cholesterol: this.food.cholesterol,
+            ingredients: this.ingredients,
             showSearchPage:false,
             showIngredientsModal: false,
             clickedFood:{},
             search: "",
         };
-
-        this.ingredients = [];
-
     }
-    componentDidMount(){
+    componentWillMount(){
         $.material.init();
     }
-    addRecipe() {
+    updateRecipe() {
 
         let _this = this;
 
@@ -118,6 +122,7 @@ class AddRecipe extends Component {
         }
 
         let recipe = {
+            id: this.state.id,
             name: this.state.name,
             amount: 100,
             unit: "g",
@@ -137,7 +142,7 @@ class AddRecipe extends Component {
             ingredients: ingredientsIdAndAmount,
         };
 
-        this.props.dispatch(addFood(recipe));
+        this.props.dispatch(updateFood(recipe));
     }
     handleChange(e) {
         switch(e.target.id) {
@@ -233,9 +238,9 @@ class AddRecipe extends Component {
         if (this.ingredients.length > 0) {
             mappedIngredients = this.ingredients.map(food =>
                 <div className="px-0 col-xs-12 f-size-2 mt-0_4" key={food._id} onClick={this.clickedFood.bind(this, food)}>
-                                <span className="c-orange col-xs-7 px-0">{food.name}</span>
-                                <span className="col-xs-4 px-0">{food.amount} x {food.unit}</span>
-                                <span id={food._id} className="col-xs-1 f-size-0_8 mt-0_4 px-0 glyphicon glyphicon-trash"></span>
+                    <span className="c-orange col-xs-7 px-0">{food.name}</span>
+                    <span className="col-xs-4 px-0">{food.amount} x {food.unit}</span>
+                    <span id={food._id} className="col-xs-1 f-size-0_8 mt-0_4 px-0 glyphicon glyphicon-trash"></span>
                 </div>);
         }
 
@@ -267,49 +272,49 @@ class AddRecipe extends Component {
                         {ingredientModal}
                     </div>
                 ) : (
+                    <div className="container-mob" style={{overflow:'hidden'}}>
 
-                <div className="container-mob" style={{overflow:'hidden'}}>
-                    {this.props.foodsNavBar}
+                        {this.props.backToFoodsNav}
 
-                    <div className="c-grey mt-1 f-size-1_5 pl-0_5">
-                        <p>RECIPE INFO</p>
-                    </div>
-                    <div className="container-mob-child">
-                        <div className="form-group required label-floating ">
-                            <label className="control-label">Name</label>
-                            <input id="name" type="text" value={this.state.name  || ''} onChange={this.handleChange.bind(this)} className="form-control"/>
+                        <div className="c-grey mt-1 f-size-1_5 pl-0_5">
+                            <p>RECIPE INFO</p>
                         </div>
-                        <div className="col-xs-6 form-group label-floating pl-0">
-                            <label className="control-label">Units</label>
-                            <select id="unit" value={this.state.unit  || ''} onChange={this.handleChange.bind(this)} className="form-control">
-                                {unitsArray}
-                            </select>
-                        </div>
-                        <div className="col-xs-2 form-group px-0">
-                            <AddUnitModal
-                                sendData={this.getUserAddedUnits.bind(this)}
-                            />
-                        </div>
+                        <div className="container-mob-child">
+                            <div className="form-group required label-floating ">
+                                <label className="control-label">Name</label>
+                                <input id="name" type="text" value={this.state.name  || ''} onChange={this.handleChange.bind(this)} className="form-control"/>
+                            </div>
+                            <div className="col-xs-6 form-group label-floating pl-0">
+                                <label className="control-label">Units</label>
+                                <select id="unit" value={this.state.unit  || ''} onChange={this.handleChange.bind(this)} className="form-control">
+                                    {unitsArray}
+                                </select>
+                            </div>
+                            <div className="col-xs-2 form-group px-0">
+                                <AddUnitModal
+                                    sendData={this.getUserAddedUnits.bind(this)}
+                                />
+                            </div>
 
+                        </div>
+                        <div className="c-grey mt-1 f-size-1_5 pl-0_5">
+                            <p>INGREDIENTS</p>
+                        </div>
+                        <div id="searchAddRecipe" className="searchBar form-group has-feedback mt-1 pr-0">
+                            <input type="text"  defaultValue="" onClick={this.handleClick.bind(this)} placeholder="Search for ingredients" className=""/>
+                            <i className="glyphicon glyphicon-search form-control-feedback"></i>
+                        </div>
+                        <div id="recipeIngredients" className="container-mob-child" onClick={this.removeIngredient.bind(this)}>
+                            {mappedIngredients}
+                        </div>
+                        <div onClick={this.props.onShowFoodsClick}>
+                            <button className="col-xs-12 btn btn-raised btn-success my-1 f-size-2" onClick={this.updateRecipe.bind(this)}> Update Recipe </button>
+                        </div>
                     </div>
-                    <div className="c-grey mt-1 f-size-1_5 pl-0_5">
-                        <p>INGREDIENTS</p>
-                    </div>
-                    <div id="searchAddRecipe" className="searchBar form-group has-feedback mt-1 pr-0">
-                        <input type="text"  defaultValue="" onClick={this.handleClick.bind(this)} placeholder="Search for ingredients" className=""/>
-                        <i className="glyphicon glyphicon-search form-control-feedback"></i>
-                    </div>
-                    <div id="recipeIngredients" className="container-mob-child" onClick={this.removeIngredient.bind(this)}>
-                        {mappedIngredients}
-                    </div>
-                    <div onClick={this.props.onShowFoodsClick}>
-                        <button className="col-xs-12 btn btn-raised btn-success my-1 f-size-2" onClick={this.addRecipe.bind(this)}> Save Recipe </button>
-                    </div>
-                </div>
                 )}
             </div>
         );
     };
 }
 
-export default AddRecipe;
+export default EditRecipe;

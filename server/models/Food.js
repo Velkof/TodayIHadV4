@@ -21,6 +21,10 @@ const FoodSchema = new Schema({
         type: Array,
         required: true
     },
+    ingredients: {
+        type: Array,
+        required: false,
+    },
     type: {
         type: String,
         required: true,

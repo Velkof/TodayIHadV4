@@ -14,6 +14,7 @@ class AddFood extends Component {
             amount: 0,
             unit:"g",
             type:"food",
+            ingredients: [],
             calories: null,
             protein:null,
             fat:null,
@@ -49,8 +50,6 @@ class AddFood extends Component {
 
         let times100g = chosenUnit[0].amountInGrams / 100;
 
-        console.log("rerere", chosenUnit, times100g);
-
         //calculate nutrient values per 100g
         function valuePer100g(value){
             if(value === null){
@@ -67,6 +66,7 @@ class AddFood extends Component {
             unit: this.state.unit,
             units: this.state.units,
             type: this.state.type,
+            ingredients: this.state.ingredients,
             calories: valuePer100g(this.state.calories),
             protein: valuePer100g(this.state.protein),
             fat: valuePer100g(this.state.fat),
@@ -78,7 +78,7 @@ class AddFood extends Component {
             fatPoly: valuePer100g(this.state.fatPoly),
             fatSat: valuePer100g(this.state.fatSat),
             sodium: valuePer100g(this.state.sodium),
-        }
+        };
 
 
         this.props.dispatch(addFood(food));

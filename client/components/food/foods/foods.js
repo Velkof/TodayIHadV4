@@ -14,7 +14,14 @@ export default class Foods extends React.Component {
     }
     sendClickedFoodToParent(value){
         this.props.sendData(value);
-        this.props.onFoodDetailsClick();
+
+        if(value.type === "food") {
+            this.props.onEditFoodClick();
+
+        } else {
+            this.props.onEditRecipeClick();
+        }
+
     }
     updateSearch(e) {
         this.setState({
@@ -40,7 +47,7 @@ export default class Foods extends React.Component {
                     <div className="col-xs-10 px-0">
                         <span className="f-size-2 c-green">{food.name}</span>
 
-                        <div className="mt-1 mb-0_5">Type: Food | Calories: {food.calories}</div>
+                        <div className="mt-1 mb-0_5">Type: {food.type} | Calories: {food.calories}</div>
                     </div>
                     <div className="col-xs-2">
                         <span className="f-size-2 glyphicon glyphicon-chevron-right" style={{float: "right", lineHeight:"2.5em", color:"darkgrey"}}></span>

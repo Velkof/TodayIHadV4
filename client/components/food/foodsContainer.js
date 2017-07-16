@@ -16,6 +16,7 @@ import Footer from "../footer/footer";
 import BackToFoodsNav from "./backToFoodsNav/backToFoodsNav";
 
 import {addFood, fetchFoods, updateFood, deleteFood} from "../../actions/foodActions";
+import EditRecipe from "./editRecipe/editRecipe";
 
 @connect((store) => {
     return {
@@ -31,6 +32,7 @@ export default class FoodsContainer extends React.Component {
         this.handleAddFoodClick = this.handleAddFoodClick.bind(this);
         this.handleAddRecipeClick = this.handleAddRecipeClick.bind(this);
         this.handleEditFoodClick = this.handleEditFoodClick.bind(this);
+        this.handleEditRecipeClick = this.handleEditRecipeClick.bind(this);
         this.handleFoodDetailsClick = this.handleFoodDetailsClick.bind(this);
         this.handleDeleteFoodClick = this.handleDeleteFoodClick.bind(this);
 
@@ -55,6 +57,9 @@ export default class FoodsContainer extends React.Component {
     }
     handleEditFoodClick() {
         this.setState({render:"editFood"});
+    }
+    handleEditRecipeClick() {
+        this.setState({render:"editRecipe"});
     }
     handleDeleteFoodClick() {
         this.setState({render:"deleteFood"});
@@ -84,13 +89,14 @@ export default class FoodsContainer extends React.Component {
                             foodId = {this.clickedFood._id}
                         />;
 
-         let backToFoodsNav = <BackToFoodsNav
+        let backToFoodsNav = <BackToFoodsNav
                                  onShowFoodsClick={this.handleShowFoodsClick}
-                             />
+                        />;
 
         if(this.state.render === "showFoods"){
             foodComponentsToRender = <Foods
                                         onEditFoodClick = {this.handleEditFoodClick}
+                                        onEditRecipeClick = {this.handleEditRecipeClick}
                                         onFoodDetailsClick = {this.handleFoodDetailsClick}
                                         onDeleteFoodClick = {this.handleDeleteFoodClick}
                                         sendData={this.getFoodFromClickedFood.bind(this)}
@@ -117,6 +123,14 @@ export default class FoodsContainer extends React.Component {
             foodComponentsToRender = <EditFood
                                         dispatch={this.props.dispatch}
                                         foodNavBar={foodNavBar}
+                                        backToFoodsNav = {backToFoodsNav}
+                                        onShowFoodsClick = {this.handleShowFoodsClick}
+                                        food = {this.clickedFood}
+                                    />
+        } else if (this.state.render === "editRecipe"){
+            foodComponentsToRender = <EditRecipe
+                                        dispatch={this.props.dispatch}
+                                        foods={this.props.foods}
                                         backToFoodsNav = {backToFoodsNav}
                                         onShowFoodsClick = {this.handleShowFoodsClick}
                                         food = {this.clickedFood}
