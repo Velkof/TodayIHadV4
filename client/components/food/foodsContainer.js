@@ -103,6 +103,7 @@ export default class FoodsContainer extends React.Component {
             foodComponentsToRender = <AddRecipe
                                         foods={this.props.foods}
                                         foodsNavBar={foodsNavBar}
+                                        dispatch={this.props.dispatch}
                                         onShowFoodsClick = {this.handleShowFoodsClick}
                                     />;
 

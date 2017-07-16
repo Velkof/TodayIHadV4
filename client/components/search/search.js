@@ -13,8 +13,8 @@ export default class Search extends React.Component {
             <div className="container-mob" style={{overflow:'hidden'}}>
                 <div className="px-0">
                     <div className="btn btn-default pl-0 f-size-1_5" onClick={this.props.onShowFoodsClick}>
-                        <span className="glyphicon glyphicon-chevron-left" style={{float:"left", lineHeight:"1.2em"}}></span>
-                        <span style={{float:"left",}}>Back to foods</span>
+                        <span className="glyphicon glyphicon-chevron-left" style={{lineHeight:"1.2em"}}></span>
+                        <span>foods</span>
                     </div>
                 </div>
                 <div id="searchAddRecipe" className="searchBar form-group has-feedback mt-1">

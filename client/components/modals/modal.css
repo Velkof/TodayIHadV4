@@ -14,15 +14,7 @@
     z-index: 9999;
     width: 100%;
     max-width: 540px!important;
-}
-
-#addUnitModal{
     margin-top: 10em;
-}
-
-#recipeIngredientsModal{
-    margin-top: 6em;
-    height: 50em;
 }
 
 #recipeIngredientsModal .modal-header{

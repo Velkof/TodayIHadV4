@@ -40,7 +40,48 @@ class AddFood extends Component {
     }
 
     addFood() {
-        this.props.dispatch(addFood(this.state));
+
+        let _this = this;
+
+        let chosenUnit = this.state.units.filter(function( obj ) {
+            return obj.name === _this.state.unit;
+        });
+
+        let times100g = chosenUnit[0].amountInGrams / 100;
+
+        console.log("rerere", chosenUnit, times100g);
+
+        //calculate nutrient values per 100g
+        function valuePer100g(value){
+            if(value === null){
+                return null;
+            }
+
+            return Math.round(value / times100g / _this.state.amount * 10) / 10;
+        }
+
+
+        let food = {
+            name: this.state.name,
+            amount: this.state.amount,
+            unit: this.state.unit,
+            units: this.state.units,
+            type: this.state.type,
+            calories: valuePer100g(this.state.calories),
+            protein: valuePer100g(this.state.protein),
+            fat: valuePer100g(this.state.fat),
+            carbs: valuePer100g(this.state.carbs),
+            sugar: valuePer100g(this.state.sugar),
+            fiber: valuePer100g(this.state.fiber),
+            cholesterol:valuePer100g(this.state.cholesterol),
+            fatMono: valuePer100g(this.state.fatMono),
+            fatPoly: valuePer100g(this.state.fatPoly),
+            fatSat: valuePer100g(this.state.fatSat),
+            sodium: valuePer100g(this.state.sodium),
+        }
+
+
+        this.props.dispatch(addFood(food));
     }
 
     getUserAddedUnits(val){
