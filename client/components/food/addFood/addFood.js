@@ -187,11 +187,11 @@ class AddFood extends Component {
                                 sendData={this.getUserAddedUnits.bind(this)}
                             />
                         </div>
-
-                        <div className="c-grey mt-1 f-size-1_5 pl-0_5 c-red-important-info">
-                                <p className="">All nutrient values below should be per: <strong> {this.state.amount} {this.state.unit}</strong>.</p>
-                        </div>
-
+                    </div>
+                    <div className="c-grey mt-1 f-size-1_5 pl-0_5 c-red-important-info">
+                            <p className="">All nutrient values below should be per: <strong> {this.state.amount} {this.state.unit}</strong>.</p>
+                    </div>
+                    <div className="container-mob-child">
                         <div className="col-xs-6 form-group required label-floating pl-0">
                             <label className="control-label">Calories</label>
                             <input id="calories" type="number" value={this.state.calories  || ''} onChange={this.handleChange.bind(this)} className="form-control"/>

@@ -107,6 +107,18 @@
     padding-right: 0!important;
 }
 
+.pr-0_3{
+    padding-right: 0.3em!important;
+}
+
+.pr-0_5{
+    padding-right: 0.5em!important;
+}
+
+.pr-1{
+    padding-right: 1em!important;
+}
+
 .pb-0{
     padding-bottom: 0!important;
 }

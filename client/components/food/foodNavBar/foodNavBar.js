@@ -39,20 +39,18 @@ class FoodNavBar extends Component {
 
 
         return (
-            <div>
-                <div className="container-mob-child px-0">
-                    <ul className="nav nav-tabs">
-                        <li className="col-xs-6 nav-item" onClick={action}>
-                            <a className={"nav-link "  + showEditFoodActive} href="javascript:void(0)">{typeLabel}</a>
-                            {/*<NavLink className={"nav-link "  + showEditFoodActive} to={'/foods/edit/' + foodId} >*/}
-                                {/*Edit food*/}
-                            {/*</NavLink>*/}
-                        </li>
-                        <li className="col-xs-6 nav-item" onClick={onDeleteFoodClick}>
-                            <a className={"nav-link " + showDeleteFoodActive} href="javascript:void(0)">Delete</a>
-                        </li>
-                    </ul>
-                </div>
+            <div className="container-mob-child px-0 col-xs-12 mb-1">
+                <ul className="nav nav-tabs">
+                    <li className="col-xs-6 nav-item" onClick={action}>
+                        <a className={"nav-link "  + showEditFoodActive} href="javascript:void(0)">{typeLabel}</a>
+                        {/*<NavLink className={"nav-link "  + showEditFoodActive} to={'/foods/edit/' + foodId} >*/}
+                            {/*Edit food*/}
+                        {/*</NavLink>*/}
+                    </li>
+                    <li className="col-xs-6 nav-item" onClick={onDeleteFoodClick}>
+                        <a className={"nav-link " + showDeleteFoodActive} href="javascript:void(0)">Delete</a>
+                    </li>
+                </ul>
             </div>
         );
     };

@@ -49,7 +49,7 @@ export default class Foods extends React.Component {
 
                         <div className="mt-1 mb-0_5">Type: {food.type} | Calories: {food.calories}</div>
                     </div>
-                    <div className="col-xs-2">
+                    <div className="col-xs-2 pr-0_3">
                         <span className="f-size-2 glyphicon glyphicon-chevron-right" style={{float: "right", lineHeight:"2.5em", color:"darkgrey"}}></span>
                     </div>
                 </div>

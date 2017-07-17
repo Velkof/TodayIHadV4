@@ -275,10 +275,7 @@ class EditRecipe extends Component {
 
                         {this.props.backToFoodsNav}
 
-                        <div style={{marginTop:"5em"}}>
-                            {this.props.foodNavBar}
-                        </div>
-
+                        {this.props.foodNavBar}
 
                         <div className="container-mob-child">
                             <div className="form-group required label-floating ">
