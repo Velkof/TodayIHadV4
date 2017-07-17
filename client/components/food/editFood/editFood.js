@@ -171,13 +171,12 @@ class EditFood extends Component {
                 <div className="container-mob" style={{overflow:'hidden'}}>
                     {this.props.backToFoodsNav}
 
-                    <div className="c-grey f-size-2 pl-0_5" style={{textAlign:"center"}}>
-                        <span>{this.props.food.name}</span>
+                    <div style={{marginTop:"5em"}}>
+                        {this.props.foodNavBar}
                     </div>
 
-                    {this.props.foodNavBar}
-
                     <div className="container-mob-child">
+
                         <div className="form-group required label-floating">
                             <label className="control-label">Name</label>
                             <input id="name" type="text" value={this.state.name  || ''} onChange={this.handleChange.bind(this)} className="form-control"/>

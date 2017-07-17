@@ -158,7 +158,16 @@ class AddRecipe extends Component {
     getUserAddedUnits(val){
         let _this = this;
 
-        this.userAddedUnits = this.state.units;
+        this.userAddedUnits = [{
+            name:"g",
+            amountInGrams: 1,
+        }, {
+            name:"oz",
+            amountInGrams: 28.35
+        }, {
+            name:"recipe",
+            amountInGrams: null,
+        }];
 
         val.forEach(function (unit) {
             _this.userAddedUnits.push(unit);

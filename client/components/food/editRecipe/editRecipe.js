@@ -163,7 +163,7 @@ class EditRecipe extends Component {
     getUserAddedUnits(val){
         let _this = this;
 
-        this.userAddedUnits = this.state.units;
+        this.userAddedUnits  = this.food.units.slice();
 
         val.forEach(function (unit) {
             _this.userAddedUnits.push(unit);
@@ -249,7 +249,6 @@ class EditRecipe extends Component {
             unitsArray.push(<option key={unitsArray.length} defaultValue={unit.amountInGrams}>{unit.name}</option>);
         });
 
-
         return (
             <div className="main-layout">
                 { this.state.showSearchPage ? (
@@ -276,9 +275,11 @@ class EditRecipe extends Component {
 
                         {this.props.backToFoodsNav}
 
-                        <div className="c-grey mt-1 f-size-1_5 pl-0_5">
-                            <p>RECIPE INFO</p>
+                        <div style={{marginTop:"5em"}}>
+                            {this.props.foodNavBar}
                         </div>
+
+
                         <div className="container-mob-child">
                             <div className="form-group required label-floating ">
                                 <label className="control-label">Name</label>
@@ -308,7 +309,9 @@ class EditRecipe extends Component {
                             {mappedIngredients}
                         </div>
                         <div onClick={this.props.onShowFoodsClick}>
-                            <button className="col-xs-12 btn btn-raised btn-success my-1 f-size-2" onClick={this.updateRecipe.bind(this)}> Update Recipe </button>
+                            <button className="col-xs-12 btn btn-raised btn-info my-1 f-size-2 mx-0"
+                                    onClick={this.updateRecipe.bind(this)}> Update Recipe
+                            </button>
                         </div>
                     </div>
                 )}

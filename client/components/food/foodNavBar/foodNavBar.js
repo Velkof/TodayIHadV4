@@ -9,42 +9,46 @@ class FoodNavBar extends Component {
         super(props)
     }
     render() {
-        const { onShowFoodsClick, onDeleteFoodClick, onFoodDetailsClick, onEditFoodClick, render, foodId} = this.props;
+        const { onDeleteFoodClick, onEditRecipeClick, onEditFoodClick, render, foodType} = this.props;
+
+        let typeLabel = "";
+        let action = null;
+
+        if(foodType === "food") {
+            typeLabel = "Edit food";
+            action = onEditFoodClick;
+        } else {
+            typeLabel = "Edit recipe";
+            action = onEditRecipeClick;
+        }
+
 
         let showEditFoodActive = "";
         let showDeleteFoodActive = "";
-        let showFoodDetailsActive = "";
 
         if (render === "editFood") {
             showEditFoodActive = "active";
             showDeleteFoodActive = "";
-            showFoodDetailsActive = "";
-
-        } else if (render === "foodDetails"){
-            showEditFoodActive = "";
+        } else if (render === "editRecipe") {
+            showEditFoodActive = "active";
             showDeleteFoodActive = "";
-            showFoodDetailsActive = "active";
-        }
-        else {
+        } else {
             showEditFoodActive = "";
             showDeleteFoodActive = "active";
-            showFoodDetailsActive = "";
         }
+
 
         return (
             <div>
                 <div className="container-mob-child px-0">
                     <ul className="nav nav-tabs">
-                        <li className="col-xs-4 nav-item" onClick={onFoodDetailsClick}>
-                            <a className={"nav-link " + showFoodDetailsActive} href="javascript:void(0)"> Food details </a>
-                        </li>
-                        <li className="col-xs-4 nav-item" onClick={onEditFoodClick}>
-                            <a className={"nav-link "  + showEditFoodActive} href="javascript:void(0)">Edit</a>
+                        <li className="col-xs-6 nav-item" onClick={action}>
+                            <a className={"nav-link "  + showEditFoodActive} href="javascript:void(0)">{typeLabel}</a>
                             {/*<NavLink className={"nav-link "  + showEditFoodActive} to={'/foods/edit/' + foodId} >*/}
                                 {/*Edit food*/}
                             {/*</NavLink>*/}
                         </li>
-                        <li className="col-xs-4 nav-item" onClick={onDeleteFoodClick}>
+                        <li className="col-xs-6 nav-item" onClick={onDeleteFoodClick}>
                             <a className={"nav-link " + showDeleteFoodActive} href="javascript:void(0)">Delete</a>
                         </li>
                     </ul>
