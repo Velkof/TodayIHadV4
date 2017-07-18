@@ -17,8 +17,6 @@ class EditRecipe extends Component {
 
         this.ingredients = [];
 
-        console.log("this.food.ingredients", this.food.ingredients);
-
         this.food.ingredients.forEach(function (ingredient) {
             let fullIngredient = _this.foods.filter(x => x._id === ingredient.id);
 
@@ -184,10 +182,13 @@ class EditRecipe extends Component {
         })
     }
     getIngredient(val){
-        this.setState({showIngredientsModal:false, showSearchPage:false,});
+        this.setState({showIngredientsModal:false, showSearchPage:false});
         this.ingredients.push(val);
 
         this.setState({ingredients: this.ingredients});
+    }
+    closeModal(){
+        this.setState({showIngredientsModal:false, showSearchPage:true});
     }
     removeIngredient(e){
         const _this = this;
@@ -195,8 +196,7 @@ class EditRecipe extends Component {
 
         if(e.target.id.length > 0) {
             for( let i=_this.ingredients.length-1; i>=0; i--) {
-                if( _this.ingredients[i]._id === e.target.id){
-                    e.target.parentNode.remove();
+                if( i + _this.ingredients[i]._id === e.target.id){
                     _this.ingredients.splice(i,1);
                 }
             }
@@ -232,17 +232,18 @@ class EditRecipe extends Component {
             ingredientModal = <IngredientModal
                 food = {this.state.clickedFood}
                 sendData={this.getIngredient.bind(this)}
+                closeModal = {this.closeModal.bind(this)}
             />;
         }
 
         let mappedIngredients = [];
 
         if (this.ingredients.length > 0) {
-            mappedIngredients = this.ingredients.map(food =>
-                <div className="px-0 col-xs-12 f-size-2 mt-0_4" key={food._id} onClick={this.clickedFood.bind(this, food)}>
+            mappedIngredients = this.ingredients.map((food, index) =>
+                <div className="px-0 col-xs-12 f-size-2 mt-0_4" key={index + food._id} onClick={this.clickedFood.bind(this, food)}>
                     <span className="c-orange col-xs-7 px-0">{food.name}</span>
                     <span className="col-xs-4 px-0">{food.amount} x {food.unit}</span>
-                    <span id={food._id} className="col-xs-1 f-size-0_8 mt-0_4 px-0 glyphicon glyphicon-trash"></span>
+                    <span id={index + food._id} className="col-xs-1 f-size-0_8 mt-0_4 px-0 glyphicon glyphicon-trash"></span>
                 </div>);
         }
 

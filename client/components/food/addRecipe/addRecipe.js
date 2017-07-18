@@ -71,9 +71,6 @@ class AddRecipe extends Component {
             cholesterol:null,
         };
 
-        console.log("Raraw", this.state.ingredients);
-
-
         this.state.ingredients.forEach(function (ingredient) {
 
             let unit = ingredient.units.filter(function (unit) {
@@ -96,8 +93,6 @@ class AddRecipe extends Component {
                 sodium: combinedIngredients.sodium + ingredient.sodium,
                 cholesterol: combinedIngredients.cholesterol + ingredient.cholesterol,
             };
-
-            console.log("ingredient", ingredient);
 
             let ingredientIdAndAmount = {
                 id: ingredient._id,
@@ -198,21 +193,23 @@ class AddRecipe extends Component {
         this.setState({ingredients: this.ingredients});
 
     }
+    closeModal(){
+        this.setState({showIngredientsModal:false, showSearchPage:true});
+    }
     removeIngredient(e){
         const _this = this;
         this.setState({ingredients: this.ingredients});
 
         if(e.target.id.length > 0) {
             for( let i=_this.ingredients.length-1; i>=0; i--) {
-                if( _this.ingredients[i]._id === e.target.id){
-                    e.target.parentNode.remove();
+                if( i + _this.ingredients[i]._id === e.target.id){
                     _this.ingredients.splice(i,1);
                 }
             }
         }
     }
     render() {
-        let mappedFoods;
+        let mappedFoods = [];
         let _this = this;
 
         let filteredFoods = this.props.foods.filter(
@@ -241,17 +238,18 @@ class AddRecipe extends Component {
             ingredientModal = <IngredientModal
                 food = {this.state.clickedFood}
                 sendData={this.getIngredient.bind(this)}
+                closeModal = {this.closeModal.bind(this)}
             />;
         }
 
         let mappedIngredients = [];
 
         if (this.ingredients.length > 0) {
-            mappedIngredients = this.ingredients.map(food =>
-                <div className="px-0 col-xs-12 f-size-2 mt-0_4" key={food._id} onClick={this.clickedFood.bind(this, food)}>
+            mappedIngredients = this.ingredients.map((food, index) =>
+                <div className="px-0 col-xs-12 f-size-2 mt-0_4" key={index + food._id} onClick={this.clickedFood.bind(this, food)}>
                                 <span className="c-orange col-xs-7 px-0">{food.name}</span>
                                 <span className="col-xs-4 px-0">{food.amount} x {food.unit}</span>
-                                <span id={food._id} className="col-xs-1 f-size-0_8 mt-0_4 px-0 glyphicon glyphicon-trash"></span>
+                                <span id={index + food._id} className="col-xs-1 f-size-0_8 mt-0_4 px-0 glyphicon glyphicon-trash"></span>
                 </div>);
         }
 

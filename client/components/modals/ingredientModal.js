@@ -14,12 +14,8 @@ const hide = {
 export default class IngredientModal extends React.Component {
     constructor(props) {
         super(props);
-
-        console.log("this.props", this.props);
-
         this.toggle = this.toggle.bind(this);
 
-        //we set unit and amount to these values as nutrient values are calculated per 100g
         this.props.food.unit = "g";
         this.props.food.amount = 100;
 
@@ -34,6 +30,9 @@ export default class IngredientModal extends React.Component {
     }
     sendIngredientToParent(){
         this.props.sendData(this.state.food);
+    }
+    closeModal(e){
+        this.props.closeModal();
     }
     handleChange(e){
 
@@ -86,7 +85,6 @@ export default class IngredientModal extends React.Component {
                 cholesterol: valuesToSelectedUnitAndAmount(this.props.food.cholesterol),
             }
         });
-        console.log("dsds", this.state);
 
     }
     toggle(e) {
@@ -102,7 +100,7 @@ export default class IngredientModal extends React.Component {
         const modal = <div className="modal modal-backdrop mr-1" style={this.state.toggle ? display : hide}>
             <div id="recipeIngredientsModal" className="modal-content">
                 <div className="modal-header">
-                    <button type="button" className="closeBtn" onClick={this.toggle}>&times;</button>
+                    <button type="button" className="closeBtn" onClick={this.closeModal.bind(this)}>&times;</button>
                     <h4 className="modal-title" style={{paddingLeft:"1.3em"}}>{"Ingredient - " + this.state.food.name || ''}</h4>
                 </div>
                 <div className="modal-body">
