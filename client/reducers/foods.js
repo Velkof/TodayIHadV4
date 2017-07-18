@@ -30,9 +30,10 @@ export default function reducer(state={
             }
         }
         case "UPDATE_FOOD": {
-            const { id, text } = action.payload;
+            const { id } = action.payload;
             const newFoods = [...state.foods];
-            const foodToUpdate = newFoods.findIndex(food => food.id === id);
+            // const newFoods = state.foods.map(a => Object.assign({}, a));
+            const foodToUpdate = newFoods.findIndex(food => food._id === id);
             newFoods[foodToUpdate] = action.payload;
 
             return {
@@ -43,7 +44,8 @@ export default function reducer(state={
         case "DELETE_FOOD": {
             return {
                 ...state,
-                foods: state.foods.filter(food => food.id !== action.payload),
+
+                foods: state.foods.filter(food => food._id !== action.payload),
             }
         }
     }

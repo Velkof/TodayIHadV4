@@ -109,8 +109,9 @@ router.route('/:id')
         Food.remove({
             _id: req.params.id
         }, function(err, food) {
-            if (err)
+            if (err) {
                 res.send(err);
+            }
             res.json({ message: 'Successfully deleted' });
         });
 

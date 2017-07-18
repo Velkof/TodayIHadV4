@@ -37,12 +37,15 @@ export default class FoodsContainer extends React.Component {
         this.state = {
             render: "showFoods",
         };
-        this.clickedFood = {
-            _id: "",
-        };
+        this.clickedFood = {};
     }
     handleShowFoodsClick() {
+        this.props.dispatch(fetchFoods());
         this.setState({render:"showFoods"});
+    }
+    shouldComponentUpdate(nextProps){
+        this.props = nextProps;
+        return true;
     }
     handleAddFoodClick() {
         this.setState({render:"addFood"});
@@ -138,7 +141,6 @@ export default class FoodsContainer extends React.Component {
                                         food = {this.clickedFood}
                                     />
         }
-
         return (
                 <div>
                     {foodComponentsToRender}
