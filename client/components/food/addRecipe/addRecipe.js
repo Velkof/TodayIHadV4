@@ -139,18 +139,8 @@ class AddRecipe extends Component {
 
         this.props.dispatch(addFood(recipe));
     }
-    handleChange(e) {
-        switch(e.target.id) {
-            case "name":
-                this.setState({name: e.target.value});
-                break;
-            case "unit":
-                this.setState({unit: e.target.value});
-                break;
-            default:
-                break;
-        }
-    }
+    handleChange = (e) => this.setState({[e.target.id]: e.target.value});
+
     handleClick(e) {
         let showSearchPage = !this.state.showSearchPage;
         this.setState({showSearchPage:showSearchPage});

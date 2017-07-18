@@ -29,18 +29,8 @@ export default class AddUnitModal extends React.Component {
     componentDidMount(){
         $.material.init();
     }
-    handleChange(e){
-        switch(e.target.id){
-            case "name":
-                this.setState({name:e.target.value});
-                break;
-            case "amountInGrams":
-                this.setState({amountInGrams:e.target.value});
-                break;
-            default:
-                break;
-        }
-    }
+    handleChange = (e) => this.setState({[e.target.id]: e.target.value});
+
     handleAddFoodClick(e){
         let unit = {
             name: this.state.name,

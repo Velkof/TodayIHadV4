@@ -110,54 +110,7 @@ class EditFood extends Component {
 
         this.setState({units:this.userAddedUnits, unit:lastUnitInArray});
     }
-    handleChange(e) {
-        switch(e.target.id) {
-            case "name":
-                this.setState({name: e.target.value});
-                break;
-            case "amount":
-                this.setState({amount: e.target.value});
-                break;
-            case "unit":
-                this.setState({unit: e.target.value});
-                break;
-            case "calories":
-                this.setState({calories: e.target.value});
-                break;
-            case "protein":
-                this.setState({protein: e.target.value});
-                break;
-            case "fat":
-                this.setState({fat: e.target.value});
-                break;
-            case "carbs":
-                this.setState({carbs: e.target.value});
-                break;
-            case "sugar":
-                this.setState({sugar: e.target.value});
-                break;
-            case "fiber":
-                this.setState({fiber: e.target.value});
-                break;
-            case "fatMono":
-                this.setState({fatMono: e.target.value});
-                break;
-            case "fatPoly":
-                this.setState({fatPoly: e.target.value});
-                break;
-            case "fatSat":
-                this.setState({fatSat: e.target.value});
-                break;
-            case "sodium":
-                this.setState({sodium: e.target.value});
-                break;
-            case "cholesterol":
-                this.setState({cholesterol: e.target.value});
-                break;
-            default:
-                break;
-        }
-    }
+    handleChange = (e) => this.setState({[e.target.id]: e.target.value});
 
     render() {
 
