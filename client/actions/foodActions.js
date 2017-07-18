@@ -17,7 +17,6 @@ export function fetchFoods() {
                 }
             })
         .then((response) => {
-
             dispatch({type: "FETCH_FOODS_FULFILLED", payload: response.data})
         })
         .catch((err) => {
@@ -55,6 +54,7 @@ export function addFood( data) {
             }
         })
         .then(function (response) {
+
             dispatch({type: "ADD_FOOD_FULFILLED", payload: response.data})
         })
         .catch(function (err) {
@@ -111,11 +111,11 @@ export function deleteFood(id) {
                 'Authorization': 'Bearer ' + token,
             }
         })
-            .then(function (response) {
-                dispatch({type: "DELETE_FOOD_FULFILLED", payload: response.data})
-            })
-            .catch(function (err) {
-                dispatch({type: "DELETE_FOOD_REJECTED", payload: err})
-            });
+        .then(function (response) {
+            dispatch({type: "DELETE_FOOD_FULFILLED", payload: response.data})
+        })
+        .catch(function (err) {
+            dispatch({type: "DELETE_FOOD_REJECTED", payload: err})
+        });
     }
 }

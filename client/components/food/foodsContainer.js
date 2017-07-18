@@ -40,12 +40,7 @@ export default class FoodsContainer extends React.Component {
         this.clickedFood = {};
     }
     handleShowFoodsClick() {
-        this.props.dispatch(fetchFoods());
         this.setState({render:"showFoods"});
-    }
-    shouldComponentUpdate(nextProps){
-        this.props = nextProps;
-        return true;
     }
     handleAddFoodClick() {
         this.setState({render:"addFood"});

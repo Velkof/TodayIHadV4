@@ -45,7 +45,7 @@ router.route('/')
         food.save(function(err) {
             if (err)
                 res.send(err);
-            res.json({ message: 'Food created!' });
+            res.json( food );
         });
 
     }).get(authCheck, function(req, res) {
@@ -101,7 +101,7 @@ router.route('/:id')
                 if (err)
                     res.send(err);
 
-                res.json({ message: 'Food updated!' });
+                res.json(food);
             });
         });
     }).delete(authCheck, function(req, res) {

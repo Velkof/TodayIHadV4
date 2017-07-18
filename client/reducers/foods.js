@@ -23,17 +23,17 @@ export default function reducer(state={
                 foods: action.payload,
             };
         }
-        case "ADD_FOOD": {
+        case "ADD_FOOD_FULFILLED": {
             return {
                 ...state,
                 foods: [...state.foods, action.payload],
             }
         }
-        case "UPDATE_FOOD": {
-            const { id } = action.payload;
+        case "UPDATE_FOOD_FULFILLED": {
+            const { _id } = action.payload;
             const newFoods = [...state.foods];
             // const newFoods = state.foods.map(a => Object.assign({}, a));
-            const foodToUpdate = newFoods.findIndex(food => food._id === id);
+            const foodToUpdate = newFoods.findIndex(food => food._id === _id);
             newFoods[foodToUpdate] = action.payload;
 
             return {
