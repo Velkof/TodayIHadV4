@@ -135,6 +135,9 @@
     padding-left: 1em!important;
 }
 
+.pl-1_5{
+    padding-left: 1.5em!important;
+}
 .pl-2{
     padding-left: 2em!important;
 }
@@ -201,6 +204,14 @@
 
 .mb-1{
     margin-bottom: 1em!important;
+}
+
+.mb-2{
+    margin-bottom: 2em!important;
+}
+
+.mb-3{
+    margin-bottom: 3em!important;
 }
 
 .ml-0{

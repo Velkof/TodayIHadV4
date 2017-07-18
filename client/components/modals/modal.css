@@ -25,3 +25,7 @@
 #recipeIngredientsModal .modal-body{
     padding-top: 0!important;
 }
+
+#foodInfoTable tr{
+    border-bottom: 1px solid lightgrey;
+}

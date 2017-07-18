@@ -17,6 +17,8 @@ class EditRecipe extends Component {
 
         this.ingredients = [];
 
+        console.log("this.food.ingredients", this.food.ingredients);
+
         this.food.ingredients.forEach(function (ingredient) {
             let fullIngredient = _this.foods.filter(x => x._id === ingredient.id);
 

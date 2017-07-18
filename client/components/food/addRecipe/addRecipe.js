@@ -71,6 +71,9 @@ class AddRecipe extends Component {
             cholesterol:null,
         };
 
+        console.log("Raraw", this.state.ingredients);
+
+
         this.state.ingredients.forEach(function (ingredient) {
 
             let unit = ingredient.units.filter(function (unit) {
@@ -93,6 +96,8 @@ class AddRecipe extends Component {
                 sodium: combinedIngredients.sodium + ingredient.sodium,
                 cholesterol: combinedIngredients.cholesterol + ingredient.cholesterol,
             };
+
+            console.log("ingredient", ingredient);
 
             let ingredientIdAndAmount = {
                 id: ingredient._id,
@@ -186,10 +191,12 @@ class AddRecipe extends Component {
         })
     }
     getIngredient(val){
+
         this.setState({showIngredientsModal:false, showSearchPage:false,});
         this.ingredients.push(val);
 
         this.setState({ingredients: this.ingredients});
+
     }
     removeIngredient(e){
         const _this = this;

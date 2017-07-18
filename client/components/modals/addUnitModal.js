@@ -2,7 +2,7 @@
  * Created by Marjan on 11-Jul-17.
  */
 import React, {Component} from 'react';
-import styles from './modal';
+import styles from './modal.css';
 
 const display = {
     display: 'block'

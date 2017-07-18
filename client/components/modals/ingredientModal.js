@@ -2,7 +2,7 @@
  * Created by Marjan on 13-Jul-17.
  */
 import React, {Component} from 'react';
-import styles from './modal';
+import styles from './modal.css';
 
 const display = {
     display: 'block'
@@ -34,7 +34,6 @@ export default class IngredientModal extends React.Component {
     }
     sendIngredientToParent(){
         this.props.sendData(this.state.food);
-
     }
     handleChange(e){
 
@@ -42,7 +41,7 @@ export default class IngredientModal extends React.Component {
         let amount;
         let unit;
         let times100g;
-        this.food = this.state.food;
+        this.food = this.props.food;
 
         if(e.target.id === "unit") {
             unit = _this.state.food.units.filter(function ( unit ) {
@@ -69,7 +68,7 @@ export default class IngredientModal extends React.Component {
 
         this.setState({
             food:{
-                id: this.food._id,
+                _id: this.food._id,
                 name: this.food.name,
                 unit: unit.name,
                 amount: amount,
@@ -87,6 +86,8 @@ export default class IngredientModal extends React.Component {
                 cholesterol: valuesToSelectedUnitAndAmount(this.props.food.cholesterol),
             }
         });
+        console.log("dsds", this.state);
+
     }
     toggle(e) {
         this.setState(prevState => ({
@@ -102,21 +103,21 @@ export default class IngredientModal extends React.Component {
             <div id="recipeIngredientsModal" className="modal-content">
                 <div className="modal-header">
                     <button type="button" className="closeBtn" onClick={this.toggle}>&times;</button>
-                    <h4 className="modal-title">Select ingredient amount and unit</h4>
+                    <h4 className="modal-title" style={{paddingLeft:"1.3em"}}>{"Ingredient - " + this.state.food.name || ''}</h4>
                 </div>
                 <div className="modal-body">
-                    <div className="col-xs-5 form-group required label-floating pl-0">
+                    <div className="form-group required label-floating pl-0">
                         <label className="control-label">Amount</label>
                         <input id="amount" type="number" value={this.state.food.amount  || ''} onChange={this.handleChange.bind(this)} className="form-control"/>
                     </div>
-                    <div className="col-xs-5 form-group required label-floating pl-0">
+                    <div className="form-group required label-floating pl-0 mb-1">
                         <label className="control-label">Select Unit</label>
                         <select id="unit" value={this.state.food.unit  || ''} onChange={this.handleChange.bind(this)} className="form-control">
                             {unitsArray}
                         </select>
                     </div>
-                    <table className="col-xs-12 f-size-1_7" id="">
-                        <tbody><tr><th>Info</th></tr>
+                    <table id="foodInfoTable" className="col-xs-12 f-size-1_7">
+                        <tbody><tr><th>Info</th><th></th><th></th><th></th></tr>
                         <tr>
                             <td className="">Fat: </td>
                             <td className=""><span id="">{this.state.food.fat}</span> g &nbsp;</td>
@@ -124,21 +125,21 @@ export default class IngredientModal extends React.Component {
                             <td className=""><span id="">{this.state.food.protein}</span> g &nbsp;</td>
                         </tr>
                         <tr>
-                            <td className="">Sat. </td>
+                            <td className="pl-1">Sat. </td>
                             <td className=""><span id="">{this.state.food.fatSat}</span> g &nbsp;</td>
                             <td className=""> Carb: </td>
                             <td className=""><span id="">{this.state.food.carbs}</span> g &nbsp;</td>
                         </tr>
                         <tr>
-                            <td className="">Mono. </td>
+                            <td className="pl-1">Mono. </td>
                             <td className=""> <span id="">{this.state.food.fatMono}</span> g &nbsp;</td>
-                            <td className="">Fiber: </td>
+                            <td className="pl-1">Fiber: </td>
                             <td className=""><span id="">{this.state.food.fiber}</span> g &nbsp;</td>
                         </tr>
                         <tr>
-                            <td className="">Poly.</td>
+                            <td className="pl-1">Poly.</td>
                             <td className=""><span id="">{this.state.food.fatPoly}</span> g &nbsp;</td>
-                            <td className="">Sugar:</td>
+                            <td className="pl-1">Sugar:</td>
                             <td className=""><span id="">{this.state.food.sugar}</span> g &nbsp;</td>
                         </tr>
                         <tr>
@@ -149,7 +150,7 @@ export default class IngredientModal extends React.Component {
                         </tr>
                         </tbody>
                     </table>
-                    <div id="" className="col-xs-12"><h3>{this.state.food.calories}</h3> calories</div>
+                    <div id="" className="col-xs-12" style={{textAlign:"center"}}><h3>{this.state.food.calories} calories</h3></div>
 
                 </div>
                 <div className="modal-footer full-width" style={{clear:"both"}} onClick={this.sendIngredientToParent.bind(this)}>
