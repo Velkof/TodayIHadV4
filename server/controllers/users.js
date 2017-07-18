@@ -28,6 +28,9 @@ router.route('/')
                     user.name = req.body.name;
                     user.email = req.body.email;
                     user.role = "user";
+                    user.createdAt = new Date();
+                    user.updatedAt = new Date();
+
                     user.save(function(err) {
                         if (err)
                             res.send(err);
@@ -46,5 +49,49 @@ router.route('/')
             res.json(users);
         });
 });
+
+router.route('/:id')
+    .get(authCheck, function(req, res) {
+
+        User.findOne({_id: req.params.id}, function (err, user) {
+
+            if (err) {
+                res.send(err);
+            }
+
+            res.json(user);
+        });
+    }).put(authCheck, function(req, res) {
+
+        User.findOne({_id: req.params.id}, function (err, user) {
+
+            if (err) {
+                res.send(err);
+            }
+
+            user.name = req.body.name;
+            user.email = req.body.email;
+            user.role = req.body.role;
+            user.updatedAt = new Date();
+
+            user.save(function(err) {
+                if (err)
+                    res.send(err);
+
+                res.json(user);
+            });
+        });
+
+    }).delete(authCheck, function(req, res) {
+
+        User.remove({
+            _id: req.params.id
+        }, function(err, user) {
+            if (err) {
+                res.send(err);
+            }
+            res.json({ message: 'Successfully deleted' });
+        });
+    });
 
 module.exports = router;
