@@ -3,5 +3,7 @@
  */
 const User = require('./User');
 const Food = require('./Food');
+const LoggedFood = require('./LoggedFood');
 
-module.exports = Object.assign({}, User, Food);
+
+module.exports = Object.assign({}, User, Food, LoggedFood);
