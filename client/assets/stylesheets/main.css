@@ -205,23 +205,6 @@ body, html{
 /*}*/
 
 
-.divlevel1{
-    width:20em!important;
-    height:20em!important;
-    background-color: red!important;
-}
-
-.divlevel2{
-    width:10em!important;
-    height:10em!important;
-    background-color: blue!important;
-}
-
-.divlevel3{
-    width:5em!important;
-    height:5em!important;
-    background-color: green!important;
-}
 /* CONTAINERS */
 /* main container that will make our app fit as mobile size and centered on big screens */
 .main-layout{
@@ -259,18 +242,6 @@ body, html{
     }
 }
 
-.line-in-middle {
-    color: red;
-    width:inherit;
-    height:20em;
-    background: linear-gradient(to right,
-    transparent 0%,
-    transparent calc(50% - 0.81px),
-    black calc(50% - 0.8px),
-    black calc(50% + 0.8px),
-    transparent calc(50% + 0.81px),
-    transparent 100%);
-}
 
 .cursor-pointer {
     cursor: pointer;
@@ -280,7 +251,6 @@ body, html{
     content:" *";
     color:red;
 }
-
 
 #searchBtn {
     position: fixed;

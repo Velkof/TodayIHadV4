@@ -11,7 +11,7 @@ const hide = {
     display: 'none'
 };
 
-export default class IngredientModal extends React.Component {
+export default class FoodModal extends React.Component {
     constructor(props) {
         super(props);
         this.toggle = this.toggle.bind(this);
@@ -28,7 +28,7 @@ export default class IngredientModal extends React.Component {
     componentDidMount(){
         $.material.init();
     }
-    sendIngredientToParent(){
+    sendFoodToParent(){
         this.props.sendData(this.state.food);
     }
     closeModal(e){
@@ -93,15 +93,26 @@ export default class IngredientModal extends React.Component {
         }));
     }
     render() {
+        let buttonLabel = "";
+        let title = "";
+        if(this.props.calledFrom === "dashboard"){
+            title = "Food - " + this.state.food.name;
+            buttonLabel = "Log Food";
+        } else {
+            title = "Ingredient - " + this.state.food.name;
+            buttonLabel = "Save Ingredient";
+        }
+
         let unitsArray = [];
         this.state.food.units.forEach(function (unit) {
             unitsArray.push(<option key={unitsArray.length} defaultValue={unit.amountInGrams}>{unit.name}</option>);
         });
+
         const modal = <div className="modal modal-backdrop mr-1" style={this.state.toggle ? display : hide}>
-            <div id="recipeIngredientsModal" className="modal-content">
+            <div id="foodModal" className="modal-content">
                 <div className="modal-header">
                     <button type="button" className="closeBtn" onClick={this.closeModal.bind(this)}>&times;</button>
-                    <h4 className="modal-title" style={{paddingLeft:"1.3em"}}>{"Ingredient - " + this.state.food.name || ''}</h4>
+                    <h4 className="modal-title" style={{paddingLeft:"1.3em"}}>{title  || ''}</h4>
                 </div>
                 <div className="modal-body">
                     <div className="form-group required label-floating pl-0">
@@ -151,8 +162,8 @@ export default class IngredientModal extends React.Component {
                     <div id="" className="col-xs-12" style={{textAlign:"center"}}><h3>{this.state.food.calories} calories</h3></div>
 
                 </div>
-                <div className="modal-footer full-width" style={{clear:"both"}} onClick={this.sendIngredientToParent.bind(this)}>
-                    <a className="btn btn-raised btn-success full-width" >Save ingredient</a>
+                <div className="modal-footer full-width" style={{clear:"both"}} onClick={this.sendFoodToParent.bind(this)}>
+                    <a className="btn btn-raised btn-success full-width" >{buttonLabel}</a>
                 </div>
             </div>
         </div>;

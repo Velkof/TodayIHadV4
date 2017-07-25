@@ -5,7 +5,7 @@ import React, {Component} from 'react';
 import styles from "../addRecipe/addRecipe.css";
 import {updateFood} from "../../../actions/foodActions";
 import Search from "../../search/search";
-import IngredientModal from "../../modals/ingredientModal";
+import FoodModal from "../../modals/foodModal";
 import AddUnitModal from "../../modals/addUnitModal";
 
 class EditRecipe extends Component {
@@ -46,7 +46,7 @@ class EditRecipe extends Component {
             cholesterol: this.food.cholesterol,
             ingredients: this.ingredients,
             showSearchPage:false,
-            showIngredientsModal: false,
+            showFoodModal: false,
             clickedFood:{},
             search: "",
         };
@@ -164,7 +164,7 @@ class EditRecipe extends Component {
         this.setState({units:this.userAddedUnits, unit:lastUnitInArray});
     }
     clickedFood(food) {
-        this.setState({clickedFood: food, showIngredientsModal:true});
+        this.setState({clickedFood: food, showFoodModal:true});
     }
     updateSearch(e) {
         this.setState({
@@ -172,13 +172,13 @@ class EditRecipe extends Component {
         })
     }
     getIngredient(val){
-        this.setState({showIngredientsModal:false, showSearchPage:false});
+        this.setState({showFoodModal:false, showSearchPage:false});
         this.ingredients.push(val);
 
         this.setState({ingredients: this.ingredients});
     }
     closeModal(){
-        this.setState({showIngredientsModal:false, showSearchPage:true});
+        this.setState({showFoodModal:false, showSearchPage:true});
     }
     removeIngredient(e){
         const _this = this;
@@ -198,7 +198,7 @@ class EditRecipe extends Component {
 
         let filteredFoods = this.props.foods.filter(
             (food) => {
-                return food.name.indexOf(this.state.search) !== -1;
+                return food.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1;
             }
         );
 
@@ -216,13 +216,14 @@ class EditRecipe extends Component {
             mappedFoods = <p>No ingredients with that name</p>;
         }
 
-        let ingredientModal;
+        let foodModal;
 
-        if (this.state.showIngredientsModal) {
-            ingredientModal = <IngredientModal
+        if (this.state.showFoodModal) {
+            foodModal = <FoodModal
                 food = {this.state.clickedFood}
                 sendData={this.getIngredient.bind(this)}
                 closeModal = {this.closeModal.bind(this)}
+                calledFrom = "recipe"
             />;
         }
 
@@ -261,7 +262,7 @@ class EditRecipe extends Component {
                                 <ul className="pl-0">{mappedFoods}</ul>
                             </div>
                         </div>
-                        {ingredientModal}
+                        {foodModal}
                     </div>
                 ) : (
                     <div className="container-mob" style={{overflow:'hidden'}}>

@@ -34,6 +34,7 @@ export function addLoggedFood( data) {
             name: data.name,
             amount: data.amount,
             unit: data.unit,
+            units: data.units,
             calories: data.calories,
             protein: data.protein,
             fat: data.fat,
@@ -70,6 +71,7 @@ export function updateLoggedFood( data) {
             name: data.name,
             amount: data.amount,
             unit: data.unit,
+            units: data.units,
             calories: data.calories,
             protein: data.protein,
             fat: data.fat,
@@ -86,12 +88,12 @@ export function updateLoggedFood( data) {
                 'Authorization': 'Bearer ' + token,
             }
         })
-            .then(function (response) {
-                dispatch({type: "UPDATE_LOGGED_FOOD_FULFILLED", payload: response.data})
-            })
-            .catch(function (err) {
-                dispatch({type: "UPDATE_LOGGED_FOOD_REJECTED", payload: err})
-            });
+        .then(function (response) {
+            dispatch({type: "UPDATE_LOGGED_FOOD_FULFILLED", payload: response.data})
+        })
+        .catch(function (err) {
+            dispatch({type: "UPDATE_LOGGED_FOOD_REJECTED", payload: err})
+        });
     }
 }
 

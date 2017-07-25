@@ -25,6 +25,7 @@ router.route('/')
         loggedFood.name = req.body.name;
         loggedFood.amount = req.body.amount;
         loggedFood.unit = req.body.unit;
+        loggedFood.units = req.body.units;
         loggedFood.calories = req.body.calories;
         loggedFood.protein = req.body.protein;
         loggedFood.fat = req.body.fat;
@@ -78,6 +79,7 @@ router.route('/:id')
         loggedFood.name = req.body.name;
         loggedFood.amount = req.body.amount;
         loggedFood.unit = req.body.unit;
+        loggedFood.units = req.body.units;
         loggedFood.calories = req.body.calories;
         loggedFood.protein = req.body.protein;
         loggedFood.fat = req.body.fat;
@@ -110,6 +112,5 @@ router.route('/:id')
     });
 
 });
-
 
 module.exports = router;

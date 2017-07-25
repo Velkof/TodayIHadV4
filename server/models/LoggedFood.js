@@ -17,6 +17,10 @@ const LoggedFoodSchema = new Schema({
         type: String,
         required: true
     },
+    units: {
+        type: Array,
+        required: true
+    },
     calories:  {
         type: Number,
         required: true

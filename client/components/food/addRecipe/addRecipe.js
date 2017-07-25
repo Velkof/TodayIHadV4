@@ -4,8 +4,7 @@
 import React, {Component} from 'react';
 import styles from "./addRecipe.css";
 import {addFood} from "../../../actions/foodActions";
-import Search from "../../search/search";
-import IngredientModal from "../../modals/ingredientModal";
+import FoodModal from "../../modals/foodModal";
 import AddUnitModal from "../../modals/addUnitModal";
 
 class AddRecipe extends Component {
@@ -39,7 +38,7 @@ class AddRecipe extends Component {
             cholesterol:null,
             ingredients: [],
             showSearchPage:false,
-            showIngredientsModal: false,
+            showFoodModal: false,
             clickedFood:{},
             search: "",
         };
@@ -168,23 +167,23 @@ class AddRecipe extends Component {
         this.setState({units:this.userAddedUnits, unit:lastUnitInArray});
     }
     clickedFood(food) {
-        this.setState({clickedFood: food, showIngredientsModal:true});
+        this.setState({clickedFood: food, showFoodModal:true});
     }
     updateSearch(e) {
         this.setState({
             search: e.target.value
         })
     }
-    getIngredient(val){
+    getFood(val){
 
-        this.setState({showIngredientsModal:false, showSearchPage:false,});
+        this.setState({showFoodModal:false, showSearchPage:false,});
         this.ingredients.push(val);
 
         this.setState({ingredients: this.ingredients});
 
     }
     closeModal(){
-        this.setState({showIngredientsModal:false, showSearchPage:true});
+        this.setState({showFoodModal:false, showSearchPage:true});
     }
     removeIngredient(e){
         const _this = this;
@@ -204,7 +203,7 @@ class AddRecipe extends Component {
 
         let filteredFoods = this.props.foods.filter(
             (food) => {
-                return food.name.indexOf(this.state.search) !== -1;
+                return food.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1;
             }
         );
 
@@ -222,13 +221,14 @@ class AddRecipe extends Component {
             mappedFoods = <p>No ingredients with that name</p>;
         }
 
-        let ingredientModal;
+        let foodModal;
 
-        if (this.state.showIngredientsModal) {
-            ingredientModal = <IngredientModal
+        if (this.state.showFoodModal) {
+            foodModal = <FoodModal
                 food = {this.state.clickedFood}
-                sendData={this.getIngredient.bind(this)}
+                sendData={this.getFood.bind(this)}
                 closeModal = {this.closeModal.bind(this)}
+                calledFrom = "recipe"
             />;
         }
 
@@ -268,7 +268,7 @@ class AddRecipe extends Component {
                                 <ul className="pl-0">{mappedFoods}</ul>
                             </div>
                         </div>
-                        {ingredientModal}
+                        {foodModal}
                     </div>
                 ) : (
 
@@ -300,7 +300,7 @@ class AddRecipe extends Component {
                         <p>INGREDIENTS</p>
                     </div>
                     <div id="searchAddRecipe" className="searchBar form-group has-feedback mt-1 pr-0">
-                        <input type="text"  defaultValue="" onClick={this.handleClick.bind(this)} placeholder="Search for ingredients" className=""/>
+                        <input type="text" onClick={this.handleClick.bind(this)} placeholder="Search for ingredients"/>
                         <i className="glyphicon glyphicon-search form-control-feedback"></i>
                     </div>
                     <div id="recipeIngredients" className="container-mob-child" onClick={this.removeIngredient.bind(this)}>

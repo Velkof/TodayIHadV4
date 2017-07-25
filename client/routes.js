@@ -6,10 +6,9 @@ import store from "./store";
 
 import Header from './components/header/header';
 import {Provider} from "react-redux";
-import Dashboard from "./containers/dashboard/dashboard";
+import DashboardContainer from "./components/dashboard/dashboardContainer";
 import Foods from "./components/food/foods/foods";
 import EditFood from "./components/food/editFood/editFood";
-import FoodDetails from "./components/food/foodDetails/foodDetails";
 import AddFood from "./components/food/addFood/addFood";
 import DeleteFood from "./components/food/deleteFood/deleteFood";
 import Homepage from "./containers/homepage/homepage";
@@ -34,15 +33,14 @@ export const Routes = () => {
                 <Header/>
                 <Route exact path="/homepage"  render={() => ( requireAuth() ? ( <Redirect to="/"/>) : ( <Homepage />) )}/>
 
-                <Route exact path="/"  render={() => ( requireAuth() ? ( <Dashboard />) : ( <Redirect to="/homepage"/>) )}/>
-                <Route exact path="/dashboard"  render={() => ( requireAuth() ? ( <Dashboard />) : ( <Redirect to="/homepage"/>) )}/>
+                <Route exact path="/"  render={() => ( requireAuth() ? ( <DashboardContainer />) : ( <Redirect to="/homepage"/>) )}/>
+                <Route exact path="/dashboard"  render={() => ( requireAuth() ? ( <DashboardContainer />) : ( <Redirect to="/homepage"/>) )}/>
 
                 <Route exact path="/foods"  render={() => ( requireAuth() ? ( <FoodsContainer/>) : ( <Redirect to="/homepage"/>) )}/>
                 {/*<Route exact path="/foods/edit/:id"   render={() => ( requireAuth() ? ( <FoodsContainer/>) : ( <Redirect to="/homepage"/>) )}/>*/}
                 {/*<Route exact path="/foods/edit/:id" component={EditFood}/>*/}
 
                 <Route exact path="/foods/delete/:id"  render={() => ( requireAuth() ? ( <DeleteFood/>) : ( <Redirect to="/homepage"/>) )}/>
-                <Route exact path="/foods/details/:id"  render={() => ( requireAuth() ? ( <FoodDetails/>) : ( <Redirect to="/homepage"/>) )}/>
                 <Route exact path="/foods/add"  render={() => ( requireAuth() ? ( <FoodsContainer/>) : ( <Redirect to="/homepage"/>) )}/>
             </div>
         </BrowserRouter>

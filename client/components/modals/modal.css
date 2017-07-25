@@ -9,7 +9,7 @@
     opacity: .2;
 }
 
-#addUnitModal, #recipeIngredientsModal {
+#addUnitModal, #foodModal {
     margin:0 auto;
     z-index: 9999;
     width: 100%;
@@ -17,12 +17,12 @@
     margin-top: 10em;
 }
 
-#recipeIngredientsModal .modal-header{
+#foodModal .modal-header{
     padding-top: 1em!important;
     padding-left: 0!important;
 }
 
-#recipeIngredientsModal .modal-body{
+#foodModal .modal-body{
     padding-top: 0!important;
 }
 

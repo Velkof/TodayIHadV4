@@ -39,6 +39,12 @@ export default class FoodsContainer extends React.Component {
         };
         this.clickedFood = {};
     }
+    componentWillMount() {
+        this.props.dispatch(fetchFoods());
+    }
+    getFoodFromClickedFood(val){
+        this.clickedFood = val;
+    }
     handleShowFoodsClick() {
         this.setState({render:"showFoods"});
     }
@@ -56,12 +62,6 @@ export default class FoodsContainer extends React.Component {
     }
     handleDeleteFoodClick() {
         this.setState({render:"deleteFood"});
-    }
-    componentWillMount() {
-        this.props.dispatch(fetchFoods());
-    }
-    getFoodFromClickedFood(val){
-        this.clickedFood = val;
     }
     render() {
 
