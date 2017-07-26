@@ -34,7 +34,7 @@ export default class DashboardContainer extends React.Component {
         this.loggedFoodsForDay = [];
     }
     componentWillMount() {
-        this.props.dispatch(fetchUser())
+        this.props.dispatch(fetchUser());
         this.props.dispatch(fetchLoggedFoods());
         this.props.dispatch(fetchFoods());
         $.material.init();
@@ -104,12 +104,13 @@ export default class DashboardContainer extends React.Component {
                             </div>
                         </div>);
 
-
             dailyStats = <DailyStats
-                loggedFoods = {this.props.loggedFoods}
+                loggedFoods = {loggedFoods}
             />;
+
         }
-        
+
+
         if (this.state.showFoodModal) {
             foodModal = <FoodModal
                 food = {this.state.clickedFood}
@@ -142,9 +143,9 @@ export default class DashboardContainer extends React.Component {
                     </div>
                 ) : (
                     <div>
-                        <a id="searchBtn" href="javascript:void(0)" className="btn btn-fab btn-success">
-                            <i className="material-icons glyphicon glyphicon-search"></i>
-                        </a>
+                        {/*<a id="searchBtn" href="javascript:void(0)" className="btn btn-fab btn-success">*/}
+                            {/*<i className="material-icons glyphicon glyphicon-search"></i>*/}
+                        {/*</a>*/}
                         <div className="container-mob">
                             <div id="searchFoods" className="searchBar form-group has-feedback mt-1">
                                 <input type="text" onClick={this.handleClick.bind(this)} placeholder="Search food"/>
@@ -154,7 +155,6 @@ export default class DashboardContainer extends React.Component {
 
                             {mappedLoggedFoods}
                             {foodModal}
-
                         </div>
                     </div>
                 )}
