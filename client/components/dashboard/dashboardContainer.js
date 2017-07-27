@@ -92,14 +92,16 @@ export default class DashboardContainer extends React.Component {
             mappedFoods = <p>No foods with that name</p>;
         }
 
-
         if (loggedFoods.length > 0) {
             mappedLoggedFoods = loggedFoods.map(food =>
                         <div className="container-mob-child" key={food._id} onClick={this.clickedLoggedFood.bind(this, food)}>
                             <div className="foodItem">
-                                <div className="col-xs-12 px-0">
+                                <div className="col-xs-10 px-0">
                                     <span className="f-size-2 c-green">{food.name}</span>
                                     <div className="mt-0_5 mb-0_5">Calories: {food.calories} | Fat: {food.fat} | Carbs: {food.carbs} | Protein: {food.protein}</div>
+                                </div>
+                                <div className="col-xs-2 lh-1 px-0">
+                                    <span className="glyphicon glyphicon-pencil f-size-1_5 lh-3 c-grey-light" style={{float:"right"}}></span>
                                 </div>
                             </div>
                         </div>);
@@ -107,9 +109,7 @@ export default class DashboardContainer extends React.Component {
             dailyStats = <DailyStats
                 loggedFoods = {loggedFoods}
             />;
-
         }
-
 
         if (this.state.showFoodModal) {
             foodModal = <FoodModal
@@ -143,18 +143,38 @@ export default class DashboardContainer extends React.Component {
                     </div>
                 ) : (
                     <div>
-                        {/*<a id="searchBtn" href="javascript:void(0)" className="btn btn-fab btn-success">*/}
-                            {/*<i className="material-icons glyphicon glyphicon-search"></i>*/}
-                        {/*</a>*/}
                         <div className="container-mob">
-                            <div id="searchFoods" className="searchBar form-group has-feedback mt-1">
+                            <div id="searchFoods" className="searchBar form-group has-feedback mt-1 pb-0">
                                 <input type="text" onClick={this.handleClick.bind(this)} placeholder="Search food"/>
                                 <i className="glyphicon glyphicon-search form-control-feedback"></i>
                             </div>
+
                             {dailyStats}
+                            <div className="c-grey mt-1 f-size-1_5 pl-0_5">
+                                <p>FOOD LOG</p>
+                            </div>
+                            <div className="col-xs-12 px-0 my-1">
+                                <div className="col-xs-3 px-0 f-size-2" style={{textAlign:"center", webkitTextStroke: "2px white"}}>
+                                    <div className="bg-c-white c-green">
+                                        <span className="lh-2 glyphicon glyphicon-chevron-left"></span>
+                                    </div>
+                                </div>
+                                <div className="col-xs-6 f-size-2" style={{textAlign:"center",}}>
+                                    <div className="bg-c-white px-0 c-green">
+                                        <span className="lh-2">12.07.2017</span>
+                                    </div>
+                                </div>
+                                <div className="col-xs-3 px-0 f-size-2" style={{textAlign:"center",  webkitTextStroke: "2px white"}}>
+                                    <div className="bg-c-white c-green">
+                                        <span className="lh-2 glyphicon glyphicon-chevron-right"></span>
+                                    </div>
+                                </div>
+                            </div>
+
 
                             {mappedLoggedFoods}
                             {foodModal}
+                            <br/>
                         </div>
                     </div>
                 )}

@@ -26,13 +26,21 @@ class DailyStats extends Component {
                 });
         }
 
+        totalCarbs = Math.round(totalCarbs);
+        totalProtein = Math.round(totalProtein);
+        totalFat = Math.round(totalFat);
         totalCalories = Math.round(totalCalories);
+
+        let labelFat = "Fat: " + totalFat;
+        let labelProtein = "Prot: " + totalProtein;
+        let labelCarbs = "Carbs: " + totalCarbs;
+
 
         const data = {
             labels: [
-                'Fat',
-                'Protein',
-                'Carbs'
+                labelFat,
+                labelProtein,
+                labelCarbs
             ],
             datasets: [{
                 data: [totalFat, totalProtein, totalCarbs],
@@ -49,7 +57,7 @@ class DailyStats extends Component {
             }]
         };
         return (
-            <div className="container-mob-child">
+            <div className="container-mob-child px-0">
                 <Doughnut
                     data={data}
                 />
