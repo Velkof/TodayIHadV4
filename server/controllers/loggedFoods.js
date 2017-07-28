@@ -12,6 +12,7 @@ const validator = require('validator');
 
 router.use(cors());
 
+
 const authCheck = jwt({
     secret:  config("auth.clientSecret"),
     audience:  config("auth.clientId")

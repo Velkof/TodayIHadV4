@@ -144,6 +144,7 @@ export default class DashboardContainer extends React.Component {
                 ) : (
                     <div>
                         <div className="container-mob">
+
                             <div id="searchFoods" className="searchBar form-group has-feedback mt-1 pb-0">
                                 <input type="text" onClick={this.handleClick.bind(this)} placeholder="Search food"/>
                                 <i className="glyphicon glyphicon-search form-control-feedback"></i>
@@ -154,7 +155,7 @@ export default class DashboardContainer extends React.Component {
                                 <p>FOOD LOG</p>
                             </div>
                             <div className="col-xs-12 px-0 my-1">
-                                <div className="col-xs-3 px-0 f-size-2" style={{textAlign:"center", webkitTextStroke: "2px white"}}>
+                                <div className="col-xs-3 px-0 f-size-2" style={{textAlign:"center", WebkitTextStroke: "2px white"}}>
                                     <div className="bg-c-white c-green">
                                         <span className="lh-2 glyphicon glyphicon-chevron-left"></span>
                                     </div>
@@ -164,7 +165,7 @@ export default class DashboardContainer extends React.Component {
                                         <span className="lh-2">12.07.2017</span>
                                     </div>
                                 </div>
-                                <div className="col-xs-3 px-0 f-size-2" style={{textAlign:"center",  webkitTextStroke: "2px white"}}>
+                                <div className="col-xs-3 px-0 f-size-2" style={{textAlign:"center",  WebkitTextStroke: "2px white"}}>
                                     <div className="bg-c-white c-green">
                                         <span className="lh-2 glyphicon glyphicon-chevron-right"></span>
                                     </div>

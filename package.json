@@ -38,7 +38,7 @@
     "webpack-dev-server": "^2.4.5"
   },
   "dependencies": {
-    "auth0-lock": "^10.18.0",
+    "auth0-js": "^8.8.0",
     "axios": "^0.16.2",
     "body-parser": "^1.17.2",
     "bootstrap": "^3.3.7",
@@ -58,6 +58,7 @@
     "mongoose": "^4.10.6",
     "morgan": "^1.8.2",
     "pretty-error": "^2.1.0",
+    "qs": "^6.5.0",
     "react": "^15.6.1",
     "react-chartjs-2": "^2.5.5",
     "react-dom": "^15.6.1",
