@@ -53,6 +53,7 @@
     "express-session": "^1.15.3",
     "handlebars": "^4.0.10",
     "jquery": "^3.2.1",
+    "jwks-rsa": "^1.2.0",
     "jwt-decode": "^2.2.0",
     "method-override": "^2.3.9",
     "mongoose": "^4.10.6",

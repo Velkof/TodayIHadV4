@@ -21,7 +21,7 @@ export default class Auth extends Component {
                         <li className="f-size-2">TodayIHad</li>
                         <li style={{float:"right",}}>
                             <span className="btn f-size-1_5" style={{ margin: '0px', padding:'.5em', color:'white'}} onClick={onLoginClick}>
-                                Login / Sign up
+                                Login with Facebook
                             </span>
                         </li>
                     </ul>

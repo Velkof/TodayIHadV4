@@ -13,65 +13,38 @@ export const LOGOUT_FULFILLED = 'LOGOUT_FULFILLED';
 
 
 export function login() {
-    // const options = {
-    //     auth: {
-    //         redirect: false,
-    //         redirectUrl: APP_CONFIG.auth.callbackUrl,
-    //         sso: true,
-    //         responseType: 'token',
-    //         params: {scope: 'openid name email picture roles user_metadata app_metadata'},
-    //     },
-    //     theme: {
-    //         logo: '',
-    //         primaryColor: '#15854f'
-    //     },
-    //     languageDictionary: {
-    //         title: "TodayIHad"
-    //     },
-    //     autoclose: true,
-    // };
-    //
-    // const lock = new Auth0Lock(APP_CONFIG.auth.clientId, APP_CONFIG.auth.clientDomain, options);
-    //
-    // lock.show();
+
     let _this = this;
+    let userProfile;
 
-
-    let auth1 = new auth0.WebAuth({
+    let WebAuth = new auth0.WebAuth({
         clientID: "YMaeM9OciPKhuqerE13BScW1SgoYC5jP",
         domain: "marjanian.eu.auth0.com",
         responseType: 'token id_token',
         redirectUri: `${window.location.origin}/homepage`
     });
 
-
-    auth1.authorize({
+    WebAuth.authorize({
         connection: 'facebook',
     });
 
-    let authResult1;
-    let profile1;
 
-
-    auth1.parseHash((err, authResult) => {
+    WebAuth.parseHash((err, authResult) => {
 
         if (authResult) {
-            console.log("authResult", authResult);
-
-
-            // Save the tokens from the authResult in local storage or a cookie
             localStorage.setItem('access_token', authResult.accessToken);
             localStorage.setItem('id_token', authResult.idToken);
-            authResult1 = authResult;
 
-            auth1.client.userInfo(authResult.accessToken, (error, profile) => {
+            // Save the tokens from the authResult in local storage or a cookie
+            WebAuth.client.userInfo(authResult.accessToken, (error, profile) => {
                 if (error) {
                     console.log('Error loading the Profile', error)
                 } else {
-                    profile1 = JSON.stringify(profile);
                     localStorage.setItem('profile', JSON.stringify(profile));
                     // Triggers profile_updated event to update the UI
-                    _this.emit('profile_updated', profile)
+                    // _this.emit('profile_updated', profile)
+                    // history.push('/');
+                    userProfile = JSON.stringify(profile);
 
                 }
             })
@@ -80,53 +53,22 @@ export function login() {
             console.log(err);
         }
     });
-
-
     return function(dispatch) {
-
-        // lock.on("authenticated", function(authResult) {
-        //     lock.getUserInfo(authResult.accessToken, function(error, profile) {
-        //         if (error) {
-        //             return dispatch(loginRejected(error))
-        //         }
-        //
-        //         axios.post('http://localhost:9000/api/users', {
-        //             name: profile.name,
-        //             email: profile.email,
-        //         })
-        //         .then(function (response) {
-        //             dispatch({type: "ADD_USER_FULFILLED", payload: response.data})
-        //         })
-        //         .catch(function (err) {
-        //             dispatch({type: "ADD_USER_REJECTED", payload: err})
-        //         });
-        //
-        //         localStorage.setItem('id_token', authResult.idToken);
-        //         localStorage.setItem("profile", JSON.stringify(profile));
-        //
-        //         history.push('/');
-        //
-        //         return dispatch(loginFulfilled(authResult.profile));
-        //
-        //     });
-        // });
-
-
         axios.post('http://localhost:9000/api/users', {
-                    name: profile1.name,
-                    email: profile1.email,
-                })
-                .then(function (response) {
-                    dispatch({type: "ADD_USER_FULFILLED", payload: response.data})
-                })
-                .catch(function (err) {
-                    dispatch({type: "ADD_USER_REJECTED", payload: err})
-                });
+            name: userProfile.name,
+            email: userProfile.email,
+        })
+            .then(function (response) {
+                dispatch({type: "ADD_USER_FULFILLED", payload: response.data})
+            })
+            .catch(function (err) {
+                dispatch({type: "ADD_USER_REJECTED", payload: err})
+            });
 
-                history.push('/');
+        // history.push('/');
 
-                return dispatch(loginFulfilled(profile1));
 
+        return dispatch(loginFulfilled(userProfile));
 
     };
 }

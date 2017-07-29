@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const jwt = require('express-jwt');
 
 router.use('/foods', require('./foods'));
 router.use('/users', require('./users'));

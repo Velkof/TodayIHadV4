@@ -5,6 +5,7 @@ const router = require('express').Router();
 const LoggedFood = require('../models/LoggedFood');
 
 const jwt = require('express-jwt');
+const jwksRsa = require('jwks-rsa');
 const cors = require('cors');
 const config = require('../config');
 const validator = require('validator');
@@ -14,10 +15,19 @@ router.use(cors());
 
 
 const authCheck = jwt({
-    secret:  config("auth.clientSecret"),
-    audience:  config("auth.clientId")
-});
+    // Dynamically provide a signing key based on the kid in the header and the singing keys provided by the JWKS endpoint.
+    secret: jwksRsa.expressJwtSecret({
+        cache: true,
+        rateLimit: true,
+        jwksRequestsPerMinute: 5,
+        jwksUri: `https://marjanian.eu.auth0.com/.well-known/jwks.json`
+    }),
 
+    // Validate the audience and the issuer.
+    audience: config("auth.clientId"),
+    issuer: config("auth.issuer"),
+    algorithms: ['RS256']
+});
 
 router.route('/')
     .post(authCheck, function(req, res) {
