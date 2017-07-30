@@ -7,16 +7,19 @@ import { connect } from "react-redux"
 import { fetchUser } from "../../actions/userActions"
 import { fetchFoods } from "../../actions/foodActions"
 import Footer from "../footer/footer";
+
 import DashboardNavBar from "./dashboardNavBar/dashboardNavBar";
 import {addLoggedFood, fetchLoggedFoods} from "../../actions/loggedFoodActions";
 import FoodModal from "../modals/foodModal";
 import DailyStats from "./dailyStats/dailyStats";
+import Redirect from "react-router-dom/es/Redirect";
 
 
 @connect((store) => {
     return {
         loggedFoods: store.loggedFoods.loggedFoods,
         foods: store.foods.foods,
+        isAuthenticated:store.auth.isAuthenticated
     };
 })
 
@@ -47,7 +50,6 @@ export default class DashboardContainer extends React.Component {
     getFood(food){
         this.setState({showFoodModal:false, showSearchPage:false,});
         this.props.dispatch(addLoggedFood(food));
-
     }
     clickedFood(food) {
         this.setState({clickedFood: food, showFoodModal:true});
@@ -64,7 +66,11 @@ export default class DashboardContainer extends React.Component {
         })
     }
     render() {
-        const {foods, loggedFoods} = this.props;
+        const {foods, loggedFoods, isAuthenticated} = this.props;
+
+        if(!isAuthenticated){
+            return <Redirect to='/homepage'/>;
+        }
 
         let _this = this;
         let mappedFoods = [];

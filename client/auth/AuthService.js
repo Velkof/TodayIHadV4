@@ -4,13 +4,12 @@
 import { EventEmitter } from 'events';
 import { isTokenExpired } from './jwtHelper';
 import auth0 from 'auth0-js';
-
+import {login, logout} from "../actions/loginActions";
 
 
 export default class AuthService extends EventEmitter {
     constructor(clientId, domain) {
         super();
-        // Configure Auth0
 
         this.auth0 = new auth0.WebAuth({
             clientID: clientId,
@@ -18,67 +17,27 @@ export default class AuthService extends EventEmitter {
             responseType: 'token id_token',
             redirectUri: `${window.location.origin}/homepage`
         });
-        this.login = this.login.bind(this);
-        this.signup = this.signup.bind(this);
-        this.loginWithGoogle = this.loginWithGoogle.bind(this);
+
         this.loginWithFacebook = this.loginWithFacebook.bind(this);
 
     }
 
-    login(username, password) {
-        this.auth0.client.login({
-            realm: 'react-auth0',
-            username,
-            password
-        }, (err, authResult) => {
-            if (err) {
-                alert('Error: ' + err.description);
-                return
-            }
-            if (authResult && authResult.idToken && authResult.accessToken) {
-                this.setToken(authResult.accessToken, authResult.idToken);
-                window.location = window.location.origin //redirect to main page
-            }
-        })
-    }
-    signup(email, password){
-
-        this.auth0.redirect.signupAndLogin({
-            connection: 'react-auth0',
-            email,
-            password,
-        }, function(err) {
-            if (err) {
-                alert('Error: ' + err.description)
-            }
-        });
-    }
-    loginWithGoogle() {
-        this.auth0.authorize({
-            connection: 'google-oauth2',
-        })
-    }
     loginWithFacebook() {
 
         let _this = this;
+        let userProfile;
+
 
         this.auth0.authorize({
             connection: 'facebook',
-        }, function (err, authResult) {
-            console.log("authResult", err, authResult);
         });
 
-
-
-
-        this.auth0.parseHash({ hash }, (err, authResult) => {
+        this.auth0.parseHash((err, authResult) => {
             if (authResult) {
-                // Save the tokens from the authResult in local storage or a cookie
                 localStorage.setItem('access_token', authResult.accessToken);
                 localStorage.setItem('id_token', authResult.idToken);
 
-                console.log("authResult", authResult);
-
+                // Save the tokens from the authResult in local storage or a cookie
                 _this.auth0.client.userInfo(authResult.accessToken, (error, profile) => {
                     if (error) {
                         console.log('Error loading the Profile', error)
@@ -86,60 +45,16 @@ export default class AuthService extends EventEmitter {
                         localStorage.setItem('profile', JSON.stringify(profile));
                         // Triggers profile_updated event to update the UI
                         _this.emit('profile_updated', profile)
+
+                        userProfile = JSON.stringify(profile);
+                        login(profile, authResult.idToken );
                     }
-                })
+                });
+
             } else if (err) {
                 // Handle errors
                 console.log(err);
             }
         });
-    }
-
-    parseHash(hash) {
-        this.auth0.parseHash({ hash }, (err, authResult) => {
-            if (authResult && authResult.accessToken && authResult.idToken) {
-                this.setToken(authResult.accessToken, authResult.idToken);
-                console.log('AuthService parseHash : code to transition to /');
-                this.auth0.client.userInfo(authResult.accessToken, (error, profile) => {
-                    if (error) {
-                        console.log('Error loading the Profile', error)
-                    } else {
-                        this.setProfile(profile)
-                    }
-                })
-            } else if (authResult && authResult.error) {
-                alert('Error: ' + authResult.error)
-            }
-        })
-    }
-    loggedIn() {
-        // Checks if there is a saved token and it's still valid
-        const token = this.getToken();
-        return !!token && !isTokenExpired(token)
-    }
-    setToken(accessToken, idToken) {
-        // Saves user access token and ID token into local storage
-        localStorage.setItem('access_token', accessToken);
-        localStorage.setItem('id_token', idToken)
-    }
-    setProfile(profile) {
-        // Saves profile data to localStorage
-        localStorage.setItem('profile', JSON.stringify(profile));
-        // Triggers profile_updated event to update the UI
-        this.emit('profile_updated', profile)
-    }
-    getProfile() {
-        // Retrieves the profile data from localStorage;
-        const profile = localStorage.getItem('profile')
-        return profile ? JSON.parse(localStorage.profile) : {}
-    }
-    getToken() {
-        // Retrieves the user token from localStorage
-        return localStorage.getItem('id_token');
-    }
-    logout() {
-        // Clear user token and profile data from localStorage
-        localStorage.removeItem('id_token');
-        localStorage.removeItem('profile');
     }
 }

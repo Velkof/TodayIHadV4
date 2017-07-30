@@ -31,6 +31,7 @@ export const Routes = () => {
         <BrowserRouter>
             <div>
                 <Header/>
+
                 <Route exact path="/homepage"  render={() => ( requireAuth() ? ( <Redirect to="/"/>) : ( <Homepage />) )}/>
 
                 <Route exact path="/"  render={() => ( requireAuth() ? ( <DashboardContainer />) : ( <Redirect to="/homepage"/>) )}/>

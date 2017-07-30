@@ -26,9 +26,8 @@ const authCheck = jwt({
     algorithms: ['RS256']
 });
 
-
 router.route('/')
-    .post( function(req, res) {
+    .post(authCheck, function(req, res) {
 
         User.findOne({email:req.body.email}, function (err, user) {
 

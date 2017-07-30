@@ -22,6 +22,7 @@ export function fetchLoggedFoods() {
             .catch((err) => {
                 dispatch({type: "FETCH_LOGGED_FOODS_REJECTED", payload: err})
             })
+
     }
 }
 

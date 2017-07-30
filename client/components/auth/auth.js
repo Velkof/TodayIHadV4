@@ -3,6 +3,7 @@
  */
 
 import React, { Component } from 'react';
+import LogInButton from "../login/LogInButton";
 
 export default class Auth extends Component {
     constructor(props) {
@@ -19,10 +20,11 @@ export default class Auth extends Component {
                 { !isAuthenticated ? (
                     <ul className="list-inline" style={{listStyle: "none", lineHeight:"5em"}}>
                         <li className="f-size-2">TodayIHad</li>
-                        <li style={{float:"right",}}>
-                            <span className="btn f-size-1_5" style={{ margin: '0px', padding:'.5em', color:'white'}} onClick={onLoginClick}>
-                                Login with Facebook
-                            </span>
+                        <li style={{float:"right",}} onClick={onLoginClick}>
+                            {/*<span className="btn f-size-1_5" style={{ margin: '0px', padding:'.5em', color:'white'}} onClick={onLoginClick}>*/}
+                                {/*Login with Facebook*/}
+                            {/*</span>*/}
+                            <LogInButton/>
                         </li>
                     </ul>
                 ) : (
