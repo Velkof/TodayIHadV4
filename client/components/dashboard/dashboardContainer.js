@@ -8,7 +8,6 @@ import { fetchUser } from "../../actions/userActions"
 import { fetchFoods } from "../../actions/foodActions"
 import Footer from "../footer/footer";
 
-import DashboardNavBar from "./dashboardNavBar/dashboardNavBar";
 import {addLoggedFood, fetchLoggedFoods} from "../../actions/loggedFoodActions";
 import FoodModal from "../modals/foodModal";
 import DailyStats from "./dailyStats/dailyStats";

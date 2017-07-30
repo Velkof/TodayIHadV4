@@ -4,7 +4,6 @@
 import React, {Component} from 'react';
 import styles from "../addRecipe/addRecipe.css";
 import {updateFood} from "../../../actions/foodActions";
-import Search from "../../search/search";
 import FoodModal from "../../modals/foodModal";
 import AddUnitModal from "../../modals/addUnitModal";
 

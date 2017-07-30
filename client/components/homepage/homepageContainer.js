@@ -2,16 +2,16 @@
  * Created by Marjan on 29-Jun-17.
  */
 import * as React from "react";
-import FooterNonAuthorized from "../../components/footerNonAuthorized/footerNonAuthorized";
+import FooterNonAuthorized from "../footerNonAuthorized/footerNonAuthorized";
 import {connect} from "react-redux";
-import LogInButton from "../../components/login/LogInButton";
+import LogInButton from "../login/LogInButton";
 
 @connect((store) => {
     return {
         auth: store.auth.isAuthenticated
     };
 })
-export default class Homepage extends React.Component {
+export default class HomepageContainer extends React.Component {
     render() {
         const { auth } = this.props;
 
