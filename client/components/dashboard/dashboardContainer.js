@@ -36,7 +36,7 @@ export default class DashboardContainer extends React.Component {
         this.loggedFoodsForDay = [];
     }
     componentWillMount() {
-        this.props.dispatch(fetchUser());
+        // this.props.dispatch(fetchUser());
         this.props.dispatch(fetchLoggedFoods());
         this.props.dispatch(fetchFoods());
         $.material.init();

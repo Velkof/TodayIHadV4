@@ -1,102 +1,91 @@
 /**
  * Created by Marjan on 27-Jul-17.
  */
-import { EventEmitter } from 'events';
 import { isTokenExpired } from './jwtHelper';
 import auth0 from 'auth0-js';
 import {login, logout} from "../actions/loginActions";
+import * as React from "react";
+import history from '../history';
 
 
-export default class AuthService extends EventEmitter {
+export default class AuthService extends React.Component {
     constructor(clientId, domain) {
         super();
+
         let _this = this;
         this.auth0 = new auth0.WebAuth({
             clientID: clientId,
             domain: domain,
             responseType: 'token id_token',
-            redirectUri: `${window.location.origin}/homepage`
+            redirectUri: `${window.location.origin}/callback`,
+            usePostMessage: true,
+            postMessageDataType: 'authResult',
         });
 
-        this.loginWithFacebook = this.loginWithFacebook.bind(this);
-        this.parseHash = this.parseHash.bind(this);
 
-        if(localStorage.getItem("tokenHasBeenFetched") === "false" ) {
-            window.addEventListener('load', this.parseHash);
-        }
-    }
+        let id_token = localStorage.getItem("id_token");
 
-    parseHash(){
-        let _this = this;
-        let userProfile;
+        if(id_token && isTokenExpired(id_token) === true) {
+            console.log("2");
+            _this.auth0.renewAuth({
+                audience: '',
+                scope: 'openid profile',
+                redirectUri: `${window.location.origin}/callback`,
+                usePostMessage: true,
+                postMessageDataType: 'authResult',
+            }, function (err, authResult) {
+                // err if automatic parseHash fails
+                if (err) {
+                    alert("Error getting new tokenzxxz: " + JSON.stringify(err));
+                }
+                else {
+                    console.log("authResult", err,authResult);
 
-        _this.auth0.authorize({
-            connection: 'facebook',
-        });
-
-        this.auth0.parseHash((err, authResult) => {
-            if (authResult) {
-                localStorage.setItem('access_token', authResult.accessToken);
-                localStorage.setItem('id_token', authResult.idToken);
-
-                // Save the tokens from the authResult in local storage or a cookie
-                _this.auth0.client.userInfo(authResult.accessToken, (error, profile) => {
-                    if (error) {
-                        console.log('Error loading the Profile', error)
-                    } else {
-                        localStorage.setItem('profile', JSON.stringify(profile));
-                        // Triggers profile_updated event to update the UI
-                        _this.emit('profile_updated', profile);
-
-                        userProfile = JSON.stringify(profile);
-                        login(profile, authResult.idToken );
+                    if (authResult.idToken) {
+                        // that.storage.set('id_token', authResult.idToken);
+                        // that.idToken = authResult.idToken;
+                        // console.log("Got new token: " + that.idToken);
                     }
-                });
+                    else {
+                        console.log("Tried to get new token, but got null!");
+                    }
+                }
+            });
+        }
 
-            } else if (err) {
-                // Handle errors
-                console.log(err);
-            }
-        });
+        this.receiveMessage = this.receiveMessage.bind(this);
+        this.loginWithFacebook = this.loginWithFacebook.bind(this);
 
-        localStorage.setItem("tokenHasBeenFetched", true);
-
+        window.addEventListener("message", this.receiveMessage, false);
     }
+
     loginWithFacebook() {
-
-        let _this = this;
-        let userProfile;
-
         this.auth0.authorize({
             connection: 'facebook',
         });
-
-        localStorage.setItem("tokenHasBeenFetched", false);
-
-        // this.auth0.parseHash((err, authResult) => {
-        //     if (authResult) {
-        //         localStorage.setItem('access_token', authResult.accessToken);
-        //         localStorage.setItem('id_token', authResult.idToken);
-        //
-        //         // Save the tokens from the authResult in local storage or a cookie
-        //         _this.auth0.client.userInfo(authResult.accessToken, (error, profile) => {
-        //             if (error) {
-        //                 console.log('Error loading the Profile', error)
-        //             } else {
-        //                 localStorage.setItem('profile', JSON.stringify(profile));
-        //                 // Triggers profile_updated event to update the UI
-        //                 _this.emit('profile_updated', profile)
-        //
-        //                 userProfile = JSON.stringify(profile);
-        //                 login(profile, authResult.idToken );
-        //             }
-        //         });
-        //
-        //     } else if (err) {
-        //         // Handle errors
-        //         console.log(err);
-        //     }
-        // });
     }
 
+    receiveMessage(event) {
+
+        let authResult;
+        let profile;
+
+        if (event.origin !== window.location.origin || !event.data.type || event.data.type !== 'authResult') {
+            return;
+        }
+
+        if (event.data.authResult && event.data.profile) {
+            authResult = event.data.authResult;
+            profile = event.data.profile;
+
+            localStorage.setItem('access_token', authResult.accessToken);
+            localStorage.setItem('id_token', authResult.idToken);
+            localStorage.setItem('profile', JSON.stringify(profile));
+
+            history.replace("/");
+        }
+
+        window.removeEventListener("message", this.receiveMessage);
+        login(profile, authResult.idToken);
+    }
 }

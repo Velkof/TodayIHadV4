@@ -3,9 +3,7 @@
  */
 import axios from "axios";
 
-export const LOGOUT_FULFILLED = 'LOGOUT_FULFILLED';
 const token = localStorage.getItem('id_token');
-
 
 export function login( profile, idToken) {
 
@@ -30,7 +28,6 @@ export function login( profile, idToken) {
         }
     });
 }
-
 
 export function logout() {
     return function (dispatch) {

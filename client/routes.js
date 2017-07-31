@@ -13,12 +13,14 @@ import AddFood from "./components/food/addFood/addFood";
 import DeleteFood from "./components/food/deleteFood/deleteFood";
 import HomepageContainer from "./components/homepage/homepageContainer";
 import FoodsContainer from "./components/food/foodsContainer";
+import Callback from "./components/Callback/Callback";
+import { isTokenExpired } from './auth/jwtHelper';
 
 
 
 function requireAuth() {
     let jwt = localStorage.getItem('id_token');
-    if(jwt) {
+    if(jwt && isTokenExpired(jwt) === false) {
         return true;
     }
     return false;
@@ -40,6 +42,13 @@ export const Routes = () => {
                 <Route exact path="/foods"  render={() => ( requireAuth() ? ( <FoodsContainer/>) : ( <Redirect to="/homepage"/>) )}/>
                 {/*<Route exact path="/foods/edit/:id"   render={() => ( requireAuth() ? ( <FoodsContainer/>) : ( <Redirect to="/homepage"/>) )}/>*/}
                 {/*<Route exact path="/foods/edit/:id" component={EditFood}/>*/}
+                {/*<Route path="/callback" render={(props) => {*/}
+                    {/*handleAuthentication(props);*/}
+                    {/*return <Callback {...props} />*/}
+                {/*}}/>*/}
+                <Route path="/callback"  render={() => ( requireAuth() ? ( <Redirect to="/"/>) : ( <Callback />) )}/>
+
+                {/*<Route path="/callback" component={Callback} />*/}
 
                 <Route exact path="/foods/delete/:id"  render={() => ( requireAuth() ? ( <DeleteFood/>) : ( <Redirect to="/homepage"/>) )}/>
                 <Route exact path="/foods/add"  render={() => ( requireAuth() ? ( <FoodsContainer/>) : ( <Redirect to="/homepage"/>) )}/>

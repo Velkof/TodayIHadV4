@@ -10,7 +10,8 @@ export function getTokenExpirationDate(token){
     }
     const date = new Date(0); // The 0 here is the key, which sets the date to the epoch
     date.setUTCSeconds(decoded.exp);
-    return date
+
+    return date;
 }
 
 export function isTokenExpired(token){
@@ -18,5 +19,6 @@ export function isTokenExpired(token){
     if (date === null) {
         return false
     }
+
     return !(date.valueOf() > new Date().valueOf());
 }

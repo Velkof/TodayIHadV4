@@ -57,7 +57,7 @@ router.route('/')
             res.json( loggedFood );
         });
 
-    }).get(authCheck, function(req, res) {
+    }).get( function(req, res) {
 
     LoggedFood.find({}, function(err, loggedFoods) {
         if (err){
