@@ -71,7 +71,7 @@ router.route('/')
 router.route('/:id')
     .get(authCheck, function(req, res) {
 
-    LoggedFood.findOne({_id: req.params.id}, function (err, loggedFood) {
+    LoggedFood.findOne({_id: req.params._id}, function (err, loggedFood) {
 
             if (err) {
                 res.send(err);

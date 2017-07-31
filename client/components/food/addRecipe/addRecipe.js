@@ -177,7 +177,7 @@ class AddRecipe extends Component {
     getFood(val){
 
         this.setState({showFoodModal:false, showSearchPage:false,});
-        this.ingredients.push(val);
+        this.ingredients.push(val.food);
 
         this.setState({ingredients: this.ingredients});
 
@@ -228,7 +228,7 @@ class AddRecipe extends Component {
                 food = {this.state.clickedFood}
                 sendData={this.getFood.bind(this)}
                 closeModal = {this.closeModal.bind(this)}
-                calledFrom = "recipe"
+                action = "addIngredient"
             />;
         }
 

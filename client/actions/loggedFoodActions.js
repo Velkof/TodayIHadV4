@@ -68,7 +68,7 @@ export function updateLoggedFood( data) {
 
         dispatch({type: 'UPDATE_LOGGED_FOOD', payload: data});
 
-        axios.put('http://localhost:9000/api/loggedFoods/' + data.id, {
+        axios.put('http://localhost:9000/api/loggedFoods/' + data._id, {
             name: data.name,
             amount: data.amount,
             unit: data.unit,
@@ -98,12 +98,12 @@ export function updateLoggedFood( data) {
     }
 }
 
-export function deleteLoggedFood(id) {
+export function deleteLoggedFood(data) {
     return function (dispatch) {
 
-        dispatch({type: 'DELETE_LOGGED_FOOD', payload: id});
+        dispatch({type: 'DELETE_LOGGED_FOOD', payload: data._id});
 
-        axios.delete('http://localhost:9000/api/loggedFoods/' + id, {
+        axios.delete('http://localhost:9000/api/loggedFoods/' + data._id, {
             'headers':{
                 'Authorization': 'Bearer ' + token,
             }

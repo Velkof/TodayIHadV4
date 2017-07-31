@@ -26,31 +26,35 @@ export default class AuthService extends React.Component {
         let id_token = localStorage.getItem("id_token");
 
         if(id_token && isTokenExpired(id_token) === true) {
-            console.log("2");
-            _this.auth0.renewAuth({
-                audience: '',
-                scope: 'openid profile',
-                redirectUri: `${window.location.origin}/callback`,
-                usePostMessage: true,
-                postMessageDataType: 'authResult',
-            }, function (err, authResult) {
-                // err if automatic parseHash fails
-                if (err) {
-                    alert("Error getting new tokenzxxz: " + JSON.stringify(err));
-                }
-                else {
-                    console.log("authResult", err,authResult);
-
-                    if (authResult.idToken) {
-                        // that.storage.set('id_token', authResult.idToken);
-                        // that.idToken = authResult.idToken;
-                        // console.log("Got new token: " + that.idToken);
-                    }
-                    else {
-                        console.log("Tried to get new token, but got null!");
-                    }
-                }
+            _this.auth0.authorize({
+                connection: 'facebook',
             });
+            // _this.auth0.renewAuth({
+            //     audience: '',
+            //     scope: 'openid profile',
+            //     redirectUri: `${window.location.origin}/callback`,
+            //     usePostMessage: true,
+            //     postMessageDataType: 'authResult',
+            // }, function (err, authResult) {
+            //     if (err) {
+            //         console.log("Error getting new token: " + JSON.stringify(err));
+            //         _this.auth0.authorize({
+            //             connection: 'facebook',
+            //         });
+            //     }
+            //     else {
+            //         console.log("authResult", err,authResult);
+            //
+            //         if (authResult.idToken) {
+            //             // that.storage.set('id_token', authResult.idToken);
+            //             // that.idToken = authResult.idToken;
+            //             // console.log("Got new token: " + that.idToken);
+            //         }
+            //         else {
+            //             console.log("Tried to get new token, but got null!");
+            //         }
+            //     }
+            // });
         }
 
         this.receiveMessage = this.receiveMessage.bind(this);

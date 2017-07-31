@@ -8,7 +8,7 @@ import { fetchUser } from "../../actions/userActions"
 import { fetchFoods } from "../../actions/foodActions"
 import Footer from "../footer/footer";
 
-import {addLoggedFood, fetchLoggedFoods} from "../../actions/loggedFoodActions";
+import {addLoggedFood, deleteLoggedFood, fetchLoggedFoods, updateLoggedFood} from "../../actions/loggedFoodActions";
 import FoodModal from "../modals/foodModal";
 import DailyStats from "./dailyStats/dailyStats";
 import Redirect from "react-router-dom/es/Redirect";
@@ -29,6 +29,7 @@ export default class DashboardContainer extends React.Component {
         this.state = {
             showSearchPage:false,
             showFoodModal: false,
+            foodModalAction: "",
             clickedFood:{},
             search: '',
         };
@@ -46,15 +47,24 @@ export default class DashboardContainer extends React.Component {
         let showSearchPage = !this.state.showSearchPage;
         this.setState({showSearchPage:showSearchPage});
     }
-    getFood(food){
+    getFood(data){
+        console.log("data", data);
+        
+        if(data.action === "deleteLoggedFood") {
+            this.props.dispatch(deleteLoggedFood(data.food));
+        } else if (data.action === "updateLoggedFood") {
+            this.props.dispatch(updateLoggedFood(data.food));
+        } else {
+            this.props.dispatch(addLoggedFood(data.food));
+        }
+
         this.setState({showFoodModal:false, showSearchPage:false,});
-        this.props.dispatch(addLoggedFood(food));
     }
     clickedFood(food) {
-        this.setState({clickedFood: food, showFoodModal:true});
+        this.setState({clickedFood: food, showFoodModal:true, foodModalAction:"logFood"});
     }
     clickedLoggedFood(food){
-        this.setState({clickedFood: food, showFoodModal:true});
+        this.setState({clickedFood: food, showFoodModal:true, foodModalAction:"updateLoggedFood"});
     }
     closeModal(){
         this.setState({showFoodModal:false, showSearchPage:true});
@@ -121,7 +131,7 @@ export default class DashboardContainer extends React.Component {
                 food = {this.state.clickedFood}
                 sendData={this.getFood.bind(this)}
                 closeModal = {this.closeModal.bind(this)}
-                calledFrom = "dashboard"
+                action = {this.state.foodModalAction}
             />;
         }
 

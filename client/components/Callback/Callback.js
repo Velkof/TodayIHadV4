@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import * as auth0 from "auth0-js";
-import loading from './loading.svg';
+import loading from '../../assets/loaders/loading.svg';
 
 
 export default class Callback extends Component {
@@ -11,9 +11,9 @@ export default class Callback extends Component {
         const webAuth = new auth0.WebAuth({
             clientID: APP_CONFIG.auth.clientId,
             domain: APP_CONFIG.auth.clientDomain,
-            responseType: 'token id_token',
-            redirectUri: `${window.location.origin}/`,
         });
+
+        console.log("hassssssssssssssssssssssssssssssssshhhhh", window.location.hash);
 
         webAuth.parseHash(window.location.hash, (err, authResult) => {
             let userProfile;
@@ -30,16 +30,12 @@ export default class Callback extends Component {
                             type: 'authResult',
                         };
                         parent.postMessage(result, `${window.location.origin}/homepage`);
-
-
                     }
                 });
-
             } else if (err) {
                 console.log("error parsing authResult hash", err);
                 parent.postMessage(err, `${window.location.origin}/homepage`);
             }
-
         });
     }
 

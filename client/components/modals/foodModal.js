@@ -28,8 +28,15 @@ export default class FoodModal extends React.Component {
     componentDidMount(){
         $.material.init();
     }
-    sendFoodToParent(){
-        this.props.sendData(this.state.food);
+    sendFoodToParent(e) {
+
+
+        let data = {
+            action: e.target.id,
+            food: this.state.food
+        };
+
+        this.props.sendData(data);
     }
     closeModal(e){
         this.props.closeModal();
@@ -93,14 +100,29 @@ export default class FoodModal extends React.Component {
         }));
     }
     render() {
-        let buttonLabel = "";
+        let actionButtons = "";
         let title = "";
-        if(this.props.calledFrom === "dashboard"){
-            title = "Food - " + this.state.food.name;
-            buttonLabel = "Log Food";
-        } else {
-            title = "Ingredient - " + this.state.food.name;
-            buttonLabel = "Save Ingredient";
+        if(this.props.action === "logFood"){
+            title = "Log food - " + this.state.food.name;
+            actionButtons = <div className="modal-footer full-width" style={{clear:"both"}} onClick={this.sendFoodToParent.bind(this)}>
+                                <a id="logFood" className="btn btn-raised btn-success full-width" >Log Food</a>
+                            </div>
+        } else if (this.props.action === "updateLoggedFood") {
+            title = "Update food - " + this.state.food.name;
+            actionButtons =  <div className="modal-footer full-width" style={{clear:"both"}} onClick={this.sendFoodToParent.bind(this)}>
+                                <div  className="col-xs-6 mx-0 pl-0 pr-0_3">
+                                    <a id="deleteLoggedFood" className="btn btn-raised btn-danger full-width">Delete</a>
+                                </div>
+                                <div className="col-xs-6 mx-0 px-0">
+                                    <a  id="updateLoggedFood" className="btn btn-raised btn-success full-width" >Update Food</a>
+                                </div>
+                            </div>;
+        }
+        else {
+            title = "Save ingredient - " + this.state.food.name;
+            actionButtons = <div className="modal-footer full-width" style={{clear:"both"}} onClick={this.sendFoodToParent.bind(this)}>
+                                <a id="saveIngredient" className="btn btn-raised btn-success full-width" >Save Ingredient</a>
+                            </div>
         }
 
         let unitsArray = [];
@@ -162,9 +184,9 @@ export default class FoodModal extends React.Component {
                     <div id="" className="col-xs-12" style={{textAlign:"center"}}><h3>{this.state.food.calories} calories</h3></div>
 
                 </div>
-                <div className="modal-footer full-width" style={{clear:"both"}} onClick={this.sendFoodToParent.bind(this)}>
-                    <a className="btn btn-raised btn-success full-width" >{buttonLabel}</a>
-                </div>
+
+                {actionButtons}
+
             </div>
         </div>;
         return (

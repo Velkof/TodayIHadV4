@@ -170,9 +170,9 @@ class EditRecipe extends Component {
             search: e.target.value
         })
     }
-    getIngredient(val){
+    getFood(val){
         this.setState({showFoodModal:false, showSearchPage:false});
-        this.ingredients.push(val);
+        this.ingredients.push(val.food);
 
         this.setState({ingredients: this.ingredients});
     }
@@ -220,9 +220,9 @@ class EditRecipe extends Component {
         if (this.state.showFoodModal) {
             foodModal = <FoodModal
                 food = {this.state.clickedFood}
-                sendData={this.getIngredient.bind(this)}
+                sendData={this.getFood.bind(this)}
                 closeModal = {this.closeModal.bind(this)}
-                calledFrom = "recipe"
+                action = "addIngredient"
             />;
         }
 
