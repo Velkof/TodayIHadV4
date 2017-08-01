@@ -33,6 +33,11 @@ class Footer extends Component {
                         <span className={"glyphicon glyphicon-home footer-tab"}></span>
                     </NavLink>
                 </div>
+                <div className="col-xs-5ths">
+                    <NavLink exact to={'/friends'}  style={{color: 'grey'}} activeStyle={{color: 'black'}} >
+                        <span className={"glyphicon glyphicon-flash footer-tab"}></span>
+                    </NavLink>
+                </div>
                 <div className="col-xs-5ths" onClick={onShowFoodsClick}>
                     <NavLink to={'/foods'} style={{color: 'grey'}} activeStyle={{color: 'black'}}  isActive={this.foodsActive.bind(this)}>
                         <span className={"glyphicon glyphicon-apple footer-tab"}></span>
@@ -41,11 +46,6 @@ class Footer extends Component {
                 {/*<div className="col-xs-5ths">*/}
                     {/*<NavLink exact to={'/foods/add'} style={{color: 'grey'}} activeStyle={{color:"black"}} isActive={this.addFoodActive.bind(this)} >*/}
                         {/*<span className={"glyphicon glyphicon-plus footer-tab"}></span>*/}
-                    {/*</NavLink>*/}
-                {/*</div>*/}
-                {/*<div className="col-xs-5ths">*/}
-                    {/*<NavLink exact to={'/foods/addsad'}  style={{color: 'grey'}} activeStyle={{color: 'black'}} >*/}
-                        {/*<span className={"glyphicon glyphicon-search footer-tab"}></span>*/}
                     {/*</NavLink>*/}
                 {/*</div>*/}
                 {/*<div className="col-xs-5ths">*/}

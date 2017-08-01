@@ -4,7 +4,6 @@
 import React, {Component} from 'react';
 
 import {deleteFood } from "../../../actions/foodActions";
-import Footer from "../../footer/footer";
 
 class DeleteFood extends Component {
     deleteFood() {

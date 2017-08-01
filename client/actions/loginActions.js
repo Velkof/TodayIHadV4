@@ -9,7 +9,8 @@ export function login( profile, idToken) {
 
     axios.post('http://localhost:9000/api/users', {
         name: profile.name,
-        email: profile.email
+        email: profile.email,
+        picture: profile.picture
     }, {
         'headers':{
             'Authorization': 'Bearer ' + idToken,

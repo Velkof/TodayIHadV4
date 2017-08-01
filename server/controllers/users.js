@@ -38,6 +38,7 @@ router.route('/')
                     const user = new User();
                     user.name = req.body.name;
                     user.email = req.body.email;
+                    user.picture = req.body.picture;
                     user.role = "user";
                     user.createdAt = new Date();
                     user.updatedAt = new Date();
@@ -82,6 +83,7 @@ router.route('/:id')
 
             user.name = req.body.name;
             user.email = req.body.email;
+            user.picture = req.body.picture;
             user.role = req.body.role;
             user.updatedAt = new Date();
 

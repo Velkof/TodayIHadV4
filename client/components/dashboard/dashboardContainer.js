@@ -37,7 +37,6 @@ export default class DashboardContainer extends React.Component {
         this.loggedFoodsForDay = [];
     }
     componentWillMount() {
-        // this.props.dispatch(fetchUser());
         this.props.dispatch(fetchLoggedFoods());
         this.props.dispatch(fetchFoods());
         $.material.init();
@@ -48,8 +47,6 @@ export default class DashboardContainer extends React.Component {
         this.setState({showSearchPage:showSearchPage});
     }
     getFood(data){
-        console.log("data", data);
-        
         if(data.action === "deleteLoggedFood") {
             this.props.dispatch(deleteLoggedFood(data.food));
         } else if (data.action === "updateLoggedFood") {
@@ -64,10 +61,15 @@ export default class DashboardContainer extends React.Component {
         this.setState({clickedFood: food, showFoodModal:true, foodModalAction:"logFood"});
     }
     clickedLoggedFood(food){
+
         this.setState({clickedFood: food, showFoodModal:true, foodModalAction:"updateLoggedFood"});
     }
     closeModal(){
-        this.setState({showFoodModal:false, showSearchPage:true});
+        if( this.state.foodModalAction === "updateLoggedFood"  || this.state.foodModalAction === "deleteLoggedFood") {
+            this.setState({showFoodModal:false, showSearchPage:false});
+        } else {
+            this.setState({showFoodModal:false, showSearchPage:true});
+        }
     }
     updateSearch(e) {
         this.setState({

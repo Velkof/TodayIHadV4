@@ -13,7 +13,6 @@ export default class Callback extends Component {
             domain: APP_CONFIG.auth.clientDomain,
         });
 
-        console.log("hassssssssssssssssssssssssssssssssshhhhh", window.location.hash);
 
         webAuth.parseHash(window.location.hash, (err, authResult) => {
             let userProfile;

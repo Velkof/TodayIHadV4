@@ -3,13 +3,13 @@
  */
 import { combineReducers } from "redux";
 
-import user from "./user";
+import users from "./users";
 import foods from "./foods";
 import loggedFoods from "./loggedFoods";
 import auth from "./auth";
 
 export default combineReducers({
-    user,
+    users,
     foods,
     loggedFoods,
     auth,
