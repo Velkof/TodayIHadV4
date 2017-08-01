@@ -89,7 +89,8 @@ export default class AuthService extends React.Component {
             history.replace("/");
         }
 
-        window.removeEventListener("message", this.receiveMessage);
-        login(profile, authResult.idToken);
+        window.removeEventListener("message", this.receiveMessage)
+
+        this.props.dispatch(login(profile, authResult.idToken));
     }
 }

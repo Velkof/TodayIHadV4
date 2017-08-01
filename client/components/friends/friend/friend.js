@@ -8,6 +8,9 @@ class Friend extends Component {
     constructor(props) {
         super(props);
     }
+    componentWillMount(){
+        $.material.init();
+    }
     handleClick(user, event){
         event.stopPropagation();
 
@@ -26,12 +29,10 @@ class Friend extends Component {
                 <div className="container-mob-child">
                     <div className="">
                         <img  id="viewProfile" src={user.picture} alt="Profile picture" height="42" width="42"/>
-
                         <p className="">{user.name}</p>
                         <div id="chat" onClick={this.handleClick.bind(this, user)}>
                             chat with user
                         </div>
-
                     </div>
                 </div>
             </div>

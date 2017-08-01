@@ -6,28 +6,26 @@ import axios from "axios";
 const token = localStorage.getItem('id_token');
 
 export function login( profile, idToken) {
-
-    axios.post('http://localhost:9000/api/users', {
-        name: profile.name,
-        email: profile.email,
-        picture: profile.picture
-    }, {
-        'headers':{
-            'Authorization': 'Bearer ' + idToken,
-        }
-    })
-    .then(function (response) {
-        return function (dispatch) {
-            dispatch({type: "ADD_USER_FULFILLED", payload: response.data});
-            dispatch({type: "LOGIN_FULFILLED", payload: response.data});
-        }
-    })
-    .catch(function (err) {
-        return function (dispatch) {
-            dispatch({type: "ADD_USER_REJECTED", payload: err});
-            dispatch({type: "LOGIN_REJECTED", payload: err});
-        }
-    });
+    return function (dispatch) {
+        axios.post('http://localhost:9000/api/users', {
+            name: profile.name,
+            email: profile.email,
+            picture: profile.picture_large,
+            user_id: profile.user_id,
+        }, {
+            'headers': {
+                'Authorization': 'Bearer ' + idToken,
+            }
+        })
+            .then(function (response) {
+                    dispatch({type: "ADD_USER_FULFILLED", payload: response.data});
+                    dispatch({type: "LOGIN_FULFILLED", payload: response.data});
+            })
+            .catch(function (err) {
+                    dispatch({type: "ADD_USER_REJECTED", payload: err});
+                    dispatch({type: "LOGIN_REJECTED", payload: err});
+            });
+    }
 }
 
 export function logout() {
@@ -38,7 +36,6 @@ export function logout() {
         dispatch({type: "LOGOUT_FULFILLED"});
     }
 }
-
 
 
 

@@ -9,13 +9,13 @@ export default function reducer(state={
 }, action) {
 
     switch (action.type) {
-        case "FETCH_CHAT_MESSAGES": {
+        case "FETCH_CHAT_MESSAGES_BETWEEN_USERS": {
             return {...state, fetching: true};
         }
-        case "FETCH_CHAT_MESSAGES_REJECTED": {
+        case "FETCH_CHAT_MESSAGES_BETWEEN_USERS_REJECTED": {
             return {...state, fetching: false, error: action.payload};
         }
-        case "FETCH_CHAT_MESSAGES_FULFILLED": {
+        case "FETCH_CHAT_MESSAGES_BETWEEN_USERS_FULFILLED": {
             return {
                 ...state,
                 fetching: false,
@@ -27,6 +27,12 @@ export default function reducer(state={
             return {
                 ...state,
                 chatMessages: [...state.chatMessages, action.payload],
+            }
+        }
+        case "ADD_CHAT_MESSAGE_REJECTED": {
+            return {
+                ...state,
+                error: action.payload,
             }
         }
     }

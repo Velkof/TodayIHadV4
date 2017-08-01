@@ -46,7 +46,7 @@ export default class Auth extends Component {
                             </ul>
                         </li>
                         <li style={{float:"right"}}>
-                            <p>Welcome, {profile.nickname}</p>
+                            <p>Welcome, {profile.name}</p>
                         </li>
                     </ul>
                 )}

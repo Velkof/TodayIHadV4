@@ -29,7 +29,7 @@ const authCheck = jwt({
 router.route('/')
     .post(authCheck, function(req, res) {
 
-        User.findOne({email:req.body.email}, function (err, user) {
+        User.findOne({user_id:req.body.user_id}, function (err, user) {
 
                 if (err) {
                    console.log("error", err);
@@ -39,6 +39,7 @@ router.route('/')
                     user.name = req.body.name;
                     user.email = req.body.email;
                     user.picture = req.body.picture;
+                    user.user_id = req.body.user_id;
                     user.role = "user";
                     user.createdAt = new Date();
                     user.updatedAt = new Date();
@@ -84,6 +85,7 @@ router.route('/:id')
             user.name = req.body.name;
             user.email = req.body.email;
             user.picture = req.body.picture;
+            user.user_id = req.body.user_id;
             user.role = req.body.role;
             user.updatedAt = new Date();
 

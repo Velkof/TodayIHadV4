@@ -1,0 +1,12 @@
+.chat-form {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 99;
+    background-color: white;
+}
+
+.chat-form #message-input .form-group {
+    margin-top: 1em;
+}

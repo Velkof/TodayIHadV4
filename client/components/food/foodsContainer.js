@@ -20,6 +20,7 @@ import EditRecipe from "./editRecipe/editRecipe";
 @connect((store) => {
     return {
         foods: store.foods.foods,
+        auth: store.auth
     };
 })
 
@@ -38,6 +39,8 @@ export default class FoodsContainer extends React.Component {
             render: "showFoods",
         };
         this.clickedFood = {};
+
+        console.log("aittttttttttttttttttttttt", this.props.auth)
     }
     componentWillMount() {
         this.props.dispatch(fetchFoods());

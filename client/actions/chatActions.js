@@ -5,37 +5,38 @@ import axios from "axios";
 
 const token = localStorage.getItem('id_token');
 
-export function fetchChatMessages() {
+export function fetchChatMessagesBetweenUsers(data) {
     return function(dispatch) {
 
-        dispatch({type: "FETCH_CHAT_MESSAGES"});
+        dispatch({type: "FETCH_CHAT_MESSAGES_BETWEEN_USERS"});
 
         axios.get("http://localhost:9000/api/chatMessages",
-            {
-                'headers':{
-                    'Authorization': 'Bearer ' + token,
-                }
-            })
-            .then((response) => {
-                dispatch({type: "FETCH_CHAT_MESSAGES_FULFILLED", payload: response.data})
-            })
-            .catch((err) => {
-                dispatch({type: "FETCH_CHAT_MESSAGES_REJECTED", payload: err})
-            })
+        {
+            'headers':{
+                'Authorization': 'Bearer ' + token,
+            },
+            'params': {
+                loggedInUser: data.loggedInUser,
+                otherUser: data.otherUser,
+            }
+        })
+        .then((response) => {
+            dispatch({type: "FETCH_CHAT_MESSAGES_BETWEEN_USERS_FULFILLED", payload: response.data})
+        })
+        .catch((err) => {
+            dispatch({type: "FETCH_CHAT_MESSAGES_BETWEEN_USERS_REJECTED", payload: err})
+        })
     }
 }
 
 export function addChatMessage( data) {
     return function (dispatch) {
 
-        dispatch({type: 'ADD_CHAT_MESSAGE', payload: data});
-
         axios.post('http://localhost:9000/api/chatMessages', {
             sender: data.sender,
             receiver: data.receiver,
             message: data.message,
-            seen: data.seen,
-
+            seen: false,
         }, {
             'headers':{
                 'Authorization': 'Bearer ' + token,

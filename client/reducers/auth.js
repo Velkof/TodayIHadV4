@@ -31,7 +31,7 @@ export default function reducer(state={
             return {
                 ...state,
                 isAuthenticated: true,
-                profile: action.profile,
+                profile: action.payload,
                 error: ''
             };
         }

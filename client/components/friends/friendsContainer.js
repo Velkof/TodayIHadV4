@@ -12,7 +12,8 @@ import Chat from "./chat/chat";
 @connect((store) => {
     return {
         users: store.users.users,
-        isAuthenticated: store.auth.isAuthenticated
+        auth: store.auth,
+        chatMessages: store.chatMessages.chatMessages
     };
 
 })
@@ -24,16 +25,13 @@ export default class FriendsContainer extends React.Component {
         this.state = {
             render: "friendList",
         };
-
         this.clickedUser = {};
     }
     componentWillMount() {
-        this.props.dispatch(fetchUsers());
         $.material.init();
+        this.props.dispatch(fetchUsers());
     }
     clickedUserData(data) {
-        console.log("data",data);
-
         this.setState({render:data.action});
         this.clickedUser = data.user;
     }
@@ -41,14 +39,14 @@ export default class FriendsContainer extends React.Component {
         this.setState({render:"friendList"});
     }
     render() {
-        const {users, isAuthenticated} = this.props;
+        const {users, auth} = this.props;
         let friends = [];
 
 
         let componentsToRender = null;
 
 
-        if(!isAuthenticated){
+        if(!auth.isAuthenticated){
             return <Redirect to='/homepage'/>;
         }
 
@@ -69,6 +67,8 @@ export default class FriendsContainer extends React.Component {
                                     friend = {this.clickedUser}
                                     dispatch = {this.props.dispatch}
                                     backToFriendList = {this.backToFriendList.bind(this)}
+                                    user_id = {auth.profile.user_id}
+                                    chatMessages = {this.props.chatMessages}
             />
         } else {
             componentsToRender = friends;
