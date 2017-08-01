@@ -13,7 +13,6 @@ export default function reducer(state={
             return {...state, fetching: true};
         }
         case "FETCH_LOGGED_FOODS_REJECTED": {
-            console.log("rejected", action.payload);
             return {...state, fetching: false, error: action.payload};
         }
         case "FETCH_LOGGED_FOODS_FULFILLED": {
@@ -25,7 +24,6 @@ export default function reducer(state={
             };
         }
         case "ADD_LOGGED_FOOD_FULFILLED": {
-            console.log("fulfilled", action.payload);
             return {
                 ...state,
                 loggedFoods: [...state.loggedFoods, action.payload],

@@ -12,5 +12,6 @@ export default combineReducers({
     users,
     foods,
     loggedFoods,
+    chatMessages,
     auth,
 });

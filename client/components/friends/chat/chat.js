@@ -9,15 +9,26 @@ class Chat extends Component {
     }
     handleClick(event){
         event.stopPropagation();
+        this.props.backToFriendList();
     }
     render() {
-        const {user} = this.props;
-        return (
-                <div className="container-mob-child">
-                    <div className="">
-                       <h3>CHAT WINDOW</h3>
+        const {friend} = this.props;
+
+        console.log("props", this.props);
+
+        return (<div>
+                <div className="px-0">
+                    <div className="btn btn-default pl-0 f-size-1_5" onClick={this.handleClick.bind(this)}>
+                        <span className="glyphicon glyphicon-chevron-left" style={{lineHeight:"1.2em"}}></span>
+                        <span>friends</span>
                     </div>
                 </div>
+                <div className="container-mob-child">
+                    <div className="">
+                        <h4>Chatting with {friend.name}</h4>
+                    </div>
+                </div>
+            </div>
         );
     };
 }

@@ -4,6 +4,7 @@
 const User = require('./User');
 const Food = require('./Food');
 const LoggedFood = require('./LoggedFood');
+const ChatMessage = require('./ChatMessage');
 
 
-module.exports = Object.assign({}, User, Food, LoggedFood);
+module.exports = Object.assign({}, User, Food, LoggedFood, ChatMessage);

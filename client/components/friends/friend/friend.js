@@ -21,8 +21,6 @@ class Friend extends Component {
     render() {
         const {user} = this.props;
 
-        console.log("useeeeeeeeeeeeer", user);
-
         return (
             <div className="col-xs-4" onClick={this.handleClick.bind(this, user)}>
                 <div className="container-mob-child">
