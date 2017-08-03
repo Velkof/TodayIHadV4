@@ -122,9 +122,6 @@ class EditFood extends Component {
         return (
             <div className="main-layout">
                 <div className="container-mob" style={{overflow:'hidden'}}>
-
-                    {this.props.backToFoodsNav}
-
                     {this.props.foodNavBar}
 
                     <div className="container-mob-child">

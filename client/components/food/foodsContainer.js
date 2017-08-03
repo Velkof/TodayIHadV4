@@ -12,10 +12,11 @@ import AddRecipe from "./addRecipe/addRecipe";
 import FoodNavBar from "./foodNavBar/foodNavBar";
 import FoodsNavBar from "./foodsNavBar/foodsNavBar";
 import Footer from "../footer/footer";
-import BackToFoodsNav from "./backToFoodsNav/backToFoodsNav";
+import Header from "../header/header";
 
 import {addFood, fetchFoods, updateFood, deleteFood} from "../../actions/foodActions";
 import EditRecipe from "./editRecipe/editRecipe";
+import {Redirect} from "react-router-dom";
 
 @connect((store) => {
     return {
@@ -39,8 +40,6 @@ export default class FoodsContainer extends React.Component {
             render: "showFoods",
         };
         this.clickedFood = {};
-
-        console.log("aittttttttttttttttttttttt", this.props.auth)
     }
     componentWillMount() {
         this.props.dispatch(fetchFoods());
@@ -67,6 +66,11 @@ export default class FoodsContainer extends React.Component {
         this.setState({render:"deleteFood"});
     }
     render() {
+        const {auth} = this.props;
+
+        if(!auth.isAuthenticated){
+            return <Redirect to='/homepage'/>;
+        }
 
         let foodComponentsToRender = null;
 
@@ -83,10 +87,6 @@ export default class FoodsContainer extends React.Component {
                             onEditRecipeClick = {this.handleEditRecipeClick}
                             onDeleteFoodClick = {this.handleDeleteFoodClick}
                             foodType = {this.clickedFood.type}
-                        />;
-
-        let backToFoodsNav = <BackToFoodsNav
-                                 onShowFoodsClick={this.handleShowFoodsClick}
                         />;
 
         if(this.state.render === "showFoods"){
@@ -117,7 +117,6 @@ export default class FoodsContainer extends React.Component {
             foodComponentsToRender = <EditFood
                                         dispatch={this.props.dispatch}
                                         foodNavBar={foodNavBar}
-                                        backToFoodsNav = {backToFoodsNav}
                                         onShowFoodsClick = {this.handleShowFoodsClick}
                                         food = {this.clickedFood}
                                     />
@@ -126,7 +125,6 @@ export default class FoodsContainer extends React.Component {
                                         dispatch={this.props.dispatch}
                                         foods={this.props.foods}
                                         foodNavBar={foodNavBar}
-                                        backToFoodsNav = {backToFoodsNav}
                                         onShowFoodsClick = {this.handleShowFoodsClick}
                                         food = {this.clickedFood}
                                     />
@@ -134,14 +132,19 @@ export default class FoodsContainer extends React.Component {
             foodComponentsToRender = <DeleteFood
                                         dispatch={this.props.dispatch}
                                         foodNavBar={foodNavBar}
-                                        backToFoodsNav = {backToFoodsNav}
                                         onShowFoodsClick = {this.handleShowFoodsClick}
                                         food = {this.clickedFood}
                                     />
         }
         return (
                 <div>
+                    <Header
+                        mainComponent = {this.state.render}
+                        backToFoodList = {this.handleShowFoodsClick}
+                    />
+
                     {foodComponentsToRender}
+
                     <Footer
                         onShowFoodsClick = {this.handleShowFoodsClick}
                     />

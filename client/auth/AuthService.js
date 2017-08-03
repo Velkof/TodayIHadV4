@@ -26,6 +26,7 @@ export default class AuthService extends React.Component {
         let id_token = localStorage.getItem("id_token");
 
         if(id_token && isTokenExpired(id_token) === true) {
+
             _this.auth0.authorize({
                 connection: 'facebook',
             });
@@ -46,9 +47,7 @@ export default class AuthService extends React.Component {
             //         console.log("authResult", err,authResult);
             //
             //         if (authResult.idToken) {
-            //             // that.storage.set('id_token', authResult.idToken);
-            //             // that.idToken = authResult.idToken;
-            //             // console.log("Got new token: " + that.idToken);
+            //
             //         }
             //         else {
             //             console.log("Tried to get new token, but got null!");

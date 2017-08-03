@@ -11,27 +11,25 @@ class Message extends Component {
     }
     render() {
         const {message, friend} = this.props;
-            let messageStyle;
-            let createdAtStyle;
+        let messageStyle;
+        let createdAtStyle;
 
-            if(message.receiver === friend.user_id) {
-                messageStyle = {float: "right", color:"white", backgroundColor:"#3dba80", minHeight:"3em"};
-                createdAtStyle = {float:"right"};
-            } else {
-                messageStyle = {float: "left",  color:"grey", minHeight:"3em"}
-                createdAtStyle = {float:"left"};
-            }
-
-
+        if(message.receiver === friend.user_id) {
+            messageStyle = {float: "right", color:"white", backgroundColor:"#3dba80", minHeight:"3em", wordBreak:"break-all"};
+            createdAtStyle = {float:"right"};
+        } else {
+            messageStyle = {float: "left",  color:"grey", backgroundColor:"white", minHeight:"3em", marginLeft:"1em",  wordBreak:"break-all"}
+            createdAtStyle = {float:"left",  marginLeft:"1em"};
+        }
 
         return ( <div style={{clear:"both"}}>
-                    <div className="col-xs-12 px-0">
-                        <div className="container-mob-child col-xs-8 py-1 px-0_5 lh-1_5"  style={messageStyle}>
-                            <span className="f-size-1_5 ">{message.message}  </span>
-                        </div>
+                <div className="col-xs-12 px-0">
+                    <div className="container-mob-child col-xs-8 py-1 px-0_5 lh-1_5"  style={messageStyle}>
+                        <span className="f-size-1_5 ">{message.message}  </span>
                     </div>
-                    <div style={createdAtStyle}>{moment(message.createdAt).format('HH:mm DD/MM/YYYY')}</div>
                 </div>
+                <div style={createdAtStyle}>{moment(message.createdAt).format('HH:mm DD/MM/YYYY')}</div>
+            </div>
         );
     };
 }

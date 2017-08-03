@@ -5,7 +5,7 @@ import React, {Component} from 'react';
 import styles from './chat.css';
 import {addChatMessage, fetchChatMessagesBetweenUsers} from "../../../actions/chatActions";
 import Message from "../message/message";
-import * as ReactDOM from "react-dom";
+
 
 class Chat extends Component {
     constructor(props) {
@@ -25,18 +25,12 @@ class Chat extends Component {
         this.props.dispatch(fetchChatMessagesBetweenUsers(data));
         $.material.init();
     }
-    componentDidMount(){
-
-    }
     addMessage(){
         this.props.dispatch(addChatMessage(this.state));
         this.setState({message:""});
     }
-    scrollToBottom() {
-        this.messagesEnd.scrollIntoView();
-    }
     componentDidUpdate(){
-        this.scrollToBottom();
+        this.messagesEnd.scrollIntoView();
     }
     handleClick(event){
         event.stopPropagation();
@@ -46,9 +40,15 @@ class Chat extends Component {
     render() {
         const {friend, chatMessages} = this.props;
         let messages = [];
+        let loadMoreMessages = "";
+
+        if(chatMessages.length % 15 === 0 ) {
+            loadMoreMessages =  <button className="btn btn-default col-xs-12">Load more messages</button>;
+        } else {
+            loadMoreMessages = <div style={{textAlign:"center"}}><p>No more messages...</p></div>;
+        }
 
         if(chatMessages.length > 0){
-
             chatMessages.forEach(function (message) {
                 messages.push(<Message
                                 key = {message._id}
@@ -64,35 +64,29 @@ class Chat extends Component {
         }
 
         return (<div>
-                <div>
-                    <div className="px-0 col-xs-3">
-                        <div id="back-to-friends" className="btn btn-default pl-0 f-size-1_5" onClick={this.handleClick.bind(this)}>
-                            <span className="glyphicon glyphicon-chevron-left" style={{lineHeight:"1.2em"}}></span>
-                            <span>friends</span>
+                    <div id="chatting-with-container" className="full-width">
+                        <div id="chatting-with">
+                            <img src={friend.picture} alt="friend profile pic" height={40} width={40} style={{ marginRight:"1em"}}/>
+                            <span className="f-size-1_7 lh-1_7">You're chatting with {friend.name}</span>
                         </div>
                     </div>
-                    <div className="col-xs-9 f-size-1_7 lh-3">
-                        <div style={{float:"right"}}>
-                            <p>Chatting with {friend.name}</p>
+                    <div className="messages-container">
+                        {loadMoreMessages}
+                        {messages}
+                        <div ref={(el) => { this.messagesEnd = el; }}></div>
+                    </div>
+                    <div className="chat-form-container pb-0 px-0 mx-0">
+                        <div className="chat-form form-group">
+                            <div id="message-input" className="col-xs-9 px-1 mb-0">
+                                    <input id="message"  type="text" className="form-control mb-0 pb-0" autoComplete="off" placeholder="Write a message..."
+                                           value={this.state.message  || ''} onChange={this.handleChange.bind(this)}
+                                    />
+                            </div>
+                            <div className="col-xs-3 px-1" onClick={this.addMessage.bind(this)} style={{textAlign:"center"}}>
+                                <span id="send-message-btn" className="btn btn-success px-0 mx-0 my-0_5">Send</span>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div className="messages-container">
-                    {messages}
-                    <div id="scroll-down-target"   ref={(el) => { this.messagesEnd = el; }}></div>
-                </div>
-                <div className="chat-form-container pb-0 px-0 mx-0">
-                    <div className="chat-form form-group">
-                        <div id="message-input" className="col-xs-9 px-1 mb-0">
-                                <input id="message"  type="text" className="form-control mb-0 pb-0" autoComplete="off" placeholder="Write a message..."
-                                       value={this.state.message  || ''} onChange={this.handleChange.bind(this)}
-                                />
-                        </div>
-                        <div className="col-xs-3 px-1" onClick={this.addMessage.bind(this)} style={{textAlign:"center"}}>
-                            <span id="send-message-btn" className="btn btn-success px-0 mx-0 my-0_5">Send</span>
-                        </div>
-                    </div>
-                </div>
             </div>
         );
     };

@@ -3,8 +3,6 @@ import {Route, BrowserRouter, Redirect} from 'react-router-dom';
 import history from './history';
 import store from "./store";
 
-
-import Header from './components/header/header';
 import {Provider} from "react-redux";
 import DashboardContainer from "./components/dashboard/dashboardContainer";
 import Foods from "./components/food/foods/foods";
@@ -13,7 +11,7 @@ import AddFood from "./components/food/addFood/addFood";
 import DeleteFood from "./components/food/deleteFood/deleteFood";
 import HomepageContainer from "./components/homepage/homepageContainer";
 import FoodsContainer from "./components/food/foodsContainer";
-import Callback from "./components/Callback/Callback";
+import Callback from "./components/callback/callback";
 import { isTokenExpired } from './auth/jwtHelper';
 import FriendsContainer from "./components/friends/friendsContainer";
 
@@ -33,8 +31,6 @@ export const Routes = () => {
     <Provider history={history} store={store}>
         <BrowserRouter>
             <div>
-                <Header/>
-
                 <Route exact path="/homepage"  render={() => ( requireAuth() ? ( <Redirect to="/"/>) : ( <HomepageContainer />) )}/>
                 <Route exact path="/"  render={() => ( requireAuth() ? ( <DashboardContainer />) : ( <Redirect to="/homepage"/>) )}/>
                 <Route exact path="/dashboard"  render={() => ( requireAuth() ? ( <DashboardContainer />) : ( <Redirect to="/homepage"/>) )}/>

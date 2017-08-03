@@ -4,10 +4,12 @@
 import React from "react";
 import { connect } from "react-redux";
 import Footer from "../footer/footer";
+import Header from "../header/header";
 import {fetchUsers} from "../../actions/userActions";
 import {Redirect} from "react-router-dom";
 import Friend from "./friend/friend";
 import Chat from "./chat/chat";
+
 
 @connect((store) => {
     return {
@@ -35,13 +37,12 @@ export default class FriendsContainer extends React.Component {
         this.setState({render:data.action});
         this.clickedUser = data.user;
     }
-    backToFriendList () {
+    backToFriendList() {
         this.setState({render:"friendList"});
     }
     render() {
         const {users, auth} = this.props;
         let friends = [];
-
 
         let componentsToRender = null;
 
@@ -76,10 +77,16 @@ export default class FriendsContainer extends React.Component {
 
         return (
             <div className="main-layout">
+                <Header
+                    mainComponent = {this.state.render}
+                    backToFriendList = {this.backToFriendList.bind(this)}
+                />
                 <div className="container-mob">
                     {componentsToRender}
                 </div>
-                <Footer/>
+                <Footer
+                    backToFriendList = {this.backToFriendList.bind(this)}
+                />
             </div>
         )
     }

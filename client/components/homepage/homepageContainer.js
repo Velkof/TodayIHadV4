@@ -2,6 +2,7 @@
  * Created by Marjan on 29-Jun-17.
  */
 import * as React from "react";
+import Header from "../header/header";
 import FooterNonAuthorized from "../footerNonAuthorized/footerNonAuthorized";
 import {connect} from "react-redux";
 import LogInButton from "../login/LogInButton";
@@ -17,6 +18,7 @@ export default class HomepageContainer extends React.Component {
 
         return (
             <div>
+                <Header/>
                 <div className="main-layout bg-c-white">
                     <h1>HOMEPAGE</h1>
                 </div>

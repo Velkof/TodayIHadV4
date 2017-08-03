@@ -19,11 +19,10 @@ class Footer extends Component {
         if (location.pathname.substring(0, 6) === "/foods") {
             return true;
         }
-
     }
 
     render() {
-        const {  onShowFoodsClick} = this.props;
+        const {  onShowFoodsClick, backToFriendList} = this.props;
 
         return (
         <div className="footer">
@@ -33,7 +32,7 @@ class Footer extends Component {
                         <span className={"glyphicon glyphicon-home footer-tab"}></span>
                     </NavLink>
                 </div>
-                <div className="col-xs-5ths">
+                <div className="col-xs-5ths" onClick={backToFriendList}>
                     <NavLink exact to={'/friends'}  style={{color: 'grey'}} activeStyle={{color: 'black'}} >
                         <span className={"glyphicon glyphicon-flash footer-tab"}></span>
                     </NavLink>

@@ -4,15 +4,14 @@
 import React from "react"
 import { connect } from "react-redux"
 
-import { fetchUser } from "../../actions/userActions"
 import { fetchFoods } from "../../actions/foodActions"
-import Footer from "../footer/footer";
-
 import {addLoggedFood, deleteLoggedFood, fetchLoggedFoods, updateLoggedFood} from "../../actions/loggedFoodActions";
+
+import Footer from "../footer/footer";
+import Header from "../header/header";
 import FoodModal from "../modals/foodModal";
 import DailyStats from "./dailyStats/dailyStats";
 import Redirect from "react-router-dom/es/Redirect";
-
 
 @connect((store) => {
     return {
@@ -55,18 +54,18 @@ export default class DashboardContainer extends React.Component {
             this.props.dispatch(addLoggedFood(data.food));
         }
 
-        this.setState({showFoodModal:false, showSearchPage:false,});
+        this.setState({showFoodModal:false, showSearchPage:false, search:""});
     }
     clickedFood(food) {
         this.setState({clickedFood: food, showFoodModal:true, foodModalAction:"logFood"});
     }
     clickedLoggedFood(food){
-
         this.setState({clickedFood: food, showFoodModal:true, foodModalAction:"updateLoggedFood"});
     }
     closeModal(){
         if( this.state.foodModalAction === "updateLoggedFood"  || this.state.foodModalAction === "deleteLoggedFood") {
-            this.setState({showFoodModal:false, showSearchPage:false});
+            this.setState({showFoodModal:false, showSearchPage:false, });
+
         } else {
             this.setState({showFoodModal:false, showSearchPage:true});
         }
@@ -139,35 +138,39 @@ export default class DashboardContainer extends React.Component {
 
         return (
             <div className="main-layout">
+
+
                 { this.state.showSearchPage ? (
-                    <div className="container-mob" style={{overflow:'hidden'}}>
-                        <div className="px-0">
-                            <div className="btn btn-default pl-0 f-size-1_5" onClick={this.handleClick.bind(this)}>
-                                <span className="glyphicon glyphicon-chevron-left" style={{lineHeight:"1.2em"}}></span>
-                                <span>dashboard</span>
+                    <div>
+                        <Header
+                            mainComponent = "dashboard"
+                            backToDashboard = {this.handleClick.bind(this)}
+                        />
+                        <div className="container-mob" style={{overflow:'hidden'}}>
+                            <div id="searchAddRecipe" className="searchBar form-group has-feedback mt-1">
+                                <input type="text" autoFocus  value={this.state.search || ''} onChange={this.updateSearch.bind(this)} placeholder="Search for food"/>
+                                <i className="glyphicon glyphicon-search form-control-feedback"></i>
                             </div>
-                        </div>
-                        <div id="searchAddRecipe" className="searchBar form-group has-feedback mt-1">
-                            <input type="text" autoFocus  value={this.state.search || ''} onChange={this.updateSearch.bind(this)} placeholder="Search foods"/>
-                            <i className="glyphicon glyphicon-search form-control-feedback"></i>
-                        </div>
-                        <div className="container-mob-child">
-                            <div className="bg-c-white">
-                                <ul className="pl-0">{mappedFoods}</ul>
+                            <div className="container-mob-child">
+                                <div className="bg-c-white">
+                                    <ul className="pl-0">{mappedFoods}</ul>
+                                </div>
                             </div>
-                        </div>
+                    </div>
                         {foodModal}
                     </div>
                 ) : (
                     <div>
+                        <Header/>
                         <div className="container-mob">
 
-                            <div id="searchFoods" className="searchBar form-group has-feedback mt-1 pb-0">
-                                <input type="text" onClick={this.handleClick.bind(this)} placeholder="Search food"/>
+                            <div id="searchFoods" className="searchBar form-group mt-1 pb-0" onClick={this.handleClick.bind(this)}>
+                                <input type="text"  value=""  placeholder="Search for food"/>
                                 <i className="glyphicon glyphicon-search form-control-feedback"></i>
                             </div>
 
                             {dailyStats}
+
                             <div className="c-grey mt-1 f-size-1_5 pl-0_5">
                                 <p>FOOD LOG</p>
                             </div>
@@ -188,7 +191,6 @@ export default class DashboardContainer extends React.Component {
                                     </div>
                                 </div>
                             </div>
-
 
                             {mappedLoggedFoods}
                             {foodModal}

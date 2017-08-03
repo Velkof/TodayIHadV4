@@ -14,11 +14,7 @@ class DeleteFood extends Component {
             <div className="main-layout">
                 <div className="container-mob"  style={{overflow:'hidden'}}>
 
-                    {this.props.backToFoodsNav}
-
-                    <div style={{marginTop:"5em"}}>
-                        {this.props.foodNavBar}
-                    </div>
+                    {this.props.foodNavBar}
 
                     <div className="container-mob-child">
                         <p className="f-size-2"> Are you sure you want to delete "{this.props.food.name}"?</p>

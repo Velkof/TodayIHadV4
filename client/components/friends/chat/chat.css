@@ -1,24 +1,38 @@
-.chat-form-container {
+.chat-form-container, #chatting-with-container {
     position: fixed;
-    bottom: 5em;
     left: 0;
     width: 100%;
-    z-index: 99!important;
+    z-index: 99;
 }
 
-.chat-form{
-    position:relative;
+.chat-form-container{
+    bottom: 5em;
+}
+
+#chatting-with-container{
+    top: 5em;
+}
+
+.chat-form, #chatting-with{
     overflow: auto;
     width:100%;
     max-width: 540px!important;
-    background-color:white;
     margin: 0 auto;
 }
 
+.chat-form{
+    background-color: white;
+}
+
+#chatting-with{
+    text-align: center;
+    background-color: #d8d8d8;
+}
+
 .chat-form.form-group {
-    padding-bottom: 0px;
+    padding-bottom: 0;
 }
 
 .messages-container{
-    padding-bottom: 10em;
+    padding-bottom: 15em;
 }

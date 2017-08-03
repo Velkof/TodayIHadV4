@@ -147,7 +147,7 @@ export default class FoodModal extends React.Component {
                             {unitsArray}
                         </select>
                     </div>
-                    <table id="foodInfoTable" className="col-xs-12 f-size-1_7">
+                    <table id="foodInfoTable" className="col-xs-10 col-xs-offset-1 f-size-1_7">
                         <tbody><tr><th>Info</th><th></th><th></th><th></th></tr>
                         <tr>
                             <td className="">Fat: </td>

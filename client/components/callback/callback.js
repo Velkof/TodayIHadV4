@@ -60,9 +60,6 @@ export default class Callback extends Component {
     }
 }
 
-
-
-
 // export default () => {
 //
 //     let _this = this;

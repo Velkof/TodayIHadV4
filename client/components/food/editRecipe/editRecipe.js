@@ -266,8 +266,6 @@ class EditRecipe extends Component {
                 ) : (
                     <div className="container-mob" style={{overflow:'hidden'}}>
 
-                        {this.props.backToFoodsNav}
-
                         {this.props.foodNavBar}
 
                         <div className="container-mob-child">
