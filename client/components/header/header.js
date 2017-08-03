@@ -44,7 +44,7 @@ class Header extends Component {
             mainComponent === "editFood" || mainComponent === "deleteFood" ||
             mainComponent === "dashboard" || mainComponent === "ingredientSearch") {
             leftSideOfHeader =<div  className="btn btn-default pr-2 pl-0_5 m-0 f-size-2" onClick={this.handleClick.bind(this)}>
-                <span className="glyphicon glyphicon-menu-left c-white" style={{lineHeight:"1.2em", }}></span>
+                <span className="glyphicon glyphicon-menu-left c-white" style={{lineHeight:"1.5em", }}></span>
             </div>;
         } else {
             leftSideOfHeader = <li className="f-size-2 ">TodayIHad</li>;
