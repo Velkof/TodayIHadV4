@@ -4,6 +4,8 @@
 import React, {Component} from 'react';
 import styles from './chat.css';
 import {addChatMessage, fetchChatMessagesBetweenUsers} from "../../../actions/chatActions";
+import Message from "../message/message";
+import * as ReactDOM from "react-dom";
 
 class Chat extends Component {
     constructor(props) {
@@ -20,13 +22,21 @@ class Chat extends Component {
             loggedInUser: this.props.user_id,
             otherUser: this.props.friend.user_id,
         };
-
         this.props.dispatch(fetchChatMessagesBetweenUsers(data));
-
         $.material.init();
+    }
+    componentDidMount(){
+
     }
     addMessage(){
         this.props.dispatch(addChatMessage(this.state));
+        this.setState({message:""});
+    }
+    scrollToBottom() {
+        this.messagesEnd.scrollIntoView();
+    }
+    componentDidUpdate(){
+        this.scrollToBottom();
     }
     handleClick(event){
         event.stopPropagation();
@@ -36,35 +46,22 @@ class Chat extends Component {
     render() {
         const {friend, chatMessages} = this.props;
         let messages = [];
-        let messageStyle = {};
-        let message;
 
         if(chatMessages.length > 0){
 
             chatMessages.forEach(function (message) {
-
-                if(message.receiver === friend.user_id) {
-                    messageStyle = {float: "right"}
-                } else {
-                    messageStyle = {float: "left"}
-                }
-                message = (
-                    <div style={{clear:"both"}} key={message._id} >
-                        <div className="container-mob-child col-xs-8" style={messageStyle}>
-                            <span className="f-size-2 c-green">{message.message}  </span>
-                        </div>
-                    </div>);
-
-                messages.push(message);
+                messages.push(<Message
+                                key = {message._id}
+                                message = {message}
+                                friend = {friend}
+                              />);
             });
-
 
         } else {
             messages = <div className="container-mob-child">
-                <p className="f-size-2">You don't have any messages with this user.</p>
-            </div>;
+                            <p className="f-size-2">You don't have any messages with this user.</p>
+                       </div>;
         }
-
 
         return (<div>
                 <div>
@@ -74,26 +71,26 @@ class Chat extends Component {
                             <span>friends</span>
                         </div>
                     </div>
-                    <div className="container-mob-child col-xs-9">
-                        <div className="">
-                            <h4>Chatting with {friend.name}<img src={friend.picture} alt="profile picture" height={20} width={20}/></h4>
+                    <div className="col-xs-9 f-size-1_7 lh-3">
+                        <div style={{float:"right"}}>
+                            <p>Chatting with {friend.name}</p>
                         </div>
                     </div>
                 </div>
-                    <br/>
-                    <br/>
-                    <br/>
-                <div className="">
+                <div className="messages-container">
                     {messages}
+                    <div id="scroll-down-target"   ref={(el) => { this.messagesEnd = el; }}></div>
                 </div>
-                <div className="chat-form form-group pb-0">
-                    <div id="message-input" className="col-xs-10 mx-0">
-                            <input id="message"  type="text" className="form-control mb-0" autoComplete="off" placeholder="Write a message..."
-                                   value={this.state.message  || ''} onChange={this.handleChange.bind(this)}
-                            />
-                    </div>
-                    <div className="col-xs-1 col-xs-offset-1 mx-0" onClick={this.addMessage.bind(this)}>
-                        <span id="send-message-btn" className="glyphicon glyphicon-send f-size-2_5 c-grey lh-2"></span>
+                <div className="chat-form-container pb-0 px-0 mx-0">
+                    <div className="chat-form form-group">
+                        <div id="message-input" className="col-xs-9 px-1 mb-0">
+                                <input id="message"  type="text" className="form-control mb-0 pb-0" autoComplete="off" placeholder="Write a message..."
+                                       value={this.state.message  || ''} onChange={this.handleChange.bind(this)}
+                                />
+                        </div>
+                        <div className="col-xs-3 px-1" onClick={this.addMessage.bind(this)} style={{textAlign:"center"}}>
+                            <span id="send-message-btn" className="btn btn-success px-0 mx-0 my-0_5">Send</span>
+                        </div>
                     </div>
                 </div>
             </div>

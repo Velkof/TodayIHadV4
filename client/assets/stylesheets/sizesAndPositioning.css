@@ -69,6 +69,10 @@
     line-height: 1em!important;
 }
 
+.lh-1_5 {
+    line-height: 1.5em!important;
+}
+
 .lh-2 {
     line-height: 2em!important;
 }
@@ -95,12 +99,34 @@
 }
 
 .px-0{
-    padding-right: 0!important;
-    padding-left: 0!important;
+     padding-right: 0!important;
+     padding-left: 0!important;
+ }
+
+
+.px-0_5{
+    padding-right: 0.5em!important;
+    padding-left: 0.5em!important;
 }
+
+.px-1{
+    padding-right: 1em!important;
+    padding-left: 1em!important;
+}
+
+.px-2{
+    padding-right: 2em!important;
+    padding-left: 2em!important;
+}
+
 .py-0{
     padding-top: 0!important;
     padding-bottom: 0!important;
+}
+
+.py-1{
+    padding-top: 1em!important;
+    padding-bottom: 1em!important;
 }
 
 .pt-0{

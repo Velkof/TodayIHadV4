@@ -1,12 +1,24 @@
-.chat-form {
-    position: absolute;
-    bottom: 0;
+.chat-form-container {
+    position: fixed;
+    bottom: 5em;
     left: 0;
     width: 100%;
-    z-index: 99;
-    background-color: white;
+    z-index: 99!important;
 }
 
-.chat-form #message-input .form-group {
-    margin-top: 1em;
+.chat-form{
+    position:relative;
+    overflow: auto;
+    width:100%;
+    max-width: 540px!important;
+    background-color:white;
+    margin: 0 auto;
+}
+
+.chat-form.form-group {
+    padding-bottom: 0px;
+}
+
+.messages-container{
+    padding-bottom: 10em;
 }

@@ -25,15 +25,16 @@ class Friend extends Component {
         const {user} = this.props;
 
         return (
-            <div className="col-xs-4" onClick={this.handleClick.bind(this, user)}>
-                <div className="container-mob-child">
-                    <div className="">
-                        <img  id="viewProfile" src={user.picture} alt="Profile picture" height="42" width="42"/>
-                        <p className="">{user.name}</p>
-                        <div id="chat" onClick={this.handleClick.bind(this, user)}>
-                            chat with user
-                        </div>
-                    </div>
+            <div className="col-xs-4 mt-2"  onClick={this.handleClick.bind(this, user)}>
+                <div>
+                    <img  id="viewProfile" src={user.picture} alt="Profile picture" height="85" width="85"
+                          style={{borderRadius:"50%", 	display: "block", margin:"0 auto"}}/>
+                </div>
+                <div className="mt-1" style={{textAlign:"center", fontWeight:"bold", color:"#4f5256"}}>
+                    <p className="f-size-1_3">{user.name}</p>
+                </div>
+                <div id="chat" onClick={this.handleClick.bind(this, user)}>
+                    chat with user
                 </div>
             </div>
         );
