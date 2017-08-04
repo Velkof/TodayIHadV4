@@ -307,7 +307,7 @@ class AddRecipe extends Component {
                         {mappedIngredients}
                     </div>
                     <div onClick={this.props.onShowFoodsClick}>
-                        <button className="col-xs-12 btn btn-raised btn-success my-1 f-size-2" onClick={this.addRecipe.bind(this)}> Save Recipe </button>
+                        <button className="col-xs-12 btn my-1 f-size-2 c-white bg-c-green-success" onClick={this.addRecipe.bind(this)}> Save Recipe </button>
                     </div>
                 </div>
                 )}

@@ -89,7 +89,7 @@ export default class AddUnitModal extends React.Component {
                                     </div>
                                 </div>
                                 <div className="modal-footer full-width" style={{clear:"both"}}>
-                                    <a className="btn btn-raised btn-success full-width" onClick={this.handleAddFoodClick.bind(this)}>Add Unit</a>
+                                    <a className="btn c-white bg-c-green-success full-width" onClick={this.handleAddFoodClick.bind(this)}>Add Unit</a>
                                 </div>
                             </div>
                         </div>;

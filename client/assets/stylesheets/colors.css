@@ -1,48 +1,59 @@
 .c-white {
-    color:white;
+    color:white!important;
 }
 
 .c-black {
-    color: black;
+    color: black!important;
 }
 
 .c-grey {
-    color: grey;
+    color: grey!important;
 }
 
 .c-grey-light {
-    color:#d8d8d8;
+    color:#d8d8d8!important;
 }
 
 .c-green {
-    color: green;
+    color: green!important;
 }
 
 .c-orange {
-    color: orange;
+    color: orange!important;
 }
 
 .c-green-light {
-    color: #59b75c;
+    color: #59b75c!important;
 }
 
 .c-green-dark {
-    color: #009688;
+    color: #009688!important;
 }
 
 .c-red-important-info {
-    color: #a94442;
+    color: #a94442!important;
 }
 
 .bg-c-white {
-    background-color:white;
+    background-color:white!important;
 }
 
 .bg-c-white-dark {
-    background-color:#fafafa;
+    background-color:#fafafa!important;
 }
 
 .bg-c-grey-light {
-    background-color:#d8d8d8;
+    background-color:#d8d8d8!important;
 }
 
+.bg-c-green-success{
+    background-color: #59b75c!important;
+}
+
+.bg-c-red-danger {
+    background-color: #f44336!important;
+}
+
+.bg-c-blue-info {
+    background-color: #0fb2fc!important;
+}

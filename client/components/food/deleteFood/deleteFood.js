@@ -20,7 +20,7 @@ class DeleteFood extends Component {
                         <p className="f-size-2"> Are you sure you want to delete "{this.props.food.name}"?</p>
                     </div>
                     <div onClick={this.props.onShowFoodsClick}>
-                        <button className="col-xs-12 btn btn-raised btn-danger my-1 f-size-2" onClick={this.deleteFood.bind(this)}> Delete </button>
+                        <button className="col-xs-12 btn c-white bg-c-red-danger my-1 f-size-2" onClick={this.deleteFood.bind(this)}> Delete </button>
                     </div>
                 </div>
             </div>

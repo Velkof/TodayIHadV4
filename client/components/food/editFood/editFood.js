@@ -202,7 +202,7 @@ class EditFood extends Component {
                         <br/>
                     </div>
                     <div onClick={this.props.onShowFoodsClick}>
-                        <button className="col-xs-12 btn btn-raised btn-info my-1 f-size-2" onClick={this.updateFood.bind(this)}> Update Food </button>
+                        <button className="col-xs-12 btn c-white bg-c-blue-info my-1 f-size-2" onClick={this.updateFood.bind(this)}> Update Food </button>
                     </div>
                 </div>
             </div>

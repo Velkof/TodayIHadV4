@@ -200,7 +200,7 @@ class AddFood extends Component {
                     </div>
 
                     <div onClick={this.props.onShowFoodsClick}>
-                        <button className="col-xs-12 btn btn-raised btn-success my-1 f-size-2" onClick={this.addFood.bind(this)}> Save Food </button>
+                        <button className="col-xs-12 btn c-white bg-c-green-success my-1 f-size-2" onClick={this.addFood.bind(this)}> Save Food </button>
                     </div>
                 </div>
             </div>
