@@ -5,19 +5,20 @@ import React from "react";
 import { connect } from "react-redux";
 import Footer from "../footer/footer";
 import Header from "../header/header";
-import {fetchUsers} from "../../actions/userActions";
+import {fetchAllUsersExceptLoggedIn, fetchUsers, fetchLoggedInUser, updateUser } from "../../actions/userActions";
 import {Redirect} from "react-router-dom";
 import Friend from "./friend/friend";
 import Chat from "./chat/chat";
+import AddFriendModal from "../modals/addFriendModal";
+import AddUnitModal from "../modals/addUnitModal";
 
 
 @connect((store) => {
     return {
-        users: store.users.users,
+        userStore: store.users,
         auth: store.auth,
-        chatMessages: store.chatMessages.chatMessages
+        chatMessages: store.chatMessages.chatMessages,
     };
-
 })
 
 export default class FriendsContainer extends React.Component {
@@ -28,10 +29,16 @@ export default class FriendsContainer extends React.Component {
             render: "friendList",
         };
         this.clickedUser = {};
+        this.friends = [];
     }
     componentWillMount() {
         $.material.init();
-        this.props.dispatch(fetchUsers());
+        this.props.dispatch(fetchAllUsersExceptLoggedIn(this.props.auth.profile.user_id));
+        this.props.dispatch(fetchLoggedInUser(this.props.auth.profile.user_id));
+    }
+    shouldComponentUpdate(nextProps){
+        this.props = nextProps;
+        return true;
     }
     clickedUserData(data) {
         this.setState({render:data.action});
@@ -40,27 +47,55 @@ export default class FriendsContainer extends React.Component {
     backToFriendList() {
         this.setState({render:"friendList"});
     }
+    getDataFromAddFriendModal(userToFollow){
+
+        console.log("user to follow", userToFollow);
+
+        let updatedLoggedInUser = Object.assign({}, this.props.userStore.loggedInUser);
+        let updatedUserToFollow = Object.assign({}, userToFollow);
+
+        console.log("updatedLoggedInUser 1", updatedLoggedInUser);
+        console.log("updatedUserToFollow 1", updatedUserToFollow);
+
+        updatedLoggedInUser.followingUsers.push(userToFollow.user_id);
+        updatedUserToFollow.followedByUsers.push(this.props.userStore.loggedInUser.user_id);
+
+        console.log("updatedLoggedInUser 2", updatedLoggedInUser);
+        console.log("updatedUserToFollow 2", updatedUserToFollow);
+
+        this.props.dispatch(updateUser(updatedLoggedInUser));
+        this.props.dispatch(updateUser(updatedUserToFollow))
+    }
+
     render() {
-        const {users, auth} = this.props;
+        const {userStore, auth, bbb} = this.props;
         let friends = [];
 
         let componentsToRender = null;
 
-
         if(!auth.isAuthenticated){
             return <Redirect to='/homepage'/>;
         }
+        friends = userStore.users.map(user =>
+            <Friend
+                key = {user._id}
+                user={user}
+                sendData = {this.clickedUserData.bind(this)}
+            />
+        );
 
-        if (users.length > 0) {
-            friends = users.map(user =>
-                <Friend
-                    key = {user._id}
-                    user={user}
-                    sendData = {this.clickedUserData.bind(this)}
-                />
-            );
-        } else {
-            friends = <p>You haven't added any friends</p>;
+        if (userStore.fetched === true) {
+            if(userStore.users.length > 0) {
+                friends = userStore.users.map(user =>
+                    <Friend
+                        key={user._id}
+                        user={user}
+                        sendData={this.clickedUserData.bind(this)}
+                    />
+                );
+            } else {
+                friends = <p>You haven't added any friends</p>;
+            }
         }
 
         if (this.state.render === "chat") {
@@ -75,15 +110,24 @@ export default class FriendsContainer extends React.Component {
             componentsToRender = friends;
         }
 
+
         return (
             <div className="main-layout">
                 <Header
                     mainComponent = {this.state.render}
                     backToFriendList = {this.backToFriendList.bind(this)}
                 />
+
                 <div className="container-mob">
                     {componentsToRender}
                 </div>
+
+                <AddFriendModal
+                    sendData={this.getDataFromAddFriendModal.bind(this)}
+                    addedFriend = {userStore.userByEmail}
+                    dispatch = {this.props.dispatch}
+                />
+
                 <Footer
                     backToFriendList = {this.backToFriendList.bind(this)}
                 />

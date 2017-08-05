@@ -47,28 +47,27 @@ router.route('/')
 
     }).get( function(req, res) {
 
+        if (!req.query.loggedInUser) {
+            ChatMessage.find({}, function(err, chatMessages) {
+                if (err) {
+                    res.send(err);
+                }
 
-    if (!req.query.loggedInUser) {
-        ChatMessage.find({}, function(err, chatMessages) {
-            if (err) {
-                res.send(err);
-            }
+                res.json(chatMessages);
+            });
+        } else {
 
-            res.json(chatMessages);
-        });
-    } else {
+            ChatMessage.find({$or:[
+                {'sender': req.query.loggedInUser, 'receiver': req.query.otherUser},
+                {'sender': req.query.otherUser, 'receiver': req.query.loggedInUser}
+            ]}, function(err, chatMessages){
+                if (err) {
+                    res.send(err);
+                }
+                res.json(chatMessages);
+            });
 
-        ChatMessage.find({$or:[
-            {'sender': req.query.loggedInUser, 'receiver': req.query.otherUser},
-            {'sender': req.query.otherUser, 'receiver': req.query.loggedInUser}
-        ]}, function(err, chatMessages){
-            if (err) {
-                res.send(err);
-            }
-            res.json(chatMessages);
-        });
-
-    }
+        }
 
 });
 

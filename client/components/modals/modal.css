@@ -9,12 +9,12 @@
     opacity: .2;
 }
 
-#addUnitModal, #foodModal {
+#addUnitModal, #foodModal, #addFriendModal {
     margin:0 auto;
     z-index: 9999;
-    width: 100%;
+    width: 90%;
     max-width: 540px!important;
-    margin-top: 10em;
+    margin-top: 8em;
 }
 
 #foodModal .modal-header{

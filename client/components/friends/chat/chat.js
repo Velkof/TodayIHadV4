@@ -66,8 +66,8 @@ class Chat extends Component {
         return (<div>
                     <div id="chatting-with-container" className="full-width">
                         <div id="chatting-with">
-                            <img src={friend.picture} alt="friend profile pic" height={40} width={40} style={{ marginRight:"1em"}}/>
-                            <span className="f-size-1_7 lh-1_7">You're chatting with {friend.name}</span>
+                            {/*<img src={friend.picture} alt="friend profile pic" height={40} width={40} style={{ marginRight:"1em", borderRadius:"50%"}}/>*/}
+                            <span className="f-size-1_7 lh-1_7 c-grey">You're chatting with {friend.name}</span>
                         </div>
                     </div>
                     <div className="messages-container">

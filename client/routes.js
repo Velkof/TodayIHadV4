@@ -14,6 +14,7 @@ import FoodsContainer from "./components/food/foodsContainer";
 import Callback from "./components/callback/callback";
 import { isTokenExpired } from './auth/jwtHelper';
 import FriendsContainer from "./components/friends/friendsContainer";
+import AuthService from "./auth/AuthService";
 
 
 

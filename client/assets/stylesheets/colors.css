@@ -14,12 +14,16 @@
     color:#d8d8d8!important;
 }
 
-.c-green {
-    color: green!important;
+.c-blue-info {
+    color: #0fb2fc!important;
 }
 
 .c-orange {
     color: orange!important;
+}
+
+.c-green {
+    color: green!important;
 }
 
 .c-green-light {
@@ -30,8 +34,16 @@
     color: #009688!important;
 }
 
+.c-green-success{
+    color: #59b75c!important;
+}
+
 .c-red-important-info {
     color: #a94442!important;
+}
+
+.c-red-danger {
+    color: #f44336!important;
 }
 
 .bg-c-white {

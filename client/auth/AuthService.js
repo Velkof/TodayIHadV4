@@ -73,6 +73,8 @@ export default class AuthService extends React.Component {
         let authResult;
         let profile;
 
+        let _this = this;
+
         if (event.origin !== window.location.origin || !event.data.type || event.data.type !== 'authResult') {
             return;
         }
@@ -84,12 +86,12 @@ export default class AuthService extends React.Component {
             localStorage.setItem('access_token', authResult.accessToken);
             localStorage.setItem('id_token', authResult.idToken);
             localStorage.setItem('profile', JSON.stringify(profile));
-
-            history.replace("/");
+            window.removeEventListener("message", this.receiveMessage);
         }
-
-        window.removeEventListener("message", this.receiveMessage)
-
-        this.props.dispatch(login(profile, authResult.idToken));
+        login(profile, authResult.idToken);
+        // this.props.dispatch( login(profile, authResult.idToken));
+        history.replace("/");
     }
 }
+
+

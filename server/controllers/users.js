@@ -29,17 +29,20 @@ const authCheck = jwt({
 router.route('/')
     .post(authCheck, function(req, res) {
 
-        User.findOne({user_id:req.body.user_id}, function (err, user) {
+        User.findOne({user_id:req.body.user_id}, function (err, result) {
 
                 if (err) {
                    console.log("error", err);
                 }
-                if(user === null) {
+                if(result === null) {
                     const user = new User();
                     user.name = req.body.name;
                     user.email = req.body.email;
                     user.picture = req.body.picture;
+                    user.picture_large = req.body.picture_large;
                     user.user_id = req.body.user_id;
+                    user.followingUsers = [];
+                    user.followedByUsers = [];
                     user.role = "user";
                     user.createdAt = new Date();
                     user.updatedAt = new Date();
@@ -54,29 +57,63 @@ router.route('/')
 
     }).get(authCheck, function(req, res) {
 
-        User.find(function(err, users) {
-            if (err){
-                res.send(err);
-            }
+        if (req.query.loggedInUserId) {
+            //all users except logged in user
+            User.find({
+                user_id: {$nin: req.query.loggedInUserId}
+            }, function (err, users) {
+                if (err) {
+                    res.send(err);
+                }
+                res.json(users);
+            });
+        } else if (req.query.email){
+            //get user by email
+            User.findOne({email: req.query.email}, function (err, user) {
 
-            res.json(users);
-        });
+                if (err) {
+                    res.send(err);
+                }
+
+                res.json(user);
+            });
+        } else if (req.query.user_id){
+            //only loggedInUser
+            User.findOne({user_id: req.query.user_id}, function (err, user) {
+
+                if (err) {
+                    res.send(err);
+                }
+
+                res.json(user);
+            });
+        } else{
+            //get all users
+            User.find(function(err, users) {
+                if (err){
+                    res.send(err);
+                }
+                res.json(users);
+            });
+        }
 });
 
+
 router.route('/:id')
-    .get(authCheck, function(req, res) {
+    // .get(authCheck, function(req, res) {
+    //
+    //     User.findOne({_id: req.params.id}, function (err, user) {
+    //
+    //         if (err) {
+    //             res.send(err);
+    //         }
+    //
+    //         res.json(user);
+    //     });
+    // })
+.put(authCheck, function(req, res) {
 
-        User.findOne({_id: req.params.id}, function (err, user) {
-
-            if (err) {
-                res.send(err);
-            }
-
-            res.json(user);
-        });
-    }).put(authCheck, function(req, res) {
-
-        User.findOne({_id: req.params.id}, function (err, user) {
+        User.findOne({user_id: req.params.id}, function (err, user) {
 
             if (err) {
                 res.send(err);
@@ -85,7 +122,9 @@ router.route('/:id')
             user.name = req.body.name;
             user.email = req.body.email;
             user.picture = req.body.picture;
-            user.user_id = req.body.user_id;
+            user.picture_large = req.body.picture_large;
+            user.followingUsers = req.body.followingUsers;
+            user.followedByUsers = req.body.followedByUsers;
             user.role = req.body.role;
             user.updatedAt = new Date();
 

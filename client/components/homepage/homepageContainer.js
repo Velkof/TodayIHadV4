@@ -6,6 +6,7 @@ import Header from "../header/header";
 import FooterNonAuthorized from "../footerNonAuthorized/footerNonAuthorized";
 import {connect} from "react-redux";
 import LogInButton from "../login/LogInButton";
+import AuthService from "../../auth/AuthService";
 
 @connect((store) => {
     return {
@@ -24,7 +25,6 @@ export default class HomepageContainer extends React.Component {
                 </div>
                 <div>dasdsa</div>
                 <div>sads</div>
-
                 <LogInButton/>
                 <FooterNonAuthorized/>
             </div>

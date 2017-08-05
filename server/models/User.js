@@ -21,6 +21,18 @@ const UserSchema = new Schema({
         type: String,
         required: true,
     },
+    picture_large: {
+        type: String,
+        required: true,
+    },
+    followingUsers: {
+        type: Array,
+        required: false,
+    },
+    followedByUsers: {
+        type: Array,
+        required: false,
+    },
     role: {
         type: String,
         required: true

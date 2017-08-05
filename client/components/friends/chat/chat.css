@@ -34,5 +34,21 @@
 }
 
 .messages-container{
-    padding-bottom: 15em;
+    padding-bottom: 13em;
 }
+
+#follow-friends-btn-container{
+    position:fixed;
+    bottom: 5em;
+    left: 0;
+    width: 100%;
+    text-align:center;
+}
+
+#follow-friends-btn{
+    width:100%;
+    max-width: 540px!important;
+    margin: 0 auto!important;
+    color:green;
+}
+

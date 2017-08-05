@@ -4,17 +4,15 @@
 
 export default function reducer(state={
     users: [],
+    userByEmail:{},
+    loggedInUser:{},
     fetching: false,
     fetched: false,
     error: null,
 }, action) {
-
     switch (action.type) {
         case "FETCH_USERS": {
             return {...state, fetching: true};
-        }
-        case "FETCH_USERS_REJECTED": {
-            return {...state, fetching: false, error: action.payload};
         }
         case "FETCH_USERS_FULFILLED": {
             return {
@@ -24,12 +22,44 @@ export default function reducer(state={
                 users: action.payload,
             };
         }
+        case "FETCH_USERS_REJECTED": {
+            return {...state, fetching: false, error: action.payload};
+        }
+        case "FETCH_USER_BY_EMAIL": {
+            return {...state, fetching: true, fetched:false};
+        }
+        case "FETCH_USER_BY_EMAIL_FULFILLED": {
+            return {
+                ...state,
+                fetching: false,
+                fetched: true,
+                userByEmail: action.payload,
+            };
+        }
+        case "FETCH_USER_BY_EMAIL_REJECTED": {
+            return {...state, fetching: false, error: action.payload};
+        }
+        case "FETCH_LOGGED_IN_USER": {
+            return {...state, fetching: true, fetched:false};
+        }
+        case "FETCH_LOGGED_IN_USER_FULFILLED": {
+            return {
+                ...state,
+                fetching: false,
+                fetched: true,
+                loggedInUser: action.payload,
+            };
+        }
+        case "FETCH_LOGGED_IN_USER_REJECTED": {
+            return {...state, fetching: false, error: action.payload};
+        }
         case "ADD_USER_FULFILLED": {
             return {
                 ...state,
                 users: [...state.users, action.payload],
             }
         }
+
         case "UPDATE_USER_FULFILLED": {
             const { _id } = action.payload;
             const newUsers = [...state.users];
@@ -40,6 +70,9 @@ export default function reducer(state={
                 ...state,
                 users: newUsers,
             }
+        }
+        case "UPDATE_USER_REJECTED": {
+            return {...state, error: action.payload};
         }
         case "DELETE_USER": {
             return {
