@@ -87,6 +87,16 @@ router.route('/')
 
                 res.json(user);
             });
+        } else if (req.query.followedUsers){
+            //fetch followed users
+            User.find({user_id: { $in:  req.query.followedUsers}}, function (err, user) {
+
+                if (err) {
+                    res.send(err);
+                }
+
+                res.json(user);
+            });
         } else{
             //get all users
             User.find(function(err, users) {

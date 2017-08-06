@@ -4,8 +4,9 @@
 
 export default function reducer(state={
     users: [],
+    followedUsers:null,
     userByEmail:{},
-    loggedInUser:{},
+    loggedInUser:null,
     fetching: false,
     fetched: false,
     error: null,
@@ -25,6 +26,21 @@ export default function reducer(state={
         case "FETCH_USERS_REJECTED": {
             return {...state, fetching: false, error: action.payload};
         }
+        case "FETCH_FOLLOWED_USERS": {
+            return {...state, fetching: true};
+        }
+        case "FETCH_FOLLOWED_USERS_FULFILLED": {
+            return {
+                ...state,
+                fetching: false,
+                fetched: true,
+                followedUsers: action.payload,
+            };
+        }
+        case "FETCH_FOLLOWED_USERS_REJECTED": {
+            return {...state, fetching: false, error: action.payload};
+        }
+
         case "FETCH_USER_BY_EMAIL": {
             return {...state, fetching: true, fetched:false};
         }

@@ -1,0 +1,19 @@
+#viewProfile {
+    border-radius:50%;
+    display: block;
+    margin:0 auto;
+    border: 1px solid white;
+}
+
+#chat{
+    position: absolute;
+    font-size: 1.8em;
+    bottom: 2.6em;
+    right: 1.8em;
+    background-color: white;
+    border: 1px solid lightgray;
+    height: 1.4em;
+    width: 1.4em;
+    border-radius: 50%;
+    text-align: center;
+}

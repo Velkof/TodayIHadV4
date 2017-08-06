@@ -41,14 +41,12 @@ export function fetchLoggedInUser(id) {
                 },
             })
             .then((response) => {
-                dispatch({type: "FETCH_LOGGED_IN_USER_FULFILLED", payload: response.data})
-            })
-            .catch((err) => {
+                dispatch({type: "FETCH_LOGGED_IN_USER_FULFILLED", payload: response.data});
+            }).catch((err) => {
                 dispatch({type: "FETCH_LOGGED_IN_USER_REJECTED", payload: err})
             })
     }
 }
-
 
 export function fetchAllUsersExceptLoggedIn(data) {
 
@@ -98,11 +96,33 @@ export function findUserByEmail(data) {
     }
 }
 
+export function fetchFollowedUsers(data) {
+    return function(dispatch) {
+
+        console.log("fetchFollowedUserddds", data);
+
+        dispatch({type: "FETCH_FOLLOWED_USERS"});
+
+        axios.get("http://localhost:9000/api/users",
+            {
+                'headers':{
+                    'Authorization': 'Bearer ' + token,
+                },
+                'params': {
+                    followedUsers: data,
+                }
+            })
+            .then((response) => {
+                dispatch({type: "FETCH_FOLLOWED_USERS_FULFILLED", payload: response.data})
+            })
+            .catch((err) => {
+                dispatch({type: "FETCH_FOLLOWED_USERS_REJECTED", payload: err})
+            })
+    }
+}
+
 export function updateUser ( data) {
     return function (dispatch) {
-
-        console.log("axios", data);
-
         axios.put('http://localhost:9000/api/users/' + data.user_id, {
             name: data.name,
             email: data.email,
@@ -116,11 +136,11 @@ export function updateUser ( data) {
                 'Authorization': 'Bearer ' + token,
             }
         })
-            .then(function (response) {
-                dispatch({type: "UPDATE_USER_FULFILLED", payload: response.data})
-            })
-            .catch(function (err) {
-                dispatch({type: "UPDATE_USER_REJECTED", payload: err})
-            });
+        .then(function (response) {
+            dispatch({type: "UPDATE_USER_FULFILLED", payload: response.data})
+        })
+        .catch(function (err) {
+            dispatch({type: "UPDATE_USER_REJECTED", payload: err})
+        });
     }
 }
