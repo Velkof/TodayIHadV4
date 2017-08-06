@@ -31,20 +31,20 @@ export default class FriendsContainer extends React.Component {
         super(props);
 
         this.state = {
-            render: "loading",
+            render: "friendList",
         };
 
+        if(this.props.userStore.followedUsers === null ) {
+            this.setState({render:"loading"});
+        }
+
         this.clickedUser = {};
-        this.friends = [];
     }
     componentWillMount() {
-        // this.props.dispatch(fetchAllUsersExceptLoggedIn(this.props.auth.profile.user_id));
         this.props.dispatch(fetchLoggedInUser(this.props.auth.profile.user_id));
     }
 
     componentWillReceiveProps(nextProps) {
-        //if loggedInUse has been fetched, get the users he's following
-        console.log("this props ", this.props, nextProps);
         if(this.props.userStore.loggedInUser === null && nextProps.userStore.loggedInUser) {
             this.props.dispatch(fetchFollowedUsers(nextProps.userStore.loggedInUser.followingUsers));
         }
@@ -117,8 +117,7 @@ export default class FriendsContainer extends React.Component {
                                         />
                                 </div>;
         }
-
-
+        
         return (
             <div className="main-layout">
                 <Header
