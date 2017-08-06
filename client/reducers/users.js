@@ -52,6 +52,12 @@ export default function reducer(state={
                 userByEmail: action.payload,
             };
         }
+        case "REMOVE_USER_BY_EMAIL_FULFILLED": {
+            return {
+                ...state,
+                userByEmail: {},
+            };
+        }
         case "FETCH_USER_BY_EMAIL_REJECTED": {
             return {...state, fetching: false, error: action.payload};
         }

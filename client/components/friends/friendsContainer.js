@@ -3,19 +3,14 @@
  */
 import React from "react";
 import { connect } from "react-redux";
-import Footer from "../footer/footer";
-import Header from "../header/header";
-import {
-    fetchAllUsersExceptLoggedIn, fetchUsers, fetchLoggedInUser, updateUser,
-    fetchFollowedUsers
-} from "../../actions/userActions";
+import {fetchLoggedInUser, updateUser, fetchFollowedUsers, removeUserByEmail} from "../../actions/userActions";
 import {Redirect} from "react-router-dom";
 import Friend from "./friend/friend";
 import Chat from "./chat/chat";
 import AddFriendModal from "../modals/addFriendModal";
-import AddUnitModal from "../modals/addUnitModal";
 import LoadingSwirl from "../loading/loadingSwirl";
-
+import Footer from "../footer/footer";
+import Header from "../header/header";
 
 
 @connect((store) => {
@@ -34,13 +29,12 @@ export default class FriendsContainer extends React.Component {
             render: "friendList",
         };
 
-        if(this.props.userStore.followedUsers === null ) {
-            this.setState({render:"loading"});
-        }
-
         this.clickedUser = {};
     }
     componentWillMount() {
+        if(this.props.userStore.followedUsers === null ) {
+            this.setState({render:"loading"});
+        }
         this.props.dispatch(fetchLoggedInUser(this.props.auth.profile.user_id));
     }
 
@@ -59,18 +53,22 @@ export default class FriendsContainer extends React.Component {
     backToFriendList() {
         this.setState({render:"friendList"});
     }
-    getDataFromAddFriendModal(userToFollow){
+    getDataFromAddFriendModal(data){
 
-        let updatedLoggedInUser = Object.assign({}, this.props.userStore.loggedInUser);
-        let updatedUserToFollow = Object.assign({}, userToFollow);
+        if(data === "removeAddedFriend") {
+            this.props.dispatch(removeUserByEmail());
+        } else {
+            let updatedLoggedInUser = Object.assign({}, this.props.userStore.loggedInUser);
+            let updatedUserToFollow = Object.assign({}, data);
 
-        updatedLoggedInUser.followingUsers.push(userToFollow.user_id);
-        updatedUserToFollow.followedByUsers.push(this.props.userStore.loggedInUser.user_id);
+            updatedLoggedInUser.followingUsers.push(data.user_id);
+            updatedUserToFollow.followedByUsers.push(this.props.userStore.loggedInUser.user_id);
 
-        this.props.dispatch(updateUser(updatedLoggedInUser));
-        this.props.dispatch(updateUser(updatedUserToFollow))
+            this.props.dispatch(updateUser(updatedLoggedInUser));
+            this.props.dispatch(updateUser(updatedUserToFollow))
+        }
+
     }
-
     render() {
         const {userStore, auth} = this.props;
 
@@ -115,9 +113,8 @@ export default class FriendsContainer extends React.Component {
                                             addedFriend = {userStore.userByEmail}
                                             dispatch = {this.props.dispatch}
                                         />
-                                </div>;
+                                  </div>;
         }
-        
         return (
             <div className="main-layout">
                 <Header

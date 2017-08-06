@@ -42,6 +42,9 @@ export default class AddFriendModal extends React.Component {
                 toggle: !prevState.toggle
             }));
             this.props.sendData(_this.props.addedFriend);
+        } else if (e.target.id === "closeBtn") {
+            this.setState({toggle:false});
+            this.props.sendData("removeAddedFriend");
         }
     }
     handleChange(e){
@@ -51,23 +54,31 @@ export default class AddFriendModal extends React.Component {
         let _this = this;
         let addedFriend;
 
-
         if(this.props.addedFriend === null) {
             addedFriend = <div>
                 <span className="c-red-important-info">There is no user with that email. Please try again.</span>
             </div>;
         } else if(this.props.addedFriend.user_id ) {
             addedFriend =<div >
-                <img src={this.props.addedFriend.picture} alt="friend profile pic" height="20rem" width="20rem" style={{borderRadius:"50%"}}/>
-                <span className="f-size-1_7">{this.props.addedFriend.name}</span>
+                <div>
+                    <img  id="viewProfile" src={this.props.addedFriend.picture_large} alt="Profile picture" height="85" width="85"
+                    style={{borderRadius:"50%",
+                        display: "block",
+                        margin: "0 auto",
+                        border: "1px solid white",}}/>
+                </div>
+                <div className="mt-1" style={{textAlign:"center", fontWeight:"bold", color:"#4f5256"}}>
+                    <p className="f-size-1_3">{this.props.addedFriend.name}</p>
+                </div>
             </div>;
+
         }
 
 
         const modal = <div className="modal modal-backdrop mr-1" style={this.state.toggle ? display : hide}>
             <div id="addFriendModal" className="modal-content">
                 <div className="modal-header">
-                    <button type="button" className="closeBtn" onClick={this.toggle.bind(this)}>&times;</button>
+                    <button id="closeBtn" type="button" className="closeBtn" onClick={this.handleClick.bind(this)}>&times;</button>
                     <h4 className="modal-title">Find and follow user</h4>
                 </div>
                 <div className="modal-body">

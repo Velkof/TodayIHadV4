@@ -96,6 +96,12 @@ export function findUserByEmail(data) {
     }
 }
 
+export function removeUserByEmail() {
+    return function(dispatch) {
+        dispatch({type: "REMOVE_USER_BY_EMAIL_FULFILLED", payload: null});
+    }
+}
+
 export function fetchFollowedUsers(data) {
     return function(dispatch) {
 
