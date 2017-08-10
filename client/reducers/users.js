@@ -81,16 +81,12 @@ export default function reducer(state={
                 users: [...state.users, action.payload],
             }
         }
-
         case "UPDATE_USER_FULFILLED": {
-            const { _id } = action.payload;
-            const newUsers = [...state.users];
-            const userToUpdate = newUsers.findIndex(user => user._id === _id);
-            newUsers[userToUpdate] = action.payload;
-
-            return {
-                ...state,
-                users: newUsers,
+            if(action.payload.user_id === state.loggedInUser.user_id) {
+                return {
+                    ...state,
+                    loggedInUser: action.payload
+                }
             }
         }
         case "UPDATE_USER_REJECTED": {

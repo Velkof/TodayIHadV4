@@ -148,3 +148,28 @@ export function updateUser ( data) {
         });
     }
 }
+
+export function updateAndFetchFollowingUsers(data) {
+    return function (dispatch) {
+        axios.put('http://localhost:9000/api/users/' + data.user_id, {
+            name: data.name,
+            email: data.email,
+            picture: data.picture,
+            picture_large: data.picture_large,
+            followingUsers: data.followingUsers,
+            followedByUsers: data.followedByUsers,
+            role: data.role,
+        }, {
+            'headers':{
+                'Authorization': 'Bearer ' + token,
+            }
+        })
+            .then(function (response) {
+                dispatch(fetchFollowedUsers(response.data.followingUsers));
+                dispatch({type: "UPDATE_USER_FULFILLED", payload: response.data})
+            })
+            .catch(function (err) {
+                dispatch({type: "UPDATE_USER_REJECTED", payload: err})
+            });
+    }
+}

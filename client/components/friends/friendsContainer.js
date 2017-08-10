@@ -3,7 +3,10 @@
  */
 import React from "react";
 import { connect } from "react-redux";
-import {fetchLoggedInUser, updateUser, fetchFollowedUsers, removeUserByEmail} from "../../actions/userActions";
+import {
+    fetchLoggedInUser, updateUser, fetchFollowedUsers, removeUserByEmail,
+    updateAndFetchFollowingUsers
+} from "../../actions/userActions";
 import {Redirect} from "react-router-dom";
 import Friend from "./friend/friend";
 import Chat from "./chat/chat";
@@ -20,7 +23,8 @@ import FriendProfile from "./friendProfile/friendProfile";
         userStore: store.users,
         auth: store.auth,
         chatMessages: store.chatMessages.chatMessages,
-        followedUsers: store.users.followedUsers
+        followedUsers: store.users.followedUsers,
+        loggedInUser: store.users.loggedInUser
     };
 })
 
@@ -43,9 +47,15 @@ export default class FriendsContainer extends React.Component {
 
     componentWillReceiveProps(nextProps) {
         if(this.props.userStore.loggedInUser === null && nextProps.userStore.loggedInUser) {
-            this.props.dispatch(fetchFollowedUsers(nextProps.userStore.loggedInUser.followingUsers));
-            this.props.dispatch(fetchChatMessagesForFollowedUsers(nextProps.userStore.loggedInUser));
+            if(nextProps.userStore.loggedInUser.followingUsers.length > 0) {
+                this.props.dispatch(fetchFollowedUsers(nextProps.userStore.loggedInUser.followingUsers));
+                this.props.dispatch(fetchChatMessagesForFollowedUsers(nextProps.userStore.loggedInUser));
+            } else {
+                this.setState({render:"friendList"});
+            }
         }
+
+
         if(this.props.followedUsers === null && nextProps.userStore.followedUsers) {
             this.setState({render:"friendList"});
         }
@@ -68,7 +78,8 @@ export default class FriendsContainer extends React.Component {
             updatedLoggedInUser.followingUsers.push(data.user_id);
             updatedUserToFollow.followedByUsers.push(this.props.userStore.loggedInUser.user_id);
 
-            this.props.dispatch(updateUser(updatedLoggedInUser));
+            // this.props.dispatch(updateUser(updatedLoggedInUser));
+            this.props.dispatch(updateAndFetchFollowingUsers(updatedLoggedInUser));
             this.props.dispatch(updateUser(updatedUserToFollow));
 
             this.props.dispatch(removeUserByEmail());
