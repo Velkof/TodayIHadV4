@@ -2,10 +2,9 @@
  * Created by Marjan on 06-Aug-17.
  */
 import React, { Component } from 'react';
-import loading from '../../assets/loaders/loading.svg';
+import loader from '../../assets/loaders/bars.svg';
 
-
-export default class LoadingSwirl extends Component {
+export default class LoadingBars extends Component {
     render() {
         const style = {
             position: 'absolute',
@@ -21,7 +20,7 @@ export default class LoadingSwirl extends Component {
 
         return (
             <div style={style}>
-                <img src={loading} alt="loading"/>
+                <img src={loader} alt="loading"/>
             </div>
         );
     }

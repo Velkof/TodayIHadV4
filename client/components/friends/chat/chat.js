@@ -16,13 +16,14 @@ class Chat extends Component {
             sender: this.props.user_id,
             receiver: this.props.friend.user_id,
         };
+
     }
     componentWillMount(){
-        let data = {
-            loggedInUser: this.props.user_id,
-            otherUser: this.props.friend.user_id,
-        };
-        this.props.dispatch(fetchChatMessagesBetweenUsers(data));
+        // let data = {
+        //     loggedInUserId: this.props.user_id,
+        //     otherUserId: this.props.friend.user_id,
+        // };
+        // this.props.dispatch(fetchChatMessagesBetweenUsers(data));
         $.material.init();
     }
     addMessage(){
@@ -31,10 +32,6 @@ class Chat extends Component {
     }
     componentDidUpdate(){
         this.messagesEnd.scrollIntoView();
-    }
-    handleClick(event){
-        event.stopPropagation();
-        this.props.backToFriendList();
     }
     handleChange = (e) => this.setState({[e.target.id]: e.target.value });
     render() {

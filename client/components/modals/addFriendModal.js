@@ -53,27 +53,42 @@ export default class AddFriendModal extends React.Component {
     render() {
         let _this = this;
         let addedFriend;
+        let followUserBtn;
 
         if(this.props.addedFriend === null) {
             addedFriend = <div>
                 <span className="c-red-important-info">There is no user with that email. Please try again.</span>
             </div>;
-        } else if(this.props.addedFriend.user_id ) {
-            addedFriend =<div >
-                <div>
-                    <img  id="viewProfile" src={this.props.addedFriend.picture_large} alt="Profile picture" height="85" width="85"
-                    style={{borderRadius:"50%",
-                        display: "block",
-                        margin: "0 auto",
-                        border: "1px solid white",}}/>
-                </div>
-                <div className="mt-1" style={{textAlign:"center", fontWeight:"bold", color:"#4f5256"}}>
-                    <p className="f-size-1_3">{this.props.addedFriend.name}</p>
-                </div>
-            </div>;
+        } else if(this.props.addedFriend.user_id) {
+            if(this.props.addedFriend.user_id === this.props.loggedInUser.user_id) {
+                addedFriend = <div>
+                    <span className="c-red-important-info">You have entered your own email. Please try again.</span>
+                </div>;
+            } else if(this.props.loggedInUser.followingUsers.indexOf(this.props.addedFriend.user_id) > -1){
+                addedFriend = <div>
+                    <span className="c-red-important-info">You are already following this user.</span>
+                </div>;
+            } else {
+                addedFriend =<div >
+                    <div>
+                        <img  id="friendProfile" src={this.props.addedFriend.picture_large} alt="Profile picture" height="85" width="85"
+                        style={{borderRadius:"50%",
+                            display: "block",
+                            margin: "0 auto",
+                            border: "1px solid white",}}/>
+                    </div>
+                    <div className="mt-1" style={{textAlign:"center", fontWeight:"bold", color:"#4f5256"}}>
+                        <p className="f-size-1_3">{this.props.addedFriend.name}</p>
+                    </div>
+                </div>;
 
+                followUserBtn = (
+                            <div onClick={this.handleClick.bind(this)}>
+                                <a id="followUser" className="btn c-white bg-c-green-success full-width">Follow user</a>
+                            </div>
+                );
+            }
         }
-
 
         const modal = <div className="modal modal-backdrop mr-1" style={this.state.toggle ? display : hide}>
             <div id="addFriendModal" className="modal-content">
@@ -87,26 +102,33 @@ export default class AddFriendModal extends React.Component {
                         <input id="name" type="email" value={this.state.friendsEmail  || ''} onChange={this.handleChange.bind(this)} className="form-control" />
                     </div>
                     <div className="form-group col-xs-3 px-0 mt-0" style={{textAlign:"center"}}>
-                        <button id="addFriend" className="btn btn-success" onClick={this.handleClick.bind(this)}>Find</button>
+                        <button id="addFriend" className="btn btn-success px-1" onClick={this.handleClick.bind(this)}>Find</button>
                     </div>
                     <div>
                         {addedFriend}
                     </div>
                 </div>
-                <div className="modal-footer full-width" style={{clear:"both"}} onClick={this.handleClick.bind(this)}>
-                    <a id="followUser" className="btn c-white bg-c-green-success full-width">Follow user</a>
+                <div className="modal-footer full-width" style={{clear:"both"}} >
+                    {followUserBtn}
                 </div>
+
             </div>
         </div>;
         return (
             <div>
-                <div id="follow-friends-btn-container" onClick={this.toggle.bind(this)}>
-                    <div id="follow-friends-btn" className="btn btn-success my-0">
-                        follow user
+                <div className="col-xs-4 mt-2 px-0"  style={{height:"12em", textAlign:"center"}}>
+                    <div className="addFriendBtn" onClick={this.toggle.bind(this)} >
+                        <i className="glyphicon glyphicon-plus material-icons"></i>
+                    </div>
+                    <div className="mt-1" style={{textAlign:"center", fontWeight:"bold", color:"#4f5256",  textOverflow: "ellipsis"}}>
+                        <p className="f-size-1_3">Follow friend</p>
                     </div>
                 </div>
                 {modal}
             </div>
-        );
+
+
+
+    );
     }
 }

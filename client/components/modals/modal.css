@@ -30,18 +30,17 @@
     border-bottom: 1px solid lightgrey;
 }
 
-#follow-friends-btn-container{
-    position:fixed;
-    bottom: 5em;
-    left: 0;
-    width: 100%;
-    text-align:center;
-    z-index: 999;
+.addFriendBtn {
+    height: 85px;
+    width: 85px;
+    color: grey;
+    border: 4px solid grey;
+    border-radius: 50%;
+    display: inline-block;
+    cursor: pointer;
 }
 
-#follow-friends-btn{
-    width:100%;
-    max-width: 540px!important;
-    margin: 0 auto!important;
-    color:green;
+.addFriendBtn i {
+    font-size: 20px;
+    line-height: 75px;
 }

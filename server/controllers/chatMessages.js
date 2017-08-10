@@ -47,7 +47,34 @@ router.route('/')
 
     }).get( function(req, res) {
 
-        if (!req.query.loggedInUser) {
+        if (req.query.loggedInUserId && req.query.otherUserId) {
+            //find chat messages between logged in user and a specific user he's following
+            ChatMessage.find({
+                $or: [
+                    {'sender': req.query.loggedInUserId, 'receiver': req.query.otherUserId},
+                    {'sender': req.query.otherUserId, 'receiver': req.query.loggedInUserId}
+                ]
+            }, function (err, chatMessages) {
+                if (err) {
+                    res.send(err);
+                }
+                res.json(chatMessages);
+            });
+        } else if(req.query.loggedInUserId && req.query.followingUsers) {
+            //find chat messages between logged in user and all the users he's following
+            ChatMessage.find({
+                $or: [
+                    {'sender': req.query.loggedInUserId, 'receiver': { $in:  req.query.followingUsers}},
+                    {'sender': { $in:  req.query.followingUsers}, 'receiver': req.query.loggedInUserId}
+                ]
+            }, function (err, chatMessages) {
+                if (err) {
+                    res.send(err);
+                }
+                res.json(chatMessages);
+            });
+
+        } else {
             ChatMessage.find({}, function(err, chatMessages) {
                 if (err) {
                     res.send(err);
@@ -55,18 +82,6 @@ router.route('/')
 
                 res.json(chatMessages);
             });
-        } else {
-
-            ChatMessage.find({$or:[
-                {'sender': req.query.loggedInUser, 'receiver': req.query.otherUser},
-                {'sender': req.query.otherUser, 'receiver': req.query.loggedInUser}
-            ]}, function(err, chatMessages){
-                if (err) {
-                    res.send(err);
-                }
-                res.json(chatMessages);
-            });
-
         }
 
 });

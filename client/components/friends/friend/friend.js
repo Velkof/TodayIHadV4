@@ -23,17 +23,24 @@ class Friend extends Component {
     }
     render() {
         const {user} = this.props;
+        let userName = "";
+
+        if(user.name.length > 24) {
+            userName = user.name.substring(0, 24) + "...";
+        } else {
+            userName = user.name;
+        }
 
         return (
-            <div className="col-xs-4 mt-2"  onClick={this.handleClick.bind(this, user)}>
+            <div className="col-xs-4 mt-2 px-0"  onClick={this.handleClick.bind(this, user)} style={{height:"12em"}}>
                 <div>
-                    <img  id="viewProfile" src={user.picture_large} alt="Profile picture" height="85" width="85"/>
+                    <img  id="friendProfile" src={user.picture_large} alt="Profile picture" height="85" width="85"  style={{cursor:"pointer"}}/>
                 </div>
-                <div className="mt-1" style={{textAlign:"center", fontWeight:"bold", color:"#4f5256"}}>
-                    <p className="f-size-1_3">{user.name}</p>
+                <div className="mt-1 truncate" style={{textAlign:"center", fontWeight:"bold", color:"#4f5256",  textOverflow: "ellipsis"}}>
+                    <p className="f-size-1_3">{userName}</p>
                 </div>
-                <div id="chat"  className="c-green-success" onClick={this.handleClick.bind(this, user)}>
-                    8
+                <div id="chat"  className="c-green-success"  style={{cursor:"pointer"}} onClick={this.handleClick.bind(this, user)}>
+                    {this.props.unseenMessagesCount}
                 </div>
             </div>
         );

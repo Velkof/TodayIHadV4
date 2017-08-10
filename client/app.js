@@ -5,6 +5,7 @@ import styles from './assets/stylesheets/main.css';
 import sizesAndPositioning from './assets/stylesheets/sizesAndPositioning.css';
 import colors from './assets/stylesheets/colors.css';
 import overrides from './assets/stylesheets/overrides.css';
+import animations from './assets/stylesheets/animations.css';
 
 import Bootstrap from 'bootstrap/dist/css/bootstrap.css';
 import BootstrapMaterialDesign from "bootstrap-material-design/dist/css/bootstrap-material-design.css";

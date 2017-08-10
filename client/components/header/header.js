@@ -22,7 +22,7 @@ class Header extends Component {
         event.stopPropagation();
         let mainComponent = this.props.mainComponent;
 
-        if(mainComponent === "chat") {
+        if(mainComponent === "chat" || mainComponent === "friendProfile") {
             this.props.backToFriendList();
         } else if (mainComponent === "editRecipe" || mainComponent === "editFood" || mainComponent === "deleteFood") {
             this.props.backToFoodList();
@@ -42,13 +42,13 @@ class Header extends Component {
 
         if( mainComponent === "chat" || mainComponent === "editRecipe" ||
             mainComponent === "editFood" || mainComponent === "deleteFood" ||
-            mainComponent === "dashboard" || mainComponent === "ingredientSearch") {
+            mainComponent === "dashboard" || mainComponent === "ingredientSearch" ||
+            mainComponent === "friendProfile") {
             leftSideOfHeader =<div  className="btn btn-default px-1 m-0 f-size-2" onClick={this.handleClick.bind(this)}>
                 <span className="glyphicon glyphicon-menu-left c-white" style={{lineHeight:"1.5em", }}></span>
             </div>;
         } else {
             leftSideOfHeader = <li className="f-size-2 ">TodayIHad</li>;
-
         }
 
         return (

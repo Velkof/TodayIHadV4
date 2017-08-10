@@ -105,8 +105,6 @@ export function removeUserByEmail() {
 export function fetchFollowedUsers(data) {
     return function(dispatch) {
 
-        console.log("fetchFollowedUserddds", data);
-
         dispatch({type: "FETCH_FOLLOWED_USERS"});
 
         axios.get("http://localhost:9000/api/users",

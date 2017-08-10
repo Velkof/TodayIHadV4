@@ -12,9 +12,6 @@ export default function reducer(state={
         case "FETCH_CHAT_MESSAGES_BETWEEN_USERS": {
             return {...state, fetching: true};
         }
-        case "FETCH_CHAT_MESSAGES_BETWEEN_USERS_REJECTED": {
-            return {...state, fetching: false, error: action.payload};
-        }
         case "FETCH_CHAT_MESSAGES_BETWEEN_USERS_FULFILLED": {
             return {
                 ...state,
@@ -22,6 +19,23 @@ export default function reducer(state={
                 fetched: true,
                 chatMessages: action.payload,
             };
+        }
+        case "FETCH_CHAT_MESSAGES_BETWEEN_USERS_REJECTED": {
+            return {...state, fetching: false, error: action.payload};
+        }
+        case "FETCH_CHAT_MESSAGES_FOR_FOLLOWED_USERS": {
+            return {...state, fetching: true};
+        }
+        case "FETCH_CHAT_MESSAGES_FOR_FOLLOWED_USERS_FULFILLED": {
+            return {
+                ...state,
+                fetching: false,
+                fetched: true,
+                chatMessages: action.payload,
+            };
+        }
+        case "FETCH_CHAT_MESSAGES_FOR_FOLLOWED_USERS_REJECTED": {
+            return {...state, fetching: false, error: action.payload};
         }
         case "ADD_CHAT_MESSAGE_FULFILLED": {
             return {

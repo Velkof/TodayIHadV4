@@ -16,8 +16,8 @@ export function fetchChatMessagesBetweenUsers(data) {
                 'Authorization': 'Bearer ' + token,
             },
             'params': {
-                loggedInUser: data.loggedInUser,
-                otherUser: data.otherUser,
+                loggedInUserId: data.loggedInUserId,
+                otherUserId: data.otherUserId,
             }
         })
         .then((response) => {
@@ -26,6 +26,31 @@ export function fetchChatMessagesBetweenUsers(data) {
         .catch((err) => {
             dispatch({type: "FETCH_CHAT_MESSAGES_BETWEEN_USERS_REJECTED", payload: err})
         })
+    }
+}
+
+export function fetchChatMessagesForFollowedUsers(data) {
+
+    return function(dispatch) {
+
+        dispatch({type: "FETCH_CHAT_MESSAGES_FOR_FOLLOWED_USERS"});
+
+        axios.get("http://localhost:9000/api/chatMessages",
+            {
+                'headers':{
+                    'Authorization': 'Bearer ' + token,
+                },
+                'params': {
+                    loggedInUserId: data.user_id,
+                    followingUsers: data.followingUsers
+                }
+            })
+            .then((response) => {
+                dispatch({type: "FETCH_CHAT_MESSAGES_FOR_FOLLOWED_USERS_FULFILLED", payload: response.data})
+            })
+            .catch((err) => {
+                dispatch({type: "FETCH_CHAT_MESSAGES_FOR_FOLLOWED_USERS_REJECTED", payload: err})
+            })
     }
 }
 
