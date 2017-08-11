@@ -117,10 +117,12 @@ export default class AddFriendModal extends React.Component {
         return (
             <div>
                 <div className="col-xs-4 mt-2 px-0"  style={{height:"12em", textAlign:"center"}}>
-                    <div className="addFriendBtn" onClick={this.toggle.bind(this)} >
-                        <i className="glyphicon glyphicon-plus material-icons"></i>
+                    <div className="addFriendBtnContainer">
+                        <div className="addFriendBtn " onClick={this.toggle.bind(this)} >
+                            <i className="glyphicon glyphicon-plus material-icons"></i>
+                        </div>
                     </div>
-                    <div className="mt-1" style={{textAlign:"center", fontWeight:"bold", color:"#4f5256",  textOverflow: "ellipsis"}}>
+                    <div className="" style={{textAlign:"center", fontWeight:"bold", color:"#4f5256",  textOverflow: "ellipsis"}}>
                         <p className="f-size-1_3">Follow friend</p>
                     </div>
                 </div>

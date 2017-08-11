@@ -44,3 +44,10 @@
     font-size: 20px;
     line-height: 75px;
 }
+
+.addFriendBtnContainer{
+    position: relative;
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+}
