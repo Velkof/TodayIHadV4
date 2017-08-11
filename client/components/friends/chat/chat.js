@@ -6,6 +6,8 @@ import styles from './chat.css';
 import {addChatMessage, fetchChatMessagesBetweenUsers} from "../../../actions/chatActions";
 import Message from "../message/message";
 
+import openSocket from 'socket.io-client';
+const socket = openSocket('http://localhost:9000');
 
 class Chat extends Component {
     constructor(props) {
@@ -15,19 +17,44 @@ class Chat extends Component {
             message: "",
             sender: this.props.user_id,
             receiver: this.props.friend.user_id,
+            room: "",
         };
 
     }
-    componentWillMount(){
-        // let data = {
-        //     loggedInUserId: this.props.user_id,
-        //     otherUserId: this.props.friend.user_id,
-        // };
-        // this.props.dispatch(fetchChatMessagesBetweenUsers(data));
+    componentDidMount(){
+        let room;
+        //room name will be unique for this chat room by combining the ids of users.
+        // The id of the user which was created first will be the first part of the room name
+        if(this.props.loggedInUser.createdAt < this.props.friend.createdAt) {
+            room = this.props.loggedInUser.user_id + this.props.friend.user_id;
+        } else {
+            room = this.props.friend.user_id + this.props.loggedInUser.user_id;
+        }
+
+        socket.emit("subscribe", { room: room });
+
+        this.setState({room:room});
+
+        this.messagesEnd.scrollIntoView();
+
+        this.handleMessageEvent();
         $.material.init();
     }
+    handleMessageEvent(){
+        let _this = this;
+
+
+        socket.on('message', (inboundMessage) => {
+            let data = {
+                loggedInUserId: _this.props.loggedInUser.user_id,
+                message: inboundMessage.message,
+            };
+
+            this.props.dispatch(addChatMessage(data));
+        })
+    }
     addMessage(){
-        this.props.dispatch(addChatMessage(this.state));
+        socket.emit('message', { message: this.state});
         this.setState({message:""});
     }
     componentDidUpdate(){
@@ -70,6 +97,7 @@ class Chat extends Component {
                     <div className="messages-container">
                         {loadMoreMessages}
                         {messages}
+
                         <div ref={(el) => { this.messagesEnd = el; }}></div>
                     </div>
                     <div className="chat-form-container pb-0 px-0 mx-0">

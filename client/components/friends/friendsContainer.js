@@ -18,6 +18,8 @@ import {fetchChatMessagesBetweenUsers, fetchChatMessagesForFollowedUsers} from "
 import FriendProfile from "./friendProfile/friendProfile";
 
 
+
+
 @connect((store) => {
     return {
         userStore: store.users,
@@ -87,7 +89,7 @@ export default class FriendsContainer extends React.Component {
 
     }
     render() {
-        const {userStore, auth, followedUsers, chatMessages} = this.props;
+        const {userStore, auth, followedUsers, chatMessages, loggedInUser} = this.props;
 
         let friends = [];
         let componentsToRender = null;
@@ -116,7 +118,7 @@ export default class FriendsContainer extends React.Component {
                     unseenMessagesForUserCount = messagesForUser.filter(unseenMessagesForCurrentUserCount).length;
 
                     function unseenMessagesForCurrentUserCount(message) {
-                        return message.seen === false && message.receiver === user.user_id;
+                        return message.seen === false && message.receiver === loggedInUser.user_id;
                     }
 
                     friend =<Friend
@@ -140,8 +142,9 @@ export default class FriendsContainer extends React.Component {
                                     dispatch = {this.props.dispatch}
                                     backToFriendList = {this.backToFriendList.bind(this)}
                                     user_id = {auth.profile.user_id}
-                                    // chatMessages = {this.props.chatMessages}
-                                    chatMessages = {messagesForUser}
+                                    loggedInUser = {loggedInUser}
+                                    chatMessages = {this.props.chatMessages}
+                                    // chatMessages = {messagesForUser}
             />
         } else if(this.state.render === "loading") {
 

@@ -10,6 +10,19 @@ const path = require('path');
 const controllers = require('./controllers');
 const fs = require('fs');
 const app = express();
+const server = require('http').Server(app);
+const io = require('socket.io')(server);
+
+io.on('connection', (client) => {
+    // here you can start emitting events to the client
+    client.on('subscribe', function(data) { client.join(data.room); });
+
+    client.on('unsubscribe', function(data) { client.leave(data.room); });
+
+    client.on('message', function(message) {
+        io.in('facebook|897985693710765facebook|100797550626633').emit('message', message);
+    });
+});
 
 const pe = new PrettyError();
 pe.start();
@@ -30,7 +43,6 @@ const hbs = exphbs.create({
     layoutsDir: __dirname + '/views/layouts'
 });
 
-
 const models_path = __dirname + '/models';
 
 fs.readdirSync(models_path).forEach(function (file) {
@@ -50,7 +62,7 @@ if(!config('app.isProduction')) {
 
 if(config('app.port')) {
 
-    app.listen(config('app.port'), (err) => {
+    server.listen(config('app.port'), (err) => {
         if (err) {
             console.error(err);
         }

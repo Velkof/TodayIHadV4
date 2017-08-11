@@ -5,6 +5,7 @@ import axios from "axios";
 
 const token = localStorage.getItem('id_token');
 
+
 export function fetchChatMessagesBetweenUsers(data) {
     return function(dispatch) {
 
@@ -57,21 +58,29 @@ export function fetchChatMessagesForFollowedUsers(data) {
 export function addChatMessage( data) {
     return function (dispatch) {
 
-        axios.post('http://localhost:9000/api/chatMessages', {
-            sender: data.sender,
-            receiver: data.receiver,
-            message: data.message,
-            seen: false,
-        }, {
-            'headers':{
-                'Authorization': 'Bearer ' + token,
-            }
-        })
-        .then(function (response) {
-            dispatch({type: "ADD_CHAT_MESSAGE_FULFILLED", payload: response.data})
-        })
-        .catch(function (err) {
-            dispatch({type: "ADD_CHAT_MESSAGE_REJECTED", payload: err})
-        });
+        let loggedInUserId = data.loggedInUserId;
+        let message = data.message;
+
+        if(loggedInUserId === message.sender) {
+            axios.post('http://localhost:9000/api/chatMessages', {
+                sender: message.sender,
+                receiver: message.receiver,
+                message: message.message,
+                room: message.room,
+                seen: false,
+            }, {
+                'headers':{
+                    'Authorization': 'Bearer ' + token,
+                }
+            })
+            .then(function (response) {
+                dispatch({type: "ADD_CHAT_MESSAGE_FULFILLED", payload: response.data})
+            })
+            .catch(function (err) {
+                dispatch({type: "ADD_CHAT_MESSAGE_REJECTED", payload: err})
+            });
+        } else {
+            dispatch({type: "ADD_CHAT_MESSAGE_FULFILLED", payload: message})
+        }
     }
 }

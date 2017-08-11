@@ -32,16 +32,30 @@ class Friend extends Component {
         }
 
         return (
-            <div className="col-xs-4 mt-2 px-0"  onClick={this.handleClick.bind(this, user)} style={{height:"12em"}}>
-                <div>
-                    <img  id="friendProfile" src={user.picture_large} alt="Profile picture" height="85" width="85"  style={{cursor:"pointer"}}/>
+            <div>
+                <div className="col-xs-4 mt-2 px-0"  onClick={this.handleClick.bind(this, user)} style={{height:"12em"}}>
+                    <div>
+                        <img  id="friendProfile" src={user.picture_large} alt="Profile picture" height="85" width="85"  style={{cursor:"pointer"}}/>
+                    </div>
+                    <div className="mt-1 truncate" style={{textAlign:"center", fontWeight:"bold", color:"#4f5256",  textOverflow: "ellipsis"}}>
+                        <p className="f-size-1_3">{userName}</p>
+                    </div>
+                    <div id="chat"  className="c-green-success"  style={{cursor:"pointer"}} onClick={this.handleClick.bind(this, user)}>
+                        {this.props.unseenMessagesCount}
+                    </div>
                 </div>
-                <div className="mt-1 truncate" style={{textAlign:"center", fontWeight:"bold", color:"#4f5256",  textOverflow: "ellipsis"}}>
-                    <p className="f-size-1_3">{userName}</p>
-                </div>
-                <div id="chat"  className="c-green-success"  style={{cursor:"pointer"}} onClick={this.handleClick.bind(this, user)}>
-                    {this.props.unseenMessagesCount}
-                </div>
+                {/*<div className="col-xs-4 mt-2 px-0"  onClick={this.handleClick.bind(this, user)} style={{height:"12em"}}>*/}
+                    {/*<div>*/}
+                        {/*<img  id="friendProfile" src={user.picture_large} alt="Profile picture" height="85" width="85"  style={{cursor:"pointer"}}/>*/}
+                    {/*</div>*/}
+                    {/*<div className="mt-1 truncate" style={{textAlign:"center", fontWeight:"bold", color:"#4f5256",  textOverflow: "ellipsis"}}>*/}
+                        {/*<p className="f-size-1_3">{userName}</p>*/}
+                    {/*</div>*/}
+                    {/*<div id="chat"  className="c-green-success"  style={{cursor:"pointer"}} onClick={this.handleClick.bind(this, user)}>*/}
+                        {/*{this.props.unseenMessagesCount}*/}
+                    {/*</div>*/}
+                {/*</div>*/}
+
             </div>
         );
     };

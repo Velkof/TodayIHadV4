@@ -17,6 +17,10 @@ const ChatMessageSchema = new Schema({
         type: String,
         required: true
     },
+    room: {
+        type: String,
+        required: true
+    },
     seen:  {
         type: Boolean,
         required: true

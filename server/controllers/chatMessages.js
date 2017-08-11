@@ -35,6 +35,7 @@ router.route('/')
         chatMessage.sender = req.body.sender;
         chatMessage.receiver = req.body.receiver;
         chatMessage.message = req.body.message;
+        chatMessage.room = req.body.room;
         chatMessage.seen = req.body.seen;
         chatMessage.createdAt = new Date();
         chatMessage.updatedAt = new Date();
