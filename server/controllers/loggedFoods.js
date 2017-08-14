@@ -9,6 +9,7 @@ const jwksRsa = require('jwks-rsa');
 const cors = require('cors');
 const config = require('../config');
 const validator = require('validator');
+const moment = require('moment');
 
 
 router.use(cors());
@@ -48,6 +49,7 @@ router.route('/')
         loggedFood.fatPoly = req.body.fatPoly;
         loggedFood.sodium = req.body.sodium;
         loggedFood.cholesterol = req.body.cholesterol;
+        loggedFood.addedBy = req.body.addedBy;
         loggedFood.createdAt = new Date();
         loggedFood.updatedAt = new Date();
 
@@ -59,13 +61,31 @@ router.route('/')
 
     }).get( function(req, res) {
 
-    LoggedFood.find({}, function(err, loggedFoods) {
-        if (err){
-            res.send(err);
-        }
+    if (req.query.loggedInUserId && req.query.dateFrom && req.query.dateTo) {
 
-        res.json(loggedFoods);
-    });
+        LoggedFood.find(
+            {$and:
+                [
+                    {createdAt: {$gte: req.query.dateFrom, $lt: req.query.dateTo}},
+                    {addedBy:req.query.loggedInUserId}
+                ]
+            },
+            function(err, loggedFoods) {
+            if (err){
+                res.send(err);
+            }
+
+            res.json(loggedFoods);
+        });
+    } else {
+        LoggedFood.find({}, function(err, loggedFoods) {
+            if (err){
+                res.send(err);
+            }
+
+            res.json(loggedFoods);
+        });
+    }
 });
 
 router.route('/:id')

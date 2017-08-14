@@ -60,6 +60,9 @@ class Chat extends Component {
     componentDidUpdate(){
         this.messagesEnd.scrollIntoView();
     }
+    componentWillUnmount(){
+        socket.emit("unsubscribe", { room: this.state.room });
+    }
     handleChange = (e) => this.setState({[e.target.id]: e.target.value });
     render() {
         const {friend, chatMessages} = this.props;

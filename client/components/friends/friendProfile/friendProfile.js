@@ -15,8 +15,8 @@ class FriendProfile extends Component {
         const {friend} = this.props;
 
         return (
-            <div >
-                <h3>FRIEND PROFILE</h3>
+            <div className="" style={{textAlign:"center"}}>
+                <img  id="friendProfile" className="cursor-pointer mt-1" src={friend.picture_large} alt="Profile picture" height="120" width="120"  />
                 <h4>{friend.name}</h4>
             </div>
         );

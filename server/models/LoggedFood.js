@@ -37,6 +37,10 @@ const LoggedFoodSchema = new Schema({
         type: Number,
         required: true
     },
+    addedBy:  {
+        type: String,
+        required: true
+    },
     createdAt: Date,
     updatedAt: Date,
     sugar: Number,

@@ -2,11 +2,16 @@
  * Created by Marjan on 19-Jul-17.
  */
 import axios from "axios";
+import moment from "moment";
 
 const token = localStorage.getItem('id_token');
 
-export function fetchLoggedFoods() {
+export function fetchLoggedFoods(data) {
     return function(dispatch) {
+
+        let dateFrom = moment(data.date).format("MM/DD/YYYY");
+        let dateTo =  moment(data.date).add(1, 'days').format("MM/DD/YYYY");
+
 
         dispatch({type: "FETCH_LOGGED_FOODS"});
 
@@ -14,8 +19,14 @@ export function fetchLoggedFoods() {
             {
                 'headers':{
                     'Authorization': 'Bearer ' + token,
+                },
+                'params': {
+                    loggedInUserId: data.loggedInUserId,
+                    dateFrom: dateFrom,
+                    dateTo: dateTo,
                 }
             })
+
             .then((response) => {
                 dispatch({type: "FETCH_LOGGED_FOODS_FULFILLED", payload: response.data})
             })
@@ -47,6 +58,7 @@ export function addLoggedFood( data) {
             fatPoly: data.fatPoly,
             fatSat: data.fatSat,
             sodium: data.sodium,
+            addedBy: data.addedBy,
         }, {
             'headers':{
                 'Authorization': 'Bearer ' + token,

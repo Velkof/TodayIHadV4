@@ -12,12 +12,14 @@ import Header from "../header/header";
 import FoodModal from "../modals/foodModal";
 import DailyStats from "./dailyStats/dailyStats";
 import Redirect from "react-router-dom/es/Redirect";
+import moment from "moment";
 
 @connect((store) => {
     return {
         loggedFoods: store.loggedFoods.loggedFoods,
         foods: store.foods.foods,
-        isAuthenticated:store.auth.isAuthenticated
+        isAuthenticated:store.auth.isAuthenticated,
+        loggedInUserId: store.auth.profile.user_id,
     };
 })
 
@@ -31,26 +33,61 @@ export default class DashboardContainer extends React.Component {
             foodModalAction: "",
             clickedFood:{},
             search: '',
+            date: Date.now(),
         };
 
         this.loggedFoodsForDay = [];
     }
     componentWillMount() {
-        this.props.dispatch(fetchLoggedFoods());
+        let _this = this;
+
+        this.fetchLoggedFoodsForDate(this.state.date);
         this.props.dispatch(fetchFoods());
         $.material.init();
     }
+    fetchLoggedFoodsForDate(date){
+        let data = {
+            loggedInUserId: this.props.loggedInUserId,
+            date: date,
+        };
+        this.props.dispatch(fetchLoggedFoods(data));
+    }
     handleChange = (e) => this.setState({[e.target.id]: e.target.value});
     handleClick(e) {
-        let showSearchPage = !this.state.showSearchPage;
-        this.setState({showSearchPage:showSearchPage});
+        let _this = this;
+        let date = this.state.date;
+        let dayBefore;
+        let dayAfter;
+
+
+        if(e && e.target && e.target.id) {
+            if(e.target.id === "dayBefore") {
+                dayBefore = new Date(date);
+                dayBefore.setDate(dayBefore.getDate() -1);
+                _this.setState({date:dayBefore});
+                _this.fetchLoggedFoodsForDate(dayBefore);
+            } else {
+                dayAfter = new Date(date);
+                dayAfter.setDate(dayAfter.getDate() + 1);
+                _this.setState({date:dayAfter});
+                _this.fetchLoggedFoodsForDate(dayAfter);
+            }
+        } else {
+            let showSearchPage = !this.state.showSearchPage;
+            this.setState({showSearchPage:showSearchPage});
+        }
+
     }
     getFood(data){
+
+        let addedBy;
+
         if(data.action === "deleteLoggedFood") {
             this.props.dispatch(deleteLoggedFood(data.food));
         } else if (data.action === "updateLoggedFood") {
             this.props.dispatch(updateLoggedFood(data.food));
         } else {
+            data.food.addedBy = this.props.loggedInUserId;
             this.props.dispatch(addLoggedFood(data.food));
         }
 
@@ -122,10 +159,12 @@ export default class DashboardContainer extends React.Component {
                             </div>
                         </div>);
 
-            dailyStats = <DailyStats
-                loggedFoods = {loggedFoods}
-            />;
+
         }
+
+        dailyStats = <DailyStats
+            loggedFoods = {loggedFoods}
+        />;
 
         if (this.state.showFoodModal) {
             foodModal = <FoodModal
@@ -165,7 +204,7 @@ export default class DashboardContainer extends React.Component {
                         <div className="container-mob">
 
                             <div id="searchFoods" className="searchBar form-group mt-1 pb-0" onClick={this.handleClick.bind(this)}>
-                                <input type="text"  value=""  placeholder="Search for food"/>
+                                <input type="text" value=""  placeholder="Search for food"/>
                                 <i className="glyphicon glyphicon-search form-control-feedback"></i>
                             </div>
 
@@ -175,19 +214,19 @@ export default class DashboardContainer extends React.Component {
                                 <p>FOOD LOG</p>
                             </div>
                             <div className="col-xs-12 px-0 my-1">
-                                <div className="col-xs-3 px-0 f-size-2" style={{textAlign:"center", WebkitTextStroke: "2px white"}}>
+                                <div className="col-xs-3 px-0 f-size-2" style={{textAlign:"center", WebkitTextStroke: "2px white"}} onClick={this.handleClick.bind(this)}>
                                     <div className="bg-c-white c-green">
-                                        <span className="lh-2 glyphicon glyphicon-chevron-left"></span>
+                                        <span id="dayBefore" className="lh-2 glyphicon glyphicon-chevron-left  full-width"></span>
                                     </div>
                                 </div>
                                 <div className="col-xs-6 f-size-2" style={{textAlign:"center",}}>
                                     <div className="bg-c-white px-0 c-green">
-                                        <span className="lh-2">12.07.2017</span>
+                                        <span className="lh-2">{moment(this.state.date).format("DD/MM/YYYY")}</span>
                                     </div>
                                 </div>
-                                <div className="col-xs-3 px-0 f-size-2" style={{textAlign:"center",  WebkitTextStroke: "2px white"}}>
+                                <div className="col-xs-3 px-0 f-size-2" style={{textAlign:"center",  WebkitTextStroke: "2px white"}} onClick={this.handleClick.bind(this)}>
                                     <div className="bg-c-white c-green">
-                                        <span className="lh-2 glyphicon glyphicon-chevron-right"></span>
+                                        <span id="dayAfter" className="lh-2 glyphicon glyphicon-chevron-right full-width"></span>
                                     </div>
                                 </div>
                             </div>

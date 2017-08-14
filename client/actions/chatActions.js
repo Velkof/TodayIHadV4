@@ -69,18 +69,18 @@ export function addChatMessage( data) {
                 room: message.room,
                 seen: false,
             }, {
-                'headers':{
+                'headers': {
                     'Authorization': 'Bearer ' + token,
                 }
             })
-            .then(function (response) {
-                dispatch({type: "ADD_CHAT_MESSAGE_FULFILLED", payload: response.data})
-            })
-            .catch(function (err) {
-                dispatch({type: "ADD_CHAT_MESSAGE_REJECTED", payload: err})
-            });
-        } else {
-            dispatch({type: "ADD_CHAT_MESSAGE_FULFILLED", payload: message})
+                .then(function (response) {
+                    dispatch({type: "ADD_CHAT_MESSAGE_FULFILLED", payload: response.data})
+                })
+                .catch(function (err) {
+                    dispatch({type: "ADD_CHAT_MESSAGE_REJECTED", payload: err})
+                });
+        } else  {
+            dispatch({type: "ADD_CHAT_MESSAGE_FULFILLED", payload: message});
         }
     }
 }
