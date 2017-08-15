@@ -68,12 +68,12 @@ export default class DashboardContainer extends React.Component {
             if(e.target.id === "dayBefore") {
                 dayBefore = new Date(date);
                 dayBefore.setDate(dayBefore.getDate() -1);
-                _this.setState({date:dayBefore});
+                _this.setState({date:moment(dayBefore)});
                 _this.fetchLoggedFoodsForDate(dayBefore);
             } else {
                 dayAfter = new Date(date);
                 dayAfter.setDate(dayAfter.getDate() + 1);
-                _this.setState({date:dayAfter});
+                _this.setState({date:moment(dayAfter)});
                 _this.fetchLoggedFoodsForDate(dayAfter);
             }
         } else {
@@ -134,29 +134,33 @@ export default class DashboardContainer extends React.Component {
 
         let _this = this;
         let mappedFoods = [];
+        let filteredFoods;
         let mappedLoggedFoods = [];
         let dailyStats;
         let foodModal;
 
-        let filteredFoods = foods.filter(
-            (food) => {
-                return food.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1;
-            }
-        );
+        if(foods !== null) {
+            filteredFoods = foods.filter(
+                (food) => {
+                    return food.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1;
+                }
+            );
 
-        if (filteredFoods.length > 0) {
-            mappedFoods = filteredFoods.map(food =>
-                <div className="container-mob-child" key={food._id} onClick={this.clickedFood.bind(this, food)}>
-                    <div className="foodItem">
-                        <div className="col-xs-12 px-0">
-                            <span className="f-size-2 c-orange">{food.name}</span>
-                            <div className="mt-0_5 mb-0_5">Calories: {food.calories} | Fat: {food.fat} | Carbs: {food.carbs} | Protein: {food.protein}</div>
+            if (filteredFoods.length > 0) {
+                mappedFoods = filteredFoods.map(food =>
+                    <div className="container-mob-child" key={food._id} onClick={this.clickedFood.bind(this, food)}>
+                        <div className="foodItem">
+                            <div className="col-xs-12 px-0">
+                                <span className="f-size-2 c-orange">{food.name}</span>
+                                <div className="mt-0_5 mb-0_5">Calories: {food.calories} | Fat: {food.fat} | Carbs: {food.carbs} | Protein: {food.protein}</div>
+                            </div>
                         </div>
-                    </div>
-                </div>);
-        } else {
-            mappedFoods = <p>No foods with that name</p>;
+                    </div>);
+            } else {
+                mappedFoods = <p>No foods with that name</p>;
+            }
         }
+
 
         if (loggedFoods.length > 0) {
             mappedLoggedFoods = loggedFoods.map(food =>
@@ -239,7 +243,6 @@ export default class DashboardContainer extends React.Component {
                                          onClick={this.toggleCalendar.bind(this)}>
                                         <span className="lh-2">{moment(this.state.date).format("DD/MM/YYYY")}</span>
                                     </div>
-
                                     {
                                         this.state.isOpen && (
                                             <DatePicker

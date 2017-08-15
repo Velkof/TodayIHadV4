@@ -2,7 +2,7 @@
  * Created by Marjan on 21-Jun-17.
  */
 export default function reducer(state={
-    foods: [],
+    foods: null,
     fetching: false,
     fetched: false,
     error: null,

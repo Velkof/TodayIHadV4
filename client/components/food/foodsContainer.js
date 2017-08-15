@@ -17,6 +17,7 @@ import Header from "../header/header";
 import {addFood, fetchFoods, updateFood, deleteFood} from "../../actions/foodActions";
 import EditRecipe from "./editRecipe/editRecipe";
 import {Redirect} from "react-router-dom";
+import LoadingBars from "../loading/loadingBars";
 
 @connect((store) => {
     return {
@@ -42,7 +43,15 @@ export default class FoodsContainer extends React.Component {
         this.clickedFood = {};
     }
     componentWillMount() {
+        if(this.props.foods === null ) {
+            this.setState({render:"loading"});
+        }
         this.props.dispatch(fetchFoods());
+    }
+    componentWillReceiveProps(nextProps) {
+        if (this.props.foods === null && nextProps.foods !== null) {
+                this.setState({render: "showFoods"});
+        }
     }
     getFoodFromClickedFood(val){
         this.clickedFood = val;
@@ -98,8 +107,11 @@ export default class FoodsContainer extends React.Component {
                                         foods={this.props.foods}
                                         foodsNavBar={foodsNavBar}
                                     />;
-        }
-        else if (this.state.render === "addRecipe") {
+        } else if(this.state.render === "loading") {
+
+            foodComponentsToRender = <LoadingBars/>;
+
+        } else if (this.state.render === "addRecipe") {
             foodComponentsToRender = <AddRecipe
                                         foods={this.props.foods}
                                         foodsNavBar={foodsNavBar}
