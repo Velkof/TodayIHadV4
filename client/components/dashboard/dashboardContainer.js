@@ -13,6 +13,10 @@ import FoodModal from "../modals/foodModal";
 import DailyStats from "./dailyStats/dailyStats";
 import Redirect from "react-router-dom/es/Redirect";
 import moment from "moment";
+import DatePicker from 'react-datepicker';
+
+import 'react-datepicker/dist/react-datepicker.css';
+
 
 @connect((store) => {
     return {
@@ -33,7 +37,7 @@ export default class DashboardContainer extends React.Component {
             foodModalAction: "",
             clickedFood:{},
             search: '',
-            date: Date.now(),
+            date: moment(),
         };
 
         this.loggedFoodsForDay = [];
@@ -112,6 +116,15 @@ export default class DashboardContainer extends React.Component {
             search: e.target.value
         })
     }
+    toggleCalendar (e) {
+        e && e.preventDefault()
+        this.setState({isOpen: !this.state.isOpen})
+    }
+    handleSelect(date) {
+        this.setState({date: date});
+        this.fetchLoggedFoodsForDate(date);
+        this.toggleCalendar();
+    }
     render() {
         const {foods, loggedFoods, isAuthenticated} = this.props;
 
@@ -147,7 +160,7 @@ export default class DashboardContainer extends React.Component {
 
         if (loggedFoods.length > 0) {
             mappedLoggedFoods = loggedFoods.map(food =>
-                        <div className="container-mob-child" key={food._id} onClick={this.clickedLoggedFood.bind(this, food)}>
+                        <div className="container-mob-child cursor-pointer" key={food._id} onClick={this.clickedLoggedFood.bind(this, food)}>
                             <div className="foodItem">
                                 <div className="col-xs-10 px-0">
                                     <span className="f-size-2 c-green">{food.name}</span>
@@ -214,17 +227,31 @@ export default class DashboardContainer extends React.Component {
                                 <p>FOOD LOG</p>
                             </div>
                             <div className="col-xs-12 px-0 my-1">
-                                <div className="col-xs-3 px-0 f-size-2" style={{textAlign:"center", WebkitTextStroke: "2px white"}} onClick={this.handleClick.bind(this)}>
+                                <div className="col-xs-3 px-0 f-size-2 cursor-pointer" style={{textAlign:"center", WebkitTextStroke: "2px white"}} onClick={this.handleClick.bind(this)}>
                                     <div className="bg-c-white c-green">
                                         <span id="dayBefore" className="lh-2 glyphicon glyphicon-chevron-left  full-width"></span>
                                     </div>
                                 </div>
-                                <div className="col-xs-6 f-size-2" style={{textAlign:"center",}}>
-                                    <div className="bg-c-white px-0 c-green">
+
+                                <div className="col-xs-6 f-size-2 cursor-pointer" style={{textAlign:"center",}}>
+
+                                    <div className="bg-c-white px-0 c-green example-custom-input"
+                                         onClick={this.toggleCalendar.bind(this)}>
                                         <span className="lh-2">{moment(this.state.date).format("DD/MM/YYYY")}</span>
                                     </div>
+
+                                    {
+                                        this.state.isOpen && (
+                                            <DatePicker
+                                                selected={this.state.date}
+                                                onSelect={this.handleSelect.bind(this)}
+                                                withPortal
+                                                inline  dropdownMode=""/>
+                                        )
+                                    }
+
                                 </div>
-                                <div className="col-xs-3 px-0 f-size-2" style={{textAlign:"center",  WebkitTextStroke: "2px white"}} onClick={this.handleClick.bind(this)}>
+                                <div className="col-xs-3 px-0 f-size-2 cursor-pointer" style={{textAlign:"center",  WebkitTextStroke: "2px white"}} onClick={this.handleClick.bind(this)}>
                                     <div className="bg-c-white c-green">
                                         <span id="dayAfter" className="lh-2 glyphicon glyphicon-chevron-right full-width"></span>
                                     </div>

@@ -246,12 +246,6 @@ class EditRecipe extends Component {
             <div className="main-layout">
                 { this.state.showSearchPage ? (
                     <div className="container-mob" style={{overflow:'hidden'}}>
-                        <div className="px-0">
-                            <div className="btn btn-default pl-0 f-size-1_5" onClick={this.handleClick.bind(this)}>
-                                <span className="glyphicon glyphicon-chevron-left" style={{lineHeight:"1.2em"}}></span>
-                                <span>recipe</span>
-                            </div>
-                        </div>
                         <div id="searchAddRecipe" className="searchBar form-group has-feedback mt-1">
                             <input type="text" autoFocus  value={this.state.search || ''} onChange={this.updateSearch.bind(this)} placeholder="Search for ingredients"/>
                             <i className="glyphicon glyphicon-search form-control-feedback"></i>

@@ -31,3 +31,12 @@
 .btn-fab{
     border-radius: 50%!important;
 }
+
+
+/*react-datepicker overrides*/
+.react-datepicker{
+    border-radius: 0!important;
+}
+.react-datepicker__day--selected, .react-datepicker__day--in-selecting-range, .react-datepicker__day--in-range {
+    background-color: #59b75c!important;
+}
