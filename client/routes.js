@@ -15,6 +15,8 @@ import Callback from "./components/callback/callback";
 import { isTokenExpired } from './auth/jwtHelper';
 import FriendsContainer from "./components/friends/friendsContainer";
 import AuthService from "./auth/AuthService";
+import StatsContainer from "./components/stats/statsContainer";
+import NotificationsContainer from "./components/notifications/notifications";
 
 
 
@@ -35,19 +37,11 @@ export const Routes = () => {
                 <Route exact path="/homepage"  render={() => ( requireAuth() ? ( <Redirect to="/"/>) : ( <HomepageContainer />) )}/>
                 <Route exact path="/"  render={() => ( requireAuth() ? ( <DashboardContainer />) : ( <Redirect to="/homepage"/>) )}/>
                 <Route exact path="/dashboard"  render={() => ( requireAuth() ? ( <DashboardContainer />) : ( <Redirect to="/homepage"/>) )}/>
-                <Route exact path="/foods"  render={() => ( requireAuth() ? ( <FoodsContainer/>) : ( <Redirect to="/homepage"/>) )}/>
                 <Route exact path="/friends"  render={() => ( requireAuth() ? ( <FriendsContainer/>) : ( <Redirect to="/homepage"/>) )}/>
+                <Route exact path="/foods"  render={() => ( requireAuth() ? ( <FoodsContainer/>) : ( <Redirect to="/homepage"/>) )}/>
+                <Route exact path="/stats"  render={() => ( requireAuth() ? ( <StatsContainer/>) : ( <Redirect to="/homepage"/>) )}/>
+                <Route exact path="/notifications"  render={() => ( requireAuth() ? ( <NotificationsContainer/>) : ( <Redirect to="/homepage"/>) )}/>
                 <Route path="/callback"  render={() => ( requireAuth() ? ( <Redirect to="/"/>) : ( <Callback />) )}/>
-
-                {/*<Route exact path="/foods/edit/:id"   render={() => ( requireAuth() ? ( <FoodsContainer/>) : ( <Redirect to="/homepage"/>) )}/>*/}
-                {/*<Route exact path="/foods/edit/:id" component={EditFood}/>*/}
-                {/*<Route path="/callback" render={(props) => {*/}
-                    {/*handleAuthentication(props);*/}
-                    {/*return <Callback {...props} />*/}
-                {/*}}/>*/}
-
-                <Route exact path="/foods/delete/:id"  render={() => ( requireAuth() ? ( <DeleteFood/>) : ( <Redirect to="/homepage"/>) )}/>
-                <Route exact path="/foods/add"  render={() => ( requireAuth() ? ( <FoodsContainer/>) : ( <Redirect to="/homepage"/>) )}/>
             </div>
         </BrowserRouter>
     </Provider>

@@ -34,7 +34,7 @@ class Footer extends Component {
                 </div>
                 <div className="col-xs-5ths" onClick={backToFriendList}>
                     <NavLink exact to={'/friends'}  style={{color: 'grey'}} activeStyle={{color: 'black'}} >
-                        <span className={"glyphicon glyphicon-flash footer-tab"}></span>
+                        <span className={"glyphicon glyphicon-star footer-tab"}></span>
                     </NavLink>
                 </div>
                 <div className="col-xs-5ths" onClick={onShowFoodsClick}>
@@ -42,16 +42,16 @@ class Footer extends Component {
                         <span className={"glyphicon glyphicon-apple footer-tab"}></span>
                     </NavLink>
                 </div>
-                {/*<div className="col-xs-5ths">*/}
-                    {/*<NavLink exact to={'/foods/add'} style={{color: 'grey'}} activeStyle={{color:"black"}} isActive={this.addFoodActive.bind(this)} >*/}
-                        {/*<span className={"glyphicon glyphicon-plus footer-tab"}></span>*/}
-                    {/*</NavLink>*/}
-                {/*</div>*/}
-                {/*<div className="col-xs-5ths">*/}
-                    {/*<NavLink exact to={'/foods/adadsasd'} style={{color: 'grey'}} activeStyle={{color:"black"}}>*/}
-                        {/*<span className={"glyphicon glyphicon-bell footer-tab"}></span>*/}
-                    {/*</NavLink>*/}
-                {/*</div>*/}
+                <div className="col-xs-5ths">
+                    <NavLink exact to={'/stats'} style={{color: 'grey'}} activeStyle={{color:"black"}}>
+                        <span className={"glyphicon glyphicon-stats footer-tab"}></span>
+                    </NavLink>
+                </div>
+                <div className="col-xs-5ths">
+                    <NavLink exact to={'/notifications'} style={{color: 'grey'}} activeStyle={{color:"black"}}>
+                        <span className={"glyphicon glyphicon-bell footer-tab"}></span>
+                    </NavLink>
+                </div>
             </div>
         </div>
       );

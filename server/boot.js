@@ -15,7 +15,9 @@ const io = require('socket.io')(server);
 
 io.on('connection', (client) => {
     // here you can start emitting events to the client
-    client.on('subscribe', function(data) { client.join(data.room); });
+
+
+    client.on('subscribe', function(data) {client.join(data.room); });
 
     client.on('unsubscribe', function(data) { client.leave(data.room); });
 

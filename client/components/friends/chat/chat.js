@@ -31,7 +31,10 @@ class Chat extends Component {
             room = this.props.friend.user_id + this.props.loggedInUser.user_id;
         }
 
+        console.log("Room", room);
+
         socket.emit("subscribe", { room: room });
+
 
         this.setState({room:room});
 
@@ -66,6 +69,8 @@ class Chat extends Component {
     handleChange = (e) => this.setState({[e.target.id]: e.target.value });
     render() {
         const {friend, chatMessages} = this.props;
+
+        let _this = this;
         let messages = [];
         let loadMoreMessages = "";
 
@@ -77,17 +82,25 @@ class Chat extends Component {
 
         if(chatMessages.length > 0){
             chatMessages.forEach(function (message) {
-                messages.push(<Message
-                                key = {message._id}
-                                message = {message}
-                                friend = {friend}
-                              />);
+                if(message.room === _this.state.room) {
+                    messages.push(<Message
+                        key = {message._id}
+                        message = {message}
+                        friend = {friend}
+                    />);
+                }
             });
 
         } else {
             messages = <div className="container-mob-child">
                             <p className="f-size-2">You don't have any messages with this user.</p>
                        </div>;
+        }
+
+        if(messages.length === 0) {
+            messages = <div className="container-mob-child">
+                <p className="f-size-2">You don't have any messages with this user.</p>
+            </div>;
         }
 
         return (<div>

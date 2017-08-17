@@ -57,7 +57,6 @@ export default class FriendsContainer extends React.Component {
             }
         }
 
-
         if(this.props.followedUsers === null && nextProps.userStore.followedUsers) {
             this.setState({render:"friendList"});
         }
